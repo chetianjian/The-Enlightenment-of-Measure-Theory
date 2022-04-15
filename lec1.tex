@@ -1,0 +1,722 @@
+\def\blacksquare{\hbox{\vrule width 10pt height 10pt depth 0pt}}
+
+\documentclass[a4paper,10pt]{article}
+\usepackage{anysize}
+\marginsize{3.0cm}{3.0cm}{2.5cm}{1.5cm}
+
+\usepackage{latexsym,amsfonts,amsmath}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+
+\def\inter{\mathop{\cap}}
+\def\NN{\mathbb{N}}
+\def\ZZ{\mathbb{Z}}
+\def\RR{\mathbb{R}}
+\def\QQ{\mathbb{Q}}
+\def\CC{\mathbb{C}}
+\def\II{\mathbb{I}}
+\def\union{\mathop{\cup}}
+\def\inter{\mathop{\cap}}
+\def\liminf{\mathop{\underline{\lim}}}
+\def\limsup{\mathop{\overline{\lim}}}
+\def\ds{\displaystyle}
+\def\SS{\scriptscriptstyle}
+\def\nl{\mbox{} \newline }
+\newcommand{\widebar}[1]{\overline{#1}}
+\newcommand{\1}[1]{\mathbf{1}_{\{#1\}}}
+\newcommand{\I}[1]{I_{\{#1\}}}
+\newcommand{\rond}[1]{\mathop{\mbox{$#1$}}\limits^{\circ}}
+\newcommand{\defi}{\stackrel{\triangle}{=}}
+
+\newtheorem{condition}{Condition}{\bfseries}{\itshape}
+
+\newtheorem{theorem}{Theorem}{\bfseries}{\itshape}
+
+\newtheorem{corollary}{Corollary}{\bfseries}{\itshape}
+
+\newtheorem{proposition}{Proposition}{\bfseries}{\itshape}
+
+\newtheorem{example}{Example}{\bfseries}{\itshape}
+
+\newtheorem{lemma}{Lemma}{\bfseries}{\itshape}
+
+\newtheorem{remark}{Remark}{\bfseries}{\itshape}
+
+\newtheorem{definition}{Definition}{\bfseries}{\itshape}
+
+%\renewcommand{\baselinestretch}{2}
+
+\begin{document}
+\begin{center} \bf \LARGE Measure Theory and Probability \end{center}\vspace{3mm}
+
+\Large {\bf BOOKS}
+
+1. M. Capinski and E.Kopp. Measure, integral and probability. Springer, 2005.
+
+2. Yeh, J. (James). Problems and proofs in real analysis: theory of measure and integration. World Scientific, 2014.
+
+3. A.Torchinsky. Problems in real and functional analysis. AMS, 2015.
+
+4. Ross Leadbetter, Stamatis Cambanis, Vladas Pipiras. A basic course in measure and probability: theory for applications. Cambridge; New York: Cambridge University Press, 2014.
+
+5. M.E.Taylor. Measure theory and integration. AMS,2006.
+
+6. R.L.Schilling. Measures, integrals and martingales.  Cambridge University Press, 2017.
+
+7. D.W.Cunningham. Set theory. Cambridge University Press, 2016.
+
+8. S.N.Ethier and T.G.Kurtz. Markov processes. Characterization and convergence. Wiley, 1986.
+\vspace{5mm}
+
+
+
+In measure theory we deal typically with families of subsets of some arbitrary given set and consider functions which assign real numbers to sets belonging to these families. Thus we need to review some basic set notation and operations on sets, as well as discussing the distinction between countably and uncountably infinite sets, with particular reference to subsets of the real line $\RR$.\vspace{5mm}
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 1. Set Theory}\\
+\hline\end{tabular}
+\vspace{5mm}
+
+Notations:
+
+$\NN=\{1,2,\ldots\}$ -- collection (or the set) of all natural numbers;
+
+$\ZZ=\{\ldots, -2,-1,0,1,2,\ldots\}$ -- collection of all integers;
+
+$\QQ$ -- collection of all rationals, i.e. numbers of the form $\frac{n}{m}$, where $n,m\in\ZZ$, $m\ne 0$;
+
+$\RR$ -- collection of all real numbers;
+
+$\RR^n=\{(x_1,x_2,\ldots, x_n); ~x_i\in\RR\}$; \vspace{3mm}
+
+A set is the collection of its elements, e.g.
+  $$B=\{2,5\};~~~C=\{3\};~~~D=\{a,b,c,d\}.$$
+Note, 3 is a number and $C=\{3\}$ is {\bf not} a number, it is the set containing number 3.
+
+All the following are different:
+  $$3,~~\{3\},~~\{\{3\}\}, ~~\{\{\{3\}\}\},~~\ldots$$
+
+Set membership is denoted by $\in$, so $x\in A$ means that the element $x$ is a member of the set $A$. For example, $b\in D$.
+
+Set inclusion $A_1\subset A_2$, means that every member of $A_1$ is a member of $A_2$. The notation $\{x\in A:~P(x)\}$ is used to denote the set of elements of $A$ with property $P$.
+
+\underline{Examples.} $\{x\in\NN:~x\ge 3\}$ coincides with $\{3,4,5,\ldots\}$;\\
+$\{x\in\RR:~x=\frac{n}{m} \mbox{ for some } n,m\in\ZZ, \mbox{ and } m\ne 0\}=\QQ$.
+
+Sometimes (seldom enough) a set can contain itself as an element: $E=\{\{\ldots \{3\}\ldots \}\}$ (infinite number of parantheses, so that $E=\{E\}$).\vspace{3mm}
+
+\underline{Paradox *.} Let us consider $F$, collection of {\bf all} sets which do not contain itself as an element. Clearly, $B,C,D\in F$, but $E\notin F$, Question: does $F$ contain itself as a member?
+
+Suppose $F\notin F$. Then $F$ must belong to $F$ because $F$ contains {\bf all} sets which do not contain itself as an element.
+
+Suppose $F\in F$. Then $F$ should {\bf not} contain $F$ because it has (as elements) {\bf only } those sets which {\bf do not } contain itself as an element.
+
+Axiomatic set theory excludes collections like $F$ from consideration. $F$ is not a set; such objects will never appear in this module. \vspace{3mm}
+
+We define the \underline{intersection} $A\cap B=\{x:~x\in A \mbox{ and }(\&)~ x\in B\}$ and the \underline{union} $A\cup B=\{x:~x\in A \mbox{ or } x\in B\}$.
+
+Very often we deal with some \underline{universal} set $\Omega$; for example $\Omega$ can coincide with $\NN$ or $\RR$.
+
+The \underline{complement} $A^c$ (or $\bar A$) of $A$ consists of the elements of $\Omega$ which are \underline{not} members of $A$; we also write $A^c=\Omega\setminus A$, and, more generally, we have the \underline{difference}
+  $$B\setminus A=\{x\in B:~ x\notin A\}=B\cap A^c$$
+and \underline{symmetric difference}
+  $$A\bigtriangleup B=(A\setminus B)\cup(B\setminus A).$$
+
+The brackets are important in this formula: expression $A\setminus B\cup B\setminus A$ can be understood in different ways:\\
+-- it may be $(A\setminus B)\cup(B\setminus A)=A\bigtriangleup B$,\\
+-- it may be $A\setminus ((B\cup B)\setminus A)$: firstly calculate $B\cup B=B$, after that calculate $C=B\setminus A$, and then calculate $A\setminus C$ which coincides with $A$. The result is different from $A\bigtriangleup B$.
+
+If we have sets $A_1,A_2,\ldots$, we can consider
+  $$A=A_1\cap A_2\cap A_3\cap \ldots$$
+It is not necessary to put brackets:
+  $$(A_1\cap A_2)\cap A_3\cap \ldots=A_1\cap (A_2\cap A_3)\cap \ldots;$$
+all such sets coincide with
+  $$A=A_1\cap A_2\cap A_3\cap \ldots=\{x:~x\in A_n \mbox{ for all } n\in\NN\}.$$
+For brevity, we write
+  $$A=\{x:~\forall n\in\NN,~ x\in A_n\}=\bigcap_{n\in\NN} A_n=\bigcap_{n=1}^\infty A_n.$$
+Instead of $\NN$, one can have {\bf any} collection $\Lambda$ of indices:
+  $$A=\bigcap_{\alpha\in\Lambda} A_\alpha=\{x:~\forall \alpha\in\Lambda,~x\in A_\alpha\}.$$
+The same concerns the unions:
+  $$B=\bigcup_{\alpha\in\Lambda} B_\alpha=\{x:~\mbox{ there exists $\alpha\in\Lambda$ such that } x\in B_\alpha\}$$
+  $$=\{x:~\exists \alpha\in\Lambda,~x\in B_\alpha\}.$$\vspace{3mm}
+
+Notations:
+
+$\forall$ means "for all";
+
+$\exists$ means "there exists";
+
+$\emptyset$ is the notation for the \underline{empty} set (no elements at all). \vspace{5mm}
+
+If $A\cap B=\emptyset$ then $A$ and $B$ are \underline{disjoint}. A family of sets $(A_\alpha)_{\alpha\in\Lambda}$ is \underline{pairwise} disjoint if $A_\alpha\cap A_\beta=\emptyset$ whenever $\alpha\ne\beta$. (Of course, $\alpha,\beta\in\Lambda$.)
+
+Usually $\Lambda=\NN$. Then $(A_n)_{n\in\NN}$ is the family $A_1,A_2,A_3,\ldots$; it is called pairwise disjoint if $A_i\cap A_j=\emptyset$ for all natural $i\ne j$.\vspace{3mm}
+
+{\bf De Morgan's laws:}
+  $$(A_1\cup A_2)^c=A^c_1\cap A^c_2;~~~~~(A_1\cap A_2)^c=A^c_1\cup A^c_2,$$
+and, more generally:
+  $$\left(\bigcup_\alpha A_\alpha\right)^c=\bigcap_\alpha A^c_\alpha;~~~~~\left(\bigcap_\alpha A_\alpha\right)^c=\bigcup_\alpha A^c_\alpha.$$\vspace{3mm}
+
+\underline{Example.} Let $A_1=\{1\}$, $A_2=\{1,2\}$, $\ldots$ $A_n=\{1,2,\ldots, n\}$, $\ldots$. Then $\bigcup_{n\in\NN} A_n=\NN$.
+
+\underline{Proof.} (a) Let $m\in \bigcup_{n\in\NN} A_n$. Then $m$ is a natural number, so that $m\in\NN$.
+
+(b) Let $m\in\NN$. Then $m\in A_n$ if, for example, $n=m$ (or $n>m$). Therefore, $m\in\bigcup_{n\in\NN} A_n$. \blacksquare
+
+Notations:
+
+Intervals in $\RR$ are denoted via each endpoint, with a square bracket indicating its inclusion, an open bracket exclusion, e.g. $[a,b)=\{x\in \RR:~ a\le x<b\}$. We use $\infty$ and $-\infty$ to describe unbounded intervals, e.g. $(-\infty,b)=\{x\in\RR:~x<b\}$.\vspace{3mm}
+
+\underline{Example.} Let $A_1=(-1,2)$, $A_2=(-\frac{1}{2}, 1\frac{1}{2}),\ldots$ $A_n=(-\frac{1}{n},1+\frac{1}{n}), \ldots$. Then $\bigcap _{n\in\NN} A_n=[0,1]$. (The intersection of open intervals is a closed interval!)
+
+\underline{Proof.} (a) Let $x\in[0,1]$. Then (obviously) $x\in A_n$ for all values of $n\in\NN$. Thus $x\in\bigcap_{n\in\NN} A_n$.
+
+(b) Let $x\in\bigcap_{n\in\NN} A_n$, i.e. $\forall n\in\NN$ $x\in A_n$. For example, $x$ can equal 0, or 1, or any real number between 0 and 1. But $x$ cannot be negative because otherwise there is such $n$ that $x<-\frac{1}{n}$ and $x\notin A_n$ for that value of $n$ (and all bigger values).
+
+Similarly, $x$ cannot be bigger than 1. Hence $x\in[0,1]$. \blacksquare \vspace{3mm}
+
+{\bf Definition.} The \underline{Cartesian product} $A\times B$ of sets $A$ and $B$ is the set of all ordered pairs
+  $$A\times B=\{(a,b):~a\in A,~b\in B\}.$$\vspace{1mm}
+
+We will consider real-valued functions defined on (abstract) sets. Notation: $f:~A\rightarrow \RR$. More generally, one can consider \underline{maps} $g:~A\rightarrow B$ from one set $A$ to another set $B$. \vspace{3mm}
+
+\underline{Example.} Sequence $f_n=\frac{1}{n}$, where $n=1,2,\ldots$, is function $f:\NN\to\RR$ which associates the real number $\frac{1}{n}$ with an element $n\in\NN$. Any sequence is a function with domain $\NN$. \vspace{3mm}
+
+\underline{Example.} Let $A=\{\emptyset, \{a\},\{b\},\{a,b\}\}$ and put $f(\emptyset)=0$, $f(\{a\})=\frac{1}{2}$, $f(\{b\})=\frac{1}{2}$, $f(\{a,b\})=1$. We have constructed a function $f:A\to\RR^+=\{x\in\RR:~x\ge 0\}$. By the way, this function is an example of \underline{probability}, which is a particular case of a \underline{measure}.\vspace{3mm}
+
+\underline{Example.} The \underline{indicator} function $\II_A$ of the set $A$ is the function
+  $$\II_A(x)=\left\{\begin{array}{ll}
+1 & \mbox{ for } x\in A, \\ 0 & \mbox{ for } x\notin A. \end{array}\right. $$
+Note that $\II_{A\cap B}=\II_A\cdot \II_B$, $\II_{A\cup B}=\II_A+\II_B-\II_A\II_B$, and $I_{A^c}=1-\II_A$. \vspace{3mm}
+
+{\bf Definition.} If $X\subset \RR$ is a set of real numbers then \\
+$\sup\{x:~x\in X\}=A$ is such a number that $x\le A$ for all $x\in X$ and, for any number $y<A$ there is such $x\in X$ that $x>y$. In case there is a maximal element in $X$, it coincides with $\sup\{x:~x\in X\}$. If the set $X$ is unbounded from above then we put $\sup\{x:~x\in X\}=+\infty$. If $X=\emptyset$ then $\sup\{x:~x\in X\}=-\infty$.\vspace{2mm}\\
+Similarly $\inf\{x:~x\in X\}=a$ if $\forall x \in X~~x\ge a$ and $\forall y>a~\exists x\in X:~x<y$; for $X=\emptyset$, $\inf\{x:~x\in X\}=\infty$. In case there is a minimal element in $X$, it coincides with $\inf\{x:~x\in X\}$. \vspace{3mm}
+
+\underline{Example.} $\sup\{x:~x\in(0,1)\}=1$, $\inf\{x:~x\in(0,1)\}=0$.
+\vspace{5mm}
+
+\begin{center}\bf\underline{Countable and uncountable sets} \end{center}
+
+We say that a set $A$ is \underline{countable} if there is a one-one correspondence between $A$ and a subset of $\NN$.
+
+Two sets $A$ and $B$ have the same \underline{cardinality} (the same number of elements) if there is a 1-1 correspondence between $A$ and $B$.\vspace{3mm}
+
+\underline{Example.} The set of even numbers $A=\{2,4,6,\ldots\}$ has the same cardinality as $\NN=\{1,2,3,\ldots\}$ because the 1-1 correspondence required is obvious:
+ $$\begin{array}{cccc}
+2 & 4 & 6 & \ldots \\
+\updownarrow & \updownarrow & \updownarrow & \updownarrow \\
+1 & 2 & 3 & \ldots
+\end{array}$$
+
+If a set $A$ has the same cardinality as $\NN$, we say that $A$ is \underline{denumerable}.
+
+Cantor showed that the interval $(0,1]$ is not denumerable. To prove this, we write those real numbers as decimals (always choosing the non-terminating version) and assume there is 1-1 correspondence between $(0,1]$ and $\NN$ (a table):
+  $$\begin{array}{ccccc}
+x_1= & 0.a_{1,1}a_{1,2}a_{1,3}& \ldots &\leftrightarrow & 1 \\
+x_2= & 0.a_{2,1}a_{2,2}a_{2,3}& \ldots &\leftrightarrow & 2
+\end{array}$$
+And so on. (Here $a_{i,j}\in\{0,1,2,\ldots,9\}$.) For instance,
+  $$\begin{array}{ccccc}
+x_1= & 0.1939999& \ldots &\leftrightarrow & 1 \\
+x_2= & 0.2561187& \ldots &\leftrightarrow & 2
+\end{array}$$
+Now, let $y=0.b_1b_2b_3\ldots$, where the digits $b_n\in\{1,2,\ldots,8,9\}$ are chosen to differ from $a_{n,n}$. Such a decimal expansion (without zeros!) defines a number $y\in(0,1]$, again the non-terminating version, that differs from each of the numbers in the table (since its expansion differs from that of  $x_n$ in the $n$-th place). Hence our sequence (table) does not exhaust $(0,1]$, and the contradiction shows that  $(0,1]$ cannot be denumerable.
+
+If there is no 1-1 correspondence between sets $A$ and $B$, but $A$ has the same cardinality as a (proper) subset of $B$, then we say, the cardinality of $B$ is bigger that that of $A$. For example, cardinality of $(0,1]$ is bigger than that of $\NN$. The 1-1 correspondence between $\NN$ and a subset of $(0,1]$ is trivial:
+  $$1\leftrightarrow 1, ~2 \leftrightarrow \frac{1}{2}, ~3 \leftrightarrow \frac{1}{3}, ~\ldots$$\vspace{3mm}
+
+\underline{Example.} Cardinality of the (open) interval $(0,1)$ is the same as the cardinality of $\RR$. The 1-1 correspondence is given e.g. by function $\tan(\pi x-\pi/2)$. \vspace{3cm}
+
+{\bf Theorem.} (Cantor) For an arbitrary set $X$, there is {\bf no} 1-1 correspondence between $X$ and the set $Y=2^X$ of all subsets of $X$. \vspace{3mm}
+
+\underline{Example.} $X=\{a,b,c\}$. The set of all subsets of $X$:
+  $$Y=2^X=\{\emptyset, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\},\{a,b,c\}\}$$
+has $2^3=8$ elements, more than 3, the number of elements of $X$. 1-1 correspondence does not exist.\vspace{3mm}
+
+\underline{Proof of the Theorem.*} Suppose $\varphi:X\to Y$ is a mapping and show that there is a subset $Z\subset X$ such that, for any $z\in X$, $Z\ne\varphi(z)$. (Of course, $Z\in Y$.)  \vspace{3mm}
+
+\underline{Example.} Suppose $\varphi(a)=\{a,c\}$, $\varphi(b)=\emptyset$, $\varphi(c)=\{a\}$. \vspace{3mm}
+
+We consider the set $Z$ of all elements $x\in X$ that {\bf do not} belong to the corresponding subset $\varphi(x)$:
+  $$Z=\{x\in X:~x\notin \varphi(x)\}.$$  \vspace{3mm}
+
+\underline{Example.} $Z=\{b,c\}\in Y$. \vspace{3mm}
+
+Let us prove that $Z$ does not correspond to {\bf any} element of $X$, i.e., that $Z\ne\varphi(z)$ for any $z\in X$. Indeed, assume that $Z=\varphi(z)$ for some $z$. Then
+  $$z\in Z \Longleftrightarrow~ (\mbox {means `if and only if' or `iff'})~ z\notin \varphi(z)$$
+  $$\Longleftrightarrow z\notin Z ~(\mbox{because } \varphi(z)=Z).$$
+Contradiction: for an element $z$ and subset $Z$ we have: $z\in Z$ if and only if $z\notin Z$. Therefore, $Z\ne\varphi(z)$ for all $z\in X$.  \blacksquare
+\vspace{3mm}
+
+\underline{Example.} $Z=\{b,c\}$ is not in the list, that is $Z\ne\varphi(a)$, $Z\ne\varphi(b)$, $Z\ne\varphi(c)$. \vspace{3mm}
+
+\underline{Corollary.} If $Y$ is the set of all subsets of $X$, then the cardinality of $Y$ is bigger than the cardinality of $X$. (Clearly, $X$ has the same cardinality as the subset of $Y$ containing all singletons.)\vspace{3mm}
+
+\underline{Example.} Obviously, $X$ has the same cardinality as $\{\{a\},\{b\},\{c\}\}\subset Y$. \vspace{3mm}
+
+Actually, interval $(0,1]$ has the same cardinality as the set of all subsets of $\NN$ (hence bigger than the cardinality of $\NN$).
+
+\begin{center}\bf\underline{$\sigma$-fields} \end{center}
+
+{\bf Definition.}  A family $\cal F$ of subsets of a universal set $\Omega$ is called \underline{$\sigma$-field}  (often called $\sigma$-algebra) if the following axioms hold:
+
+(i) $\Omega\in{\cal F}$;
+
+(ii) If $A\in {\cal F}$ then $A^c\in{\cal F}$;
+
+(iii) If $A_n\in{\cal F}$ for all $n=1,2,\ldots$ then $\displaystyle\bigcup_{n=1}^\infty A_n\in{\cal F}$.\vspace{3mm}
+
+\underline{Examples.} 1. $\Omega=\{a,b,c,d\}$;
+  $${\cal F}^1=\{\emptyset,\{a\},\{b\},\{c\},\{d\},\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{b,d\},\{c,d\},$$
+  $$\{a,b,c\},\{a,b,d\},\{a,c,d\},\{b,c,d\},\Omega\},$$
+the family of \underline{all} subsets of $\Omega$, is obviously a $\sigma$-field.
+
+But ${\cal F}^2=\{\emptyset,\Omega\}$ is also a $\sigma$-field;
+  $${\cal F}^3=\{\emptyset, \{a\},\{b,c,d\},\Omega\}$$
+is also a $\sigma$-field, the minimal one that contains the singleton $\{a\}$, i.e. \underline{generated} by $\{a\}$.
+  $${\cal F}^4=\{\emptyset, \{a,b\},\{c,d\},\Omega\};$$
+  $${\cal F}^5=\{\emptyset, \{a,b\},\{c\},\{d\},\{a,b,c\},\{a,b,d\},\{c,d\},\Omega\}.$$
+
+2. $\Omega=\{(1,a),(2,a),(1,b),(2,b),(1,c),(2,c)\}$ is the Cartesian product of $\Omega_1=\{1,2\}$ and $\Omega_2=\{a,b,c\}$, the collection of all (ordered) pairs.
+  $${\cal F}=\{\emptyset, \{(1,a),(2,a)\},\{(1,b),(2,b)\},$$
+  $$\{(1,c),(2,c)\},\{(1,a),(2,a),(1,b),(2,b)\},\{(1,a),(2,a),(1,c),(2,c)\},$$
+  $$\{(1,b),(2,b),(1,c),(2,c)\},\Omega\}$$
+is the $\sigma$-field generated by the second component: we put $\Omega_2=\{a,b,c\}$, consider $\sigma$-field
+  $${\cal G}_2=\{\emptyset,\{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\},\Omega_2\}$$
+and replace any letter $a;b$; or $c$ with the two correponding pairs $(1,a),(2,a)$; $(1,b),(2,b)$; or $(1,c),(2,c)$.
+
+3. Let $\Omega=\NN$. One can introduce the following $\sigma$-field: $\emptyset,\Omega$, all countable  (finite or denumerable) collections of even numbers like $\{2\}$, $\{2,4\}$, $\{4,8,12,14,16,20\ldots\}$, and all unions of  $\{$all odd numbers$\}$ and countable collections of even numbers like
+  $$\{1,3,5,\ldots\},~\{1,2,3,5,\ldots\},~\{1,2,3,4,5,7,\ldots\},$$
+  $$\{1,3,4,5,7,8,9,11,12,13,14,15,16,17,19,20,\ldots\}.$$
+
+4. Let $\Omega=\RR$. Then the minimal $\sigma$-field containing all open intervals $(a,b)$ is called \underline{Borel} $\sigma$-field. \vspace{3mm}
+
+{\bf Definition.} A family $\cal A$ of subsets of a universal set $\Omega$ is called a \underline{field} if $\Omega\in{\cal A}$ and the following axiom holds:
+
+If $A,B\in{\cal A}$ then $A\cup B,~A\setminus B\in{\cal A}$.
+
+Equivalently, $A\in{\cal A}\Rightarrow A^c\in{\cal A}$ and $\forall A,B,\in{\cal A},~A\cup B\in{\cal A}$.\vspace{3mm}
+
+\underline{Exercises.} 1. Prove that, if $A$ belongs to a field $\cal A$, then $A^c\in{\cal A}$.\\
+Proof: if $A\in{\cal A}$ then (since $\Omega\in{\cal A}$) $\Omega\setminus A=A^c\in{\cal A}$. \blacksquare
+
+2. Prove that the empty set $\emptyset$ belongs to (any) field $\cal A$.\\
+Proof: $\Omega\in{\cal A}\Longrightarrow \Omega^c=\emptyset\in{\cal A}$. \blacksquare\vspace{3mm}
+
+\underline{Example.} Let $\Omega=\RR$ (or $\NN$) and consider the family of subsets of the following two types: $A\in{\cal A}$ if $A$ is finite (or empty), and $B\in{\cal A}$ if $B^c$ is finite (or empty).\\
+(i) If $A_1,A_2\in{\cal A}$ are two subsets of the first type (finite) then $A_1\cup A_2\in{\cal A}$, $A_1\setminus A_2\in{\cal A}$ because these sets are finite.\\
+(ii) If $B_1,B_2\in{\cal A}$ are two subsets of the second type, then $B_1\cup B_2=(B_1^c\cap B_2^c)^c\in{\cal A}$ because $(B_1^c\cap B_2^c)$ is finite;
+$B_1\setminus B_2=B_1\cap B_2^c\in{\cal A}$ because $B_2^c$ (and hence $B_1\cap B_2^c$) is finite. \\
+(iii) If $A,B\in{\cal A}$ are two subsets of types one and two (correspondingly), then $A\cup B=(A^c\cap B^c)^c\in{\cal A}$ because $B^c$ (and hence $A^c\cap B^c$) is finite; $A\setminus B\in{\cal A}$ because $A$ and $A\setminus B$ are finite; $B\setminus A=B\cap A^c=(B^c\cup A)^c\in{\cal A}$ because both $B^c$ and $A$ are finite.
+
+Therefore, $\cal A$ is a field, but {\bf not} a $\sigma$-field because, if e.g. $A_1=\{a_1\},A_2=\{a_2\},\ldots\in{\cal A}$ is a sequence of singletons, then it is not necessary that $\bigcup_{n=1}^\infty A_n\in{\cal A}$.\vspace{3mm}
+
+{\bf Theorem.} The intersection of (any) family of $\sigma$-fields, over the same universal set $\Omega$, is a $\sigma$-field.
+
+\underline{Proof.} Let ${\cal F}_\alpha$ be $\sigma$-fields for $\alpha\in\Lambda$. Put ${\cal F}=\bigcap_{\alpha\in\Lambda}{\cal F}_\alpha$.\\
+(i) $\Omega\in{\cal F}_\alpha$ for all $\alpha\in\Lambda$, so $\Omega\in{\cal F}$.\\
+(ii) If $A\in{\cal F}$, then $A\in{\cal F}_\alpha$ for all $\alpha\in\Lambda$. Thus, $\forall\alpha\in\Lambda$, $A^c\in{\cal F}_\alpha$, so $A^c\in{\cal F}$.\\
+(iii) If $A_n\in{\cal F}$ for $n=1,2,\ldots$ then $A_n\in{\cal F}_\alpha$ for all $n$ and all $\alpha\in\Lambda$. Hence $\forall\alpha\in\Lambda$ $\bigcup_{n=1}^\infty A_n\in{\cal F}_\alpha$, and so $\cup_{n=1}^\infty A_n\in{\cal F}$. \blacksquare\vspace{3mm}
+
+\underline{Example.} $\Omega=\{a,b,c,d\}$,
+  $${\cal F}_1=\{\emptyset, \{a\},\{b\},\{c,d\},\{a,b\},\{a,c,d\},\{b,c,d\},\Omega\};$$
+  $${\cal F}_2=\{\emptyset,\{a,b\},\{c\},\{d\},\{a,b,c\},\{a,b,d\},\{c,d\},\Omega\};$$
+  $${\cal F}={\cal F}_1\cap{\cal F}_2=\{\emptyset,\{a,b\},\{c,d\},\Omega\}.$$\vspace{3mm}
+
+{\bf Definition.} Let $A_\alpha\subset\Omega$, $\alpha\in\Lambda$ be a family of subsets. Then the intersection of all $\sigma$-fields over $\Omega$ containing all subsets $A_\alpha$ (the \underline{minimal} $\sigma$-field containing all $A_\alpha$) is called $\sigma$-field \underline{generated} by $A_\alpha$, $\alpha\in\Lambda$.\vspace{3mm}
+
+In the previous example, ${\cal F}_1$ is generated by $A_1=\{a,b\}$, $A_2=\{a\}$; ${\cal F}_2$ is generated by $B_1=\{a,b\}$, $B_2=\{c\}$; ${\cal F}={\cal F}_1\cap {\cal F}_2$ is generated by $C_1=\{a,b\}$.\vspace{3mm}
+
+\begin{center}\bf\underline{Monotone Class Theorem} \end{center}
+
+{\bf Definition.} A \underline{monotone class} $\cal G$ is a family of sets closed under countable unions of increasing sets and countable intersections of decreasing sets:
+
+if $A_1\subset A_2\subset\ldots,~~~A_i\in{\cal G}$,  then  $\displaystyle\bigcup_{i=1}^\infty A_i\in{\cal G}$;
+
+if $A_1\supset A_2\supset\ldots,~~~A_i\in{\cal G}$,  then  $\displaystyle\bigcap_{i=1}^\infty A_i\in{\cal G}$. \vspace{5mm}
+
+{\bf Theorem.} The smallest monotone class $\cal G_A$ containing a field $\cal A$ coincides with the $\sigma$-field $\cal F_A$ generated by $\cal A$.
+
+\underline{Proof.*} Any $\sigma$-field is a monotone class (check). Since $\cal G_A$ is the \underline{smallest} monotone class containing $\cal A$, we have ${\cal G_A}\subset{\cal F_A}$.
+
+(a) Let us show that $\cal G_A$ is a field.
+
+(i) Consider the family of sets
+  $${\cal G}=\{A:~A^c\in{\cal G_A}\}.$$
+Firstly, ${\cal A}\subset {\cal G}$ because, if $A\in{\cal A}$ then $A^c\in{\cal A}$ (because ${\cal A}$ is a field), and $A^c\in{\cal G_A}$ because $\cal G_A$ contains $\cal A$. Hence $A\in{\cal G}$.\\
+Secondly, $\cal G$ is a monotone class:\\
+- if $A_1\subset A_2\subset \ldots$, $A_i\in{\cal G}$ then $A^c_1\supset A^c_2\supset\ldots$, $A^c_i\in{\cal G_A}$. Thus $\bigcap_{i=1}^\infty A^c_i\in {\cal G_A}$ (because $\cal G_A$ is a monotone class) and $[\bigcup_{i=1}^\infty A_i]^c=\bigcap_{i=1}^\infty A^c_i\in{\cal G_A}$ (de Morgan's law), so that $\bigcup_{i=1}^\infty A_i\in{\cal G}$.\\
+- if $A_1\supset A_2\supset \ldots$, $A_i\in{\cal G}$ then $A^c_1\subset A^c_2\subset\ldots$, $A^c_i\in{\cal G_A}\Rightarrow [\bigcap_{i=1}^\infty A_i]^c\in{\cal G_A}\Rightarrow \bigcap_{i=1}^\infty A_i\in{\cal G}$.
+
+Since $\cal G_A$ is the \underline{smallest} monotone class containing $\cal A$, we have ${\cal G_A}\subset{\cal G}$ meaning that $\cal G_A$ is closed with respect to taking complements:\\
+if $B\in{\cal G_A}$ then $B^c\in{\cal G_A}$.
+
+(ii) Fix an arbitrary set $A\in{\cal A}$ and consider
+  $${\cal G}'=\{B:~A\cup B\in{\cal G_A}\}.$$
+Firstly, ${\cal A}\subset {\cal G}'$ because if $B\in{\cal A}$ then $A\cup B\in{\cal A}\subset{\cal G_A}\Rightarrow B\in{\cal G}'$.\\
+Secondly, ${\cal G}'$ is a monotone class:\\
+- if $B_1\subset B_2\subset \ldots$, $B_i\in{\cal G}'$ then $A\cup B_i\in{\cal G_A}$ and $(A\cup B_1)\subset (A\cup B_2)\subset\ldots$ Thus $\bigcup_{i=1}^\infty (A\cup B_i)\in{\cal G_A}$ (monotone class!) $\Leftrightarrow A\cup[\bigcup_{i=1}^\infty B_i]\in{\cal G_A}$; hence $\bigcup_{i=1}^\infty B_i\in{\cal G}'$.\\
+- if $B_1\supset B_2\supset \ldots$, $B_i\in{\cal G}'$ then $A\cup B_i\in{\cal G_A}$ and $(A\cup B_1)\supset (A\cup B_2)\supset\ldots \Rightarrow \bigcap_{i=1}^\infty (A\cup B_i)\in{\cal G_A}\Leftrightarrow A\cup[\bigcap_{i=1}^\infty B_i]\in{\cal G_A}\Rightarrow \bigcap_{i=1}^\infty B_i\in{\cal G}'$.
+
+Therefore, ${\cal G_A}\subset {\cal G}'$: if $B\in{\cal G_A}$ then $A\cup B\in{\cal G_A}$. We have proved that
+  $$\forall A\in{\cal A}~\forall B\in{\cal G_A}~~~A\cup B\in{\cal G_A}.$$
+
+Now take an arbitrary $A\in{\cal G_A}$. From the previous statement, if $C\in{\cal A}$, then $A\cup C\in{\cal G_A}$, hence ${\cal A}\subset \{C:~A\cup C\in{\cal G_A}\}$. By the same argument as before, the family $\{C:~A\cup C\in{\cal G_A}\}$ is a monotone class containing $\cal A$. Thus ${\cal G_A}\subset \{C:~A\cup C\in{\cal G_A}\}$. Since $A\in{\cal G_A}$ was arbitrary, we conclude that
+  $$\forall A,C\in{\cal G_A}~~~A\cup C\in{\cal G_A}.$$
+Therefore, ${\cal G_A}$ is a field: $\Omega\in{\cal G_A}$ because $\Omega\in{\cal A}\subset{\cal G_A}$; and, if $A,B\in{\cal G_A}$, then $A\cup B\in{\cal G_A}$ and $A\setminus B=A\cap B^c=(A^c\cup B)^c\in{\cal G_A}$ (see (i)).
+
+(b) Now show that $\cal G_A$ is a $\sigma$-field.\\
+- $\Omega\in{\cal G_A}$ because $\cal G_A$ is a field.\\
+- if $A\in{\cal G_A}$ then $A^c\in{\cal G_A}$ because $\cal G_A$ is a field.\\
+- if $A_n\in{\cal G_A}$ then all sets
+  $$A_1\subset A_1\cup A_2 \subset A_1\cup A_2\cup A_3 \subset \cdots$$
+are in ${\cal G_A}$ because ${\cal G_A}$ is a field. Thus
+  $$A_1\cup(A_1\cup A_2)\cup (A_1\cup A_2\cup A_3)\cup \cdots =\bigcup_{i=1}^\infty A_i\in{\cal G_A}$$
+because $\cal G_A$ is a monotone class.
+
+Therefore $\cal G_A$ is a $\sigma$-field containing $\cal A$, thus ${\cal F_A}\subset{\cal G_A}$ (because $\cal F_A$ is the \underline{minimal} $\sigma$-field containing $\cal A$).
+
+We have proved that ${\cal F_A}\subset{\cal G_A}$ and ${\cal G_A}\subset{\cal F_A}$ (at the beginning). Hence ${\cal G_A}={\cal F_A}$. \blacksquare\vspace{5mm}
+
+{\bf Definition.} Let $\Omega_1$ and $\Omega_2$ be two (universal) sets and $\Omega=\Omega_1\times\Omega_2$ be the Cartesian product. Suppose ${\cal F}_1$ is a $\sigma$-field in $\Omega_1$ and ${\cal F}_2$ is a $\sigma$-field in $\Omega_2$. The minimal $\sigma$-field $\cal F$ in $\Omega$ containing "rectangles" $A_1\times A_2=\{(a_1,a_2)\in\Omega:~a_1\in A_1,~a_2\in A_2\}$ for all $A_1\in{\cal F}_1$, $A_2\in{\cal F}_2$, is called the \underline{product $\sigma$-field} of ${\cal F}_1$ and ${\cal F}_2$: ${\cal F}={\cal F}_1\times{\cal F}_2$. \vspace{5mm}
+
+{\bf Theorem.} The product $\sigma$-field ${\cal F}_1\times{\cal F}_2$ is generated by the family of sets ("cylinders")
+  $${\cal C}=\{A_1\times\Omega_2:~A_1\in{\cal F}_1\}\cup\{\Omega_1\times A_2:~A_2\in{\cal F}_2\}.$$
+
+\underline{Proof.} Let ${\cal R}=\{A_1\times A_2:~A_1\in{\cal F}_1,A_2\in{\cal F}_2\}$. Since ${\cal C}\subset{\cal R}$, the generated $\sigma$-fields satisfy ${\cal F_C}\subset {\cal F_R}={\cal F}_1\times{\cal F}_2$.
+
+On the other hand, $A_1\times A_2=(A_1\times\Omega_2)\cap (\Omega_1\times A_2)$. Hence the rectangles belong to the $\sigma$-field generated by cylinders: ${\cal R}\subset{\cal F_C}\Longrightarrow {\cal F_R}\subset {\cal F_C}$.
+
+Thus ${\cal F}_1\times{\cal F}_2 ={\cal F_R}={\cal F_C}$. \blacksquare\vspace{3mm}
+
+\underline{Example.} $\Omega_1=\{1,2\}$, ${\cal F}_1=\{\emptyset, \{1\},\{2\},\Omega_1\}$;\\
+$\Omega_2=\{a,b,c\}$, ${\cal F}_2=\{\emptyset, \{a\},\{b,c\},\Omega_2\}$.\\
+$\Omega=\Omega_1\times\Omega_2=\{(1,a),(2,a),(1,b),(2,b),(1,c),(2,c)\}$. $\sigma$-field ${\cal F}_1\times{\cal F}_2$ is in 1-1 correspondence with the collection of all the subsets of \linebreak $\{\{(1,a)\},\{(2,a)\},\{(1,b),(1,c)\},\{(2,b),(2,c)\}\}$:
+  $${\cal F}_1\times{\cal F}_2=\{\emptyset, \{(1,a)\},\{(2,a)\},\{(1,b),(1,c)\},\{(2,b),(2,c)\},$$
+  $$\{(1,a),(2,a)\},\{(1,a),(1,b),(1,c)\},\{(1,a),(2,b),(2,c)\},$$
+  $$\{(2,a),(1,b),(1,c)\},\{(2,a),(2,b),(2,c)\},\{(1,b),(1,c),(2,b),(2,c)\},$$
+  $$\{(1,a),(2,a),(1,b),(1,c)\},\{(1,a),(2,a),(2,b),(2,c)\},$$
+  $$\{(1,a),(1,b),(1,c),(2,b),(2,c)\},\{(2,a),(1,b),(1,c),(2,b),(2,c)\},$$
+  $$\{(1,a),(2,a),(1,b),(2,b),(1,c),(2,c)\}=\Omega=\Omega_1\times\Omega_2\}.$$\vspace{3mm}
+
+\begin{center}\bf\underline{Open and closed sets in $\RR$} \end{center}
+
+An open interval  in $\RR$ is any set of the form $\{x\in\RR:~a<x<b\}$, where $a,b\in\RR\cup\{-\infty,+\infty\}$. \vspace{3mm}
+
+{\bf Definition.} A subset $O$ of the real line $\RR$ is \underline{open} if it is a union of open intervals: $O=\bigcup_{\alpha\in\Lambda} I_\alpha$. Equivalently, $O$ is open if it is a union of countable number of disjoint open intervals.
+The empty set $\emptyset$ is also open by definition.  A set is \underline{closed} if its complement is open. \vspace{3mm}
+
+Clearly, any union of open sets is open.
+
+Equivalent definition: a subset $O$ is open if $\forall x\in O$ $\exists\varepsilon>0$: $|x-y|<\varepsilon\Longrightarrow y\in O~~~~~(*)$ (means: every point in $O$ is internal).\\
+\underline{Proof.} (a) If $O$ is open and $x\in O$ then $x$ belongs to one of the intervals $I_\alpha$; for that interval $\exists\varepsilon>0$: $|x-y|<\varepsilon\Longrightarrow y\in I_\alpha \Longrightarrow y\in O$.\\
+(b) If (*) holds then, for each $\alpha\in O$ we take $I_\alpha=\{y:~|\alpha-y|<\varepsilon\}\subset O$ with $\varepsilon$ corresponding to $\alpha$. Now $O=\bigcup_{\alpha\in O} I_\alpha$.
+\blacksquare\vspace{3mm}
+
+Similarly, a set $A$ is closed if and only if it contains all its limiting points:\\
+if $x\in\RR$ is such that $\forall\varepsilon>0$ $\exists y\in A:~|x-y|<\varepsilon$, then $x\in A$.\\
+\underline{Proof.} (a) If $A$ is closed then $A^c$ is open; now, if $x\in A^c$ then $\exists\varepsilon>0$: $|x-y|<\varepsilon\Longrightarrow y\in A^c$, so that $x$ cannot be limiting in $A$.
+Thus, all limiting points of $A$ belong to $A$.\\
+(b) If $A$ contains all its limiting points, then any point $x\in A^c$ is not limiting in $A$, so that $\exists\varepsilon>0$: $\forall y\in A$ $|x-y|\ge\varepsilon \Longrightarrow \forall z$, if $|x-z|<\varepsilon$ then $z\in A^c$. Hence $A^c$ is open and $A$ is closed. \blacksquare\vspace{3mm}
+
+Intersection of open sets is open:
+  $$O^1\cap O^2=\left[\bigcup_\alpha I^1_\alpha\right]\cap O^2=\bigcup_\alpha\left(I^1_\alpha\cap O^2\right)=\bigcup_\alpha\left[ I^1_\alpha\cap\left(\bigcup_\beta I^2_\beta\right)\right]$$
+  $$=\bigcup_\alpha\bigcup_\beta \left( I^1_\alpha\cap I^2_\beta\right),$$
+and $I^1_\alpha\cap I^2_\beta$ is again an open interval. Hence, any finite intersection of open sets is open.
+
+However, a denumerable intersection of open sets is not necessarily open:
+let $O_n=(-\frac{1}{n},1)$ for $n\ge 1$; then $E=\bigcap_{n=1}^\infty O_n=[0,1)$ is not open: zero is not internal; 1 is a limiting point, but $1\notin E$; $E$ is not open and not closed.\vspace{3mm}
+
+{\bf Definition.} The minimal $\sigma$-field in $\RR$ containing all open sets is called \underline{Borel} $\sigma$-field. The elements of this $\sigma$-field, usually denoted as $\cal B$, are called Borel sets (Borel-measurable). \vspace{3mm}
+
+\underline{Remark.*} A system $\tau$ of subsets of $\Omega$ is called a \underline{topology} if $\emptyset,\Omega\in\tau$ and\\
+-- any union of subsets from $\tau$ also belongs to $\tau$;\\
+-- any finite intersection of subsets from $\tau$ also belongs to $\tau$.
+
+The pair $(\Omega,\tau)$ is called a \underline{topological space}. Open sets in $\RR$ define a topology, in this sense $\RR$ is a topological space.
+
+Open sets in $\RR^n$ ($n>1$) can be defined as unions of $n$-fold products of open intervals.\vspace{3mm}
+
+{\bf Definition.} A real function $f:~\RR^n\to\RR$ is said to be \underline{continuous} if $f^{-1}(O)$, the complete preimage, is open for each open set $O$. Equivalently, $\forall x\in\RR^n$ $f(x)=\lim_{y\to x} f(y)$.\vspace{3mm}
+
+\underline{Remark.} The limit $\lim_{y\to x} f(y)$ of a function $f:\RR^n\to\RR$ is such a number $A$ that
+$$\forall\varepsilon>0~\exists\delta>0:~\forall y\in\RR^n, \mbox{ if } |y-x|<\delta \mbox{ then } |f(y)-A|<\varepsilon.$$
+Note, the value of $x\in\RR^n$ is fixed here.\vspace{3mm}
+
+\underline{Examples.} 1. $f(x)=x^2:~\RR\to\RR$.\\
+If $0\le a<b$ then $f^{-1}((a,b))=(-\sqrt{b},-\sqrt{a})\cup(\sqrt{a},\sqrt{b})$;\\
+if $a<0<b$ then $f^{-1}((a,b))=(-\sqrt{b},\sqrt{b})$;\\
+if $a<b\le 0$ then $f^{-1}((a,b))=\emptyset$.
+
+Thus, for any open interval $I$, $f^{-1}(I)$ is open, and, for any open set $O=\bigcup_{\alpha\in\Lambda} I_\alpha$, $f^{-1}(O)=\bigcup_{\alpha\in\Lambda} f^{-1}(I_\alpha)$ is the union of open sets, hence, open. Function $f$ is continuous.\vspace{2mm}
+
+2.
+$$f(x)=\left\{\begin{array}{rl}
+1+x, & \mbox{ if } x>0,\\ 0, & \mbox{ if } x=0,\\ -1+x, & \mbox{ if } x<0. \end{array}\right.$$
+Take the open set $I=(-\frac{1}{2},2)$; then $f^{-1}(I)=[0,1)$ is not open. The function $f$ is not continuous.\vspace{3mm}
+
+\begin{center}\bf\underline{Cylinder sets} \end{center}
+
+\underline{Example.} Let $\cal B$ be the Borel $\sigma$-field in $\RR$ and consider the space $\Omega=\RR^\infty=\{(x_1,x_2,\ldots)\}$ of real sequences. Let $0<n_1<n_2<\ldots<n_K$ be a finite set of natural numbers and suppose $A$ is a Borel set in $\RR^K$, i.e. belongs to the $\sigma$-field ${\cal B}\times{\cal B}\times\ldots\times{\cal B}={\cal B}^K$ in $\RR^K$.
+
+The subset
+  $$\{\omega=(x_1,x_2,\ldots):~(x_{n_1},x_{n_2},\ldots ,x_{n_K})\in A\}$$
+of $\Omega$ is called a \underline{cylinder set}. The collection of all cylinders is a field, but not a $\sigma$-field! The minimal $\sigma$-field which contains all cylinders is very important in the theory of stochastic processes.
+
+One can also apply this reasoning to real functions $x_t\in\RR$, where $t\in[0,T]$ or $t\in[0,\infty)$.\vspace{3mm}
+
+\begin{center}\bf\underline{Riemann integral} \end{center}
+
+Let $f:~[a,b]\to\RR$ be a bounded real function, where $a<b$ are real numbers. A \underline{partition} of $[a,b]$ is a finite set $P=\{a_0,a_1,a_2,\ldots,a_n\}$ with $a=a_0<a_1<a_2<\ldots<a_n=b$. The partition $P$ gives rise to the upper and lower Riemann sums
+  $$U(P,f)=\sum_{i=1}^n M_i\cdot \Delta a_i,~~~L(P,f)=\sum_{i=1}^n m_i\cdot \Delta a_i,$$
+where $\Delta a_i=a_i-a_{i-1}$, $M_i=\sup_{a_{i-1}\le x\le a_i} f(x)$ and  $m_i=\inf_{a_{i-1}\le x\le a_i} f(x)$ for each $i\le n$.\vspace{3mm}
+
+Properties:\\
+-- For any given partition $P$, $L(P,f)\le U(P,f)$.\\
+-- If $P'\supset P$ then $L(P,f)\le L(P',f)$ and $U(P',f)\le U(P,f)$.\\
+-- For any two partitions $P,Q$ we have $L(P,f)\le U(Q,f)$ because $P\cup Q$ is the refinement of both $P$ and $Q$, so that
+  $$L(P,f)\le L(P\cup Q,f)\le U(P\cup Q,f)\le U(Q,f).$$
+The set $\{L(P,f):~P \mbox{ is a partition of } [a,b]\}$ is bounded above in $\RR$, and we call its supremum the \underline{lower} integral of $f$ on $[a,b]$.\vspace{3mm}
+
+Similarly, the infimum of the set of upper sums is the \underline{upper} integral. The function $f$ is now said to be Riemann-integrable on $[a,b]$ if these two numbers coincide, and their common value is the \underline{Riemann integral} of $f$, denoted by $\int_a^b f(x) dx$.\vspace{3mm}
+
+\underline{Example.} Let $f:[0,1]\to\RR$ be the following function:
+  $$f(x)=\left\{\begin{array}{ll}
+1, &\mbox{ if } x\in\QQ, \\ 0, & \mbox{ if } x\notin\QQ\end{array}\right. =\II_\QQ(x).$$
+Riemann integral $\int_0^1 f(x) dx$ does not exist. (See Assignment 2.)
+
+Suppose the sequence $\{q_n\}_{n=1}^\infty$ is an enumeration of the rationals on $[0,1]$ and put $A_N=\{q_1,q_2,\ldots, q_N\}$, $f_N(x)=\II_{A_N}(x)$. Then $\int_0^1 f_N(x)dx=0$ for all $N$. Clearly, $f(x)=\lim_{N\to\infty} f_N(x)$: the point-wise limit of Rieamnn-integrable functions is not Riemann-integrable.\vspace{3mm}
+
+\underline{Example.} Let
+  $$f_n(x)=\left\{\begin{array}{rl}
+4n^2x, \mbox{ if } 0\le x<\frac{1}{2n}; \\ \\ 4n-4n^2x, \mbox{ if } \frac{1}{2n}\le x<\frac{1}{n}; \\ \\ 0, \mbox{ if } \frac{1}{n}\le x\le 1\end{array}\right. ~~~~~~~~~~~~~~~~~~~~$$
+Then $\forall n\ge 1$ $\int_0^1 f_n(x)dx=1$.
+
+The limiting function $f(x)=\lim_{n\to\infty} f_n(x)=0$ is also integrable, but
+  $$\int_0^1 f(x)dx=\int_0^1(\lim_{n\to\infty} f_n(x)) dx=0\ne\lim_{n\to\infty} \int_0^1 f_n(x)dx=1.$$
+
+To understand better such situation, we need to look more carefully at the theory of integrating.\vspace{3mm}
+
+\underline{Remark.} Probabilities of events are usually integrals (in case a density exists) or sums. Thus, measure and integration theory are useful (actually, make the base) for the advanced Probability Theory.\vspace{3mm}
+
+\underline{Example.}  Let $p_n=\left(\frac{1}{2}\right)^n$, $n=1,2,\ldots$ Then $\sum_{n=1}^\infty p_n=1$. Clearly,  $\sum_{n=n_1}^{n_2}p_n=\int_{n_1-1}^{n_2} f(x) dx$, where
+  $$f(x)=\left\{\begin{array}{rl}
+\frac{1}{2},& \mbox{ if } x\in[0,1); \\ \\ \frac{1}{4},& \mbox{ if }x\in[1,2); \\ \\ \frac{1}{8},& \mbox{ if }x\in[2,3);\\ & \mbox{ and so on. }\end{array}\right.~~~~~~~~~~~~~~~~~~~~$$
+A sum is a special case of an integral.\vspace{10mm}
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 2. Measure}\\
+\hline\end{tabular}
+\vspace{5mm}
+
+\begin{center}\bf\underline{Null sets} \end{center}
+
+Suppose $I$ is a bounded interval of any kind, i.e. $I=[a,b]$, $I=[a,b)$, $I=(a,b]$, or $I=(a,b)$ with $a\le b$. We define the length of $I$ (the {\bf measure} of $I$) as $l(I)=b-a$ in each case. In particular $l(\{a\})=l([a,a])=0$: a one-element set is `null'.\vspace{5mm}
+
+{\bf Definition.} \underline{A null set} $A\subset \RR$ is a set that may be covered by a sequence of intervals of arbitrarily small total length, i.e. given any $\varepsilon>0$, we can find a sequence $\{I_n:~n\ge 1\}$ of intervals such that
+  $$A\subset \bigcup_{n=1}^\infty I_n \mbox{ and } \sum_{n=1}^\infty l(I_n)<\varepsilon.$$
+(We say that $A$ is `null'.)\vspace{3mm}
+
+\underline{Exercise.} Prove that the set $A=\{5\}$ is null. Take an arbitrary $\varepsilon>0$ and consider the sequence of intervals $I_1=[5,5]$, $I_2=[5,5]$, ... $A\subset\bigcup_{n=1}^\infty I_n$, $\sum_{n=1}^\infty l(I_n)=0<\varepsilon$. \vspace{3mm}
+
+{\bf Theorem.} If $(N_n)_{n\in\NN}$ is a sequence of null sets, then their union $N=\bigcup_{n=1}^\infty N_n$ is also null.\vspace{3mm}
+
+\underline{Proof.} Fix an arbitrary $\varepsilon>0$. Since $N_1$ is null, there exist intervals $I^1_k$, $k\ge 1$, such that $N_1\subset\bigcup_{k=1}^\infty I^1_k$ and $\sum_{k=1}^\infty l(I^1_k)<\frac{\varepsilon}{2}$. For $N_2$ we find a system of intervals $I^2_k$, $k\ge 1$, with $N_2\subset\bigcup_{k=1}^\infty I^2_k$ and $\sum_{k=1}^\infty l(I^2_k)<\frac{\varepsilon}{4}$. And so on:
+  $$ N_n\subset\bigcup_{k=1}^\infty I^n_k \mbox{ and } \sum_{k=1}^\infty l(I^n_k)<\frac{\varepsilon}{2^n}.$$
+One can arrange all those intervals in a sequence. For instance,
+  $$J_1=I^1_1,~J_2=I^1_2,~J_3=I^2_1,~ J_4=I^3_1,~ J_5=I^2_2,~ J_6=I^1_3,~ J_7=I^1_4,~\ldots$$
+Now $N=\bigcup_{n=1}^\infty N_n\subset \bigcup_{n=1}^\infty\bigcup_{k=1}^\infty I^n_k=\bigcup_{j=1}^\infty J_j$
+and the total length of the intervals $J_j$ equals
+  $$\sum_{n=1}^\infty\left(\sum_{k=1}^\infty l(I^n_k)\right)<\sum_{n=1}^\infty \frac{\varepsilon}{2^n}=\varepsilon.$$
+\blacksquare \vspace{3mm}
+
+{\bf Corollary.} Any countable set is null. \vspace{3mm}
+
+\underline{Example.} Uncountable sets can be null: Cantor set.
+
+1. Start with the interval $[0,1]$, remove the `middle third', i.e. the interval $(\frac{1}{3},\frac{2}{3})$, obtaining the set $C_1$, which consists of the two intervals $[0,\frac{1}{3}]$ and $[\frac{2}{3},1]$; $l(C_1)=\frac{2}{3}$. Here and below, $C_n$ is a finite union of disjoint intervals, and $l(C_n)$ is the total length of those intervals.
+
+2. Next remove the middle third part of these two intervals, leading to
+  $$C_2=[0,\frac{1}{9}]\cup[\frac{2}{9},\frac{3}{9}]\cup[\frac{6}{9},\frac{7}{9}]\cup[\frac{8}{9},1];~~~~~l(C_2)=\frac{4}{9}=\left(\frac{2}{3}\right)^2.$$
+
+3. and so on: $C_n$ consists of $2^n$ disjoint closed intervals; $l(C_n)=\left(\frac{2}{3}\right)^n$.
+
+Cantor set: $C=\bigcap_{n=1}^\infty C_n$.
+
+For an arbitrary $\varepsilon>0$, choose $n$ such that $\left(\frac{2}{3}\right)^n<\varepsilon$. Now $C\subset C_n$, $l(C_n)<\varepsilon$ and $C_n$ consists of a finite set of intervals.
+
+Prove independently that $C$ is uncountable.\vspace{3mm}
+
+$\emptyset$ is a null set according to the definition.
+
+Any subset of a null set is also a null set.
+
+Is the collection of all null sets a field?
+
+Note: the collection of all null sets and their complements is a $\sigma$-field. \vspace{3mm}
+
+\begin{center}\bf\underline{Outer measure} \end{center}\vspace{3mm}
+
+{\bf Definition.} The (Lebesgue) \underline{outer measure} of any set $A\subset\RR$ is given by
+  $$m^*(A)=\inf Z_A, \mbox{ where } Z_A=\left\{\sum_{n=1}^\infty l(I_n):~~I_n \mbox{ are intervals, } A\subset \bigcup_{n=1}^\infty I_n\right\}.$$
+We say the intervals $(I_n)_{n\ge 1}$ \underline{cover} the set $A$.\vspace{3mm}
+
+{\bf Theorem.} (i) $A\subset\RR$ is a null set if and only if $m^*(A)=0$.\\
+(ii) If $A\subset B$ then  $m^*(A)\le m^*(B)$.\\
+(iii) If $I$ is an interval then $m^*(I)=l(I)$.\\
+(iv) $m^*(\bigcup_{n=1}^\infty E_n)\le\sum_{n=1}^\infty m^*(E_n)$.\\
+(v) $m^*(A)=m^*(A+t)$ for each $A\subset\RR$, $t\in\RR$: the outer measure is translation-invariant.
+Here $A+t=\{x:~x=y+t \mbox{ for some } y\in A\}$.
+\vspace{3mm}
+
+\begin{center}\bf\underline{Lebesgue-measurable sets and Lebesgue measure} \end{center}\vspace{3mm}
+
+Outer measure is an attempt to define the `length' of a set on the straight line $\RR$.
+
+We certainly wish to ensure that if the sets $E_1$ and $E_2$ are disjoint then the `length' of $E_1\cup E_2$ equals the `length' of $E_1$ plus the `length' of $E_2$, and, more generally $length\left(\bigcup_{i=1}^\infty E_i\right)=\sum_{i=1}^\infty length(E_i)$ for pairwise disjoint sets. Unfortunately, the outer measure does not satisfy this requirement.\vspace{3mm}
+
+{\bf Definition.} A set $E\subset\RR$ is (Lebesgue) \underline{measurable} if $\forall A\subset\RR$ we have
+  $$m^*(A)=m^*(A\cap E)+m^*(A\cap E^c).$$
+
+We shall write $m(E)$ instead of $m^*(E)$ for measurable sets $E$; $m(E)$ is called the \underline{`Lebesgue measure'}. \vspace{3mm}
+
+{\bf Theorem.} (i) Any null set $N$ is measurable and $m(N)=0$.
+
+(ii) Any interval ($[a,b],~(a,b)$ etc) is measurable and $m([a,b])=m((a,b))=b-a$ for $-\infty<a\le b<\infty$. \vspace{3mm}
+
+{\bf Notation:} $\cal M$ is the class of all Lebesgue-measurable subsets of $\RR$. \vspace{3mm}
+
+{\bf Theorem.} (i) $\RR\in{\cal M}$; of course $m(\RR)=\infty$.\\
+(ii) If $E\in{\cal M}$ then $E^c\in{\cal M}$.\\
+(iii) If $E_n\in{\cal M}$ for all $n=1,2,\ldots$ then $\displaystyle\bigcup_{n=1}^\infty E_n\in{\cal M}$.\\
+(iv) Moreover, if $E_n\in{\cal M}$, $n=1,2,\ldots$ and $E_j\cap E_k=\emptyset$ for $j\ne k$, then
+  $$m(\bigcup_{n=1}^\infty E_n)=\sum_{n=1}^\infty m(E_n).$$\vspace{3mm}
+
+\underline{Remark.} Conditions (i)--(iii) mean that $\cal M$ is a $\sigma$-field. The Lebesgue measure is a $[0,\infty]$-valued function defined on the $\sigma$-field $\cal M$, which satisfies (iv): for pair-wise disjoint sets, it is countably additive.\vspace{3mm}
+
+(Partial) \underline{proof.} (i) Let $A\subset\RR$. Then  $A\cap\RR=A$ and $m^*(A\cap\RR)=m^*(A)$; $A\cap\RR^c=A\cap\emptyset=\emptyset$ and $m^*(A\cap \RR^c)=m^*(\emptyset)=0$, so that
+  $$m^*(A\cap\RR)+m^*(A\cap\RR^c)=m^*(A)+0.$$
+
+(ii) Suppose $E\in{\cal M}$. Then $\forall A\subset\RR$
+  $$m^*(A)=m^*(A\cap E)+m^*(A\cap E^c)=m^*(A\cap E^c)+m^*(A\cap(E^c)^c),$$
+so that $E^c\in{\cal M}$.
+
+(iii)--(iv) -- without proofs. \blacksquare \vspace{3mm}
+
+In many textbooks, the following (\underline{equivalent}) definitions are accepted:\\
+a \underline{bounded} subset $E\subset [a,b]$ is measurable if $m^*(E)=(b-a)-m^*([a,b]\setminus E)\defi m_*(E)$; the function $m_*$ is called `inner' measure (see the book by Taylor from the recommended list);\\
+a \underline{bounded} subset $E\subset [a,b]$ is measurable if, for any $\varepsilon>0$, there is a finite collection of pair-wise disjoint intervals $I_1,I_2,\ldots, I_n$ such that, for $B=\bigcup_{i=1}^n I_i$, inequality $m^*(E\bigtriangleup B)<\varepsilon$ holds.\vspace{3mm}
+
+{\bf Definition.} Suppose $\cal F$ is a $\sigma$-field of subsets of some universal set $\Omega$. A real-valued function $\mu:~{\cal F}\to [0,\infty]$ is called a \underline{measure} if $\mu(\emptyset)=0$ and, for any sequence of disjoint subsets $E_n\in{\cal F}$, $n=1,2,\ldots$,
+  $$\mu(\bigcup_{n=1}^\infty E_n)=\sum_{n=1}^\infty \mu(E_n).$$
+
+The triplet $(\Omega,{\cal F},\mu)$ is called a \underline{measure space}; $(\Omega,{\cal F})$ is called a \underline{measurable space}. \\
+A measure is called finite if $\mu(\Omega)<\infty$; hence $\mu$ takes values in $[0, \mu(\Omega)<\infty]$. The Lebesgue measure on $\RR$ is not finite. It is \underline{$\sigma$-finite} meaning that $\RR$ can be represented as a denumerable union of disjoint subsets having finite Lebesgue measure: e.g. $\RR=\ldots [-2,-1)\cup[-1,0)\cup[0,1)\cup[1,2)\ldots$.
+
+For a fixed $a\in\RR$ the set function $\delta_a(E)=\left\{\begin{array}{ll} 1, & \mbox{ if } a\in E; \\ 0 & \mbox{ otherwise } \end{array}\right.$ is a measure on $\RR$ called Dirac measure.
+
+Consider a continuous strictly increasing function $F:~\RR\to\RR$ and define the measure of finite intervals as
+  $$\mu((a,b))=\mu([a,b))=\mu((a,b])=\mu([a,b])=F(b)-F(a).$$
+After that, one can describe the null sets, outer measure, measurable sets and the measure $\mu$ similarly to the Lebesgue measure. The class of measurable subsets of $\RR$ coincides with $\cal M$. Sometimes one writes ${\cal M}_\mu$ to underline the dependence on the measure $\mu$. For example, ${\cal M}_{\delta_a}\ne{\cal M}$. More about different measures in [V.Bogachev. Measure Theory. Springer, Berlin, 2007 V.1].
+
+If $\mu_1$ and $\mu_2$ are two measures on the same measurable space $(\Omega,{\cal F})$ then $\mu=\mu_1+\mu_2$ is again a measure on $(\Omega,{\cal F})$.
+\vspace{3mm}
+
+\begin{center}\bf\underline{Properties of the Lebesgue measure} \end{center}\vspace{3mm}
+
+-- Lebesgue measure of an interval is equal to its length.
+
+-- Lebesgue measure of a null set is zero.
+
+-- If $A,B\in{\cal M}$ and $A\subset B$ then $m(A)\le m(B)$.
+
+--  If $A,B\in{\cal M}$, $A\subset B$ and $m(A)$ is finite then $m(B\setminus A)=m(B)-m(A)$.
+
+-- $m$ is translation-invariant: if $A\in{\cal M}$ then $\forall t\in\RR$ $A+t\in{\cal M}$ and $m(A+t)=m(A)$.
+
+-- If $A,B\in{\cal M}$ then $m(A\cup B)=m(A)+m(B)-m(A\cap B)$. Here `$+\infty$'$-$`$+\infty$'=`$+\infty$'.
+
+-- All open sets are Lebesgue-measurable. (Hence, any element of the Borel $\sigma$-field is Lebesgue-measurable.)
+
+-- If $A_n\in{\cal M}$ and $A_n\subset A_{n+1}$ for all $n=1,2,\ldots$, then
+  $$m\left(\bigcup_{n=1}^\infty A_n\right)=\lim_{n\to\infty} m(A_n).$$
+
+-- If $A_n\in{\cal M}$ and $A_n\supset A_{n+1}$ for all $n=1,2,\ldots$, then
+$$m\left(\bigcap_{n=1}^\infty A_n\right)=\lim_{n\to\infty} m(A_n).$$\vspace{3mm}
+
+\begin{center}\bf\underline{Completion of a measure} \end{center}
+
+According to the definition, the Borel $\sigma$-field is the minimal one containing all open sets (or "generated" by open sets). One can prove that, on the straight line, any open set (union of open intervals) is the union of finite or countable number of open intervals. This means, the Borel $\sigma$-field is generated by open intervals. Since $\cal M$, the $\sigma$-field of Lebesgue-measurable subsets, includes open intervals, $\cal M$ includes the Borel $\sigma$-field. In fact, there are subsets in $\cal M$ which are not Borel [Capinski, p.42].
+
+Obviously, the Lebesgue measure is well defined on the Borel $\sigma$-field. But, if $A$ is Borel and $m(A)=0$ then it is not necessarily true that any subset $B$ of $A$ (with $m(B)=0$) is Borel; we know only that $B\in{\cal M}$. In fact, $\cal M$ is the minimal $\sigma$-field which includes all Borel subsets and all null sets with $m(B)=0$.\vspace{3mm}
+
+{\bf Definition.} The \underline{completion} of a $\sigma$-field $\cal G$, relative to a given measure $\mu$, is defined as the smallest $\sigma$-field $\cal F$ containing $\cal G$ such that, if $N\subset G\in{\cal G}$ and $\mu(G)=0$, then $N\in{\cal F}$.\\
+A measure space $(\Omega,{\cal F},\mu)$ is called \underline{complete} if, for any $G\in{\cal F}$ with $\mu(G)=0$, for all $N\subset G$, we have $N\in{\cal F}$ (and of course $\mu(N)=0$).
+\vspace{3mm}
+
+$\cal M$ is the completion of the Borel $\sigma$-field relative to the Lebesgue measure.\newpage
+
+\begin{center}\bf\underline{Probability} \end{center}\vspace{3mm}
+
+{\bf Definition.} A \underline{probability space} is a triple $(\Omega,{\cal F}, P)$, where $\Omega$ is an arbitrary set, $\cal F$ is a $\sigma$-field of subsets of $\Omega$, and $P$ is a measure on $\cal F$ such that $P(\Omega)=1$, called \underline{probability measure} or, briefly, probability. The elements of $\cal F$ are called \underline{events}. If $A\in{\cal F}$ we say that $P(A)$ is the probability of event $A$.\vspace{3mm}
+
+\underline{Example.} A coin is tossed twice. The probability space describing this experiment can look as follows:\\
+$\Omega=\{(t,t),(t,h),(h,t),(h,h)\}$;\\
+$\cal F$ is the $\sigma$-field of all subsets of $\Omega$ (including $\emptyset$ and $\Omega$);\\
+$P(A)$ is the number of elements in $A$ divided by 4, e.g. $P(\{(t,t),(h,t),(h,h)\}=\frac{3}{4}$, $P(\{t,t)\}=\frac{1}{4}$, $P(\emptyset)=0$ and so on.\vspace{3mm}
+
+\underline{Example.} Given the Lebesgue measure $m$ on the Lebesgue $\sigma$-field $\cal M$, let $B\in{\cal M}$ be a fixed set such that $m(B)>0$. Let ${\cal M}_B=\{A\cap B:~A\in{\cal M}\}$. For $A\in{\cal M}_B$, we write $m_B(A)=m(A)$. ${\cal M}_B$ is the collection of the Lebesgue-measurable subsets of $B$ and $m_B$ is the Lebesgue measure on ${\cal M}_B$, the restriction (or trace) of the Lebesgue measure $m$ to $B$. Now $(B,{\cal M}_B,m_B)$ is a complete measure space. Let $P(A)=\frac{m_B(A)}{m(B)}$, assuming $0<m(B)<\infty$. Now $(B,{\cal M}_B,P)$ is a probability space. E.g. $B=[0,2]$, $P(A)=\frac{1}{2} m_{[0,2]}(A)$. \vspace{3mm}
+
+{\bf Definition.} Suppose $B\in{\cal F}$ and $P(B)>0$. Then, for any $A\in{\cal F}$, the number
+  $$P(A|B)=\frac{P(A\cap B)}{P(B)}$$
+is called the \underline{conditional probability} of $A$ given $B$.\vspace{3mm}
+
+Actually, $Q(A)\defi P(A|B)$ is again a probability measure on $\cal F$, so that $(\Omega,{\cal F},Q)$ is a probability space; $Q(B^c)=0$, $Q(B)=1$, and one can consider $(B,{\cal F}_B,Q)$ instead. Here ${\cal F}_B\defi \{A\cap B:~A\in{\cal F}\}$ is the $\sigma$-field of subsets of $B$ and $Q(A)\defi P(A|B)$ as before.  The measure $P(A\cap B)$ is the restriction (trace) of $P$ to $B$. Note, $B$ is fixed and $A\in{\cal F}$ is arbitrary. (cf the Example above about $m_B$.) \vspace{5mm}
+
+\underline{Law of total probability:} if $H_1,H_2,\ldots$ are pairwise disjoint events such that $\displaystyle \bigcup_{i=1}^\infty H_i=\Omega$, then (obviously), for any event $A$,
+  $$P(A)=\sum_{i=1}^\infty P(A\cap H_i),$$
+so that, if $P(H_i)\ne 0$, we have
+  $$P(A)=\sum_{i=1}^\infty P(A|H_i)P(H_i).$$ \vspace{3mm}
+
+{\bf Definition.} Two events $A$ and $B$ are called \underline{independent} if $P(A\cap B)=P(A)\cdot P(B)$.\vspace{3mm}
+
+If $P(A)=0$ then $P(A\cap B)=0$ for any event $B$, so that any event with zero probability is independent of any other event. Similarly, if $P(A)=1$ then $P(A\cap B)=P(B)$ because $P(B)=P(B\cap A)+P(B\cap A^c)$ and the last probability is zero. Any event with the full probability is independent of any other event.
+
+If $P(B)>0$ then $A$ and $B$ are independent if and only if $P(A)=P(A|B)$: the fact that $B$ takes place has no influence on the chances of $A$.\vspace{3mm}
+
+\begin{center}\bf\underline{Independent $\sigma$-fields} \end{center}\vspace{3mm}
+
+One can easily show that, if events A and B are independent, then all elements of the $\sigma$-fields they generate (those are ${\cal F}_A=\{\emptyset,A,A^c,\Omega\}$ and ${\cal F}_B=\{\emptyset,B,B^c,\Omega\}$) are (pair-wise) independent. This leads to the following
+
+{\bf Definition.} Two $\sigma$-fields ${\cal F}_1\subset{\cal F}$ and ${\cal F}_2\subset{\cal F}$ are \underline{independent} if   for any choice of sets $A_1\in{\cal F}_1$ and $A_2\in{\cal F}_2$ we have $P(A_1\cap A_2)=P(A_1)\cdot P(A_2)$.\vspace{3mm}
+
+\underline{Example.} Consider the probability space $([0,1],{\cal M}_{[0,1]}, P=m_{[0,1]})$ and let
+  $$A=[0,\frac{1}{4}],~~~B=[\frac{1}{8},\frac{5}{8}],~~~C=[\frac{1}{8},\frac{3}{8}]\cup[\frac{3}{4},1].$$
+Events  A and B are independent:
+  $$P(A\cap B)=P([\frac{1}{8},\frac{1}{4}])=\frac{1}{8}=P(A)P(B)=\frac{1}{4}\cdot\frac{1}{2}.$$
+Similarly, A and C are independent and B and C are independent. However,
+  $$P(A\cap B\cap C)=P([\frac{1}{8},\frac{1}{4}])=\frac{1}{8};~~~P(A)P(B)P(C)=\frac{1}{4}\cdot\frac{1}{2}\cdot\frac{1}{2}=\frac{1}{16}.$$
+Thus, given three events, the pairwise independence of each of the three possible pairs does not suffice for the extension of "independence" to all three events.
+
+On the other hand, with $A=[0,\frac{1}{4}]$, $B=C=[0,\frac{1}{16}]\cup[\frac{1}{4},\frac{11}{16}]$, we have
+  $$P(A\cap B\cap C)=P([0,\frac{1}{16}]\cup\{\frac{1}{4}\})=\frac{1}{16};~~~P(A)P(B)P(C)=\frac{1}{4}\cdot\frac{1}{2}\cdot\frac{1}{2}=\frac{1}{16},$$
+but none of the pairs make independent events. \vspace{3mm}
+
+{\bf Definition.} The events $A_1,A_2,\ldots, A_n$ are \underline{independent} if for all $k\le n$ for each choice of $k$ events, the probability of their intersection is the product of the probabilities.
+
+The $\sigma$-fields ${\cal F}_1,{\cal F}_2,\ldots,{\cal F}_n$ defined on a given probability space $(\Omega,{\cal F},P)$ are \underline{independent} if, for all choices of distinct indices $i_1,i_2,\ldots,i_k$ from $\{1,2,\ldots,n\}$ and all choices of sets $A_{i_j}\in{\cal F}_{i_j}$, we have
+  $$P(A_{i_1}\cap A_{i_2}\cap\ldots A_{i_k})=P(A_{i_1})\cdot P(A_{i_2})\cdot\ldots\cdot P(A_{i_k}).$$\vspace{3mm}
+
+\underline{Example.} A coin is tossed twice. Consider the corresponding probability space $(\Omega,{\cal F},P)$ described earlier; $\Omega=\{tt,~th,~ht,~hh\}$. Let $A=\{tt,th\}$ -- event meaning the first trial gives tails; $B=\{th,ht\}$ -- event meaning exactly one tail appears. Consider $\sigma$-fields ${\cal F}_A=\{\emptyset, A,A^c,\Omega\}=\{\emptyset, \{tt,th\},\{ht,hh\},\Omega\}$ and ${\cal F}_B=\{\emptyset, B,B^c,\Omega\}=\{\emptyset, \{th,ht\},\{tt,hh\},\Omega\}$ generated by the events A and B. Check that ${\cal F}_A$ and ${\cal F}_B$ are independent.\\
+(a) Events $\emptyset$ and $\Omega$ are independent of any other event:
+  $$\forall E\in{\cal F}~~P(E\cap\emptyset)=P(\emptyset)=0=P(E)P(\emptyset);$$
+  $$P(E\cap\Omega)=P(E)=P(E)P(\Omega).$$
+(b)
+  $$P(A\cap B)=P(\{th\})=\frac{1}{4}=\frac{1}{2}\cdot\frac{1}{2}=P(A)P(B);$$
+  $$P(A\cap B^c)=P(\{tt\})=\frac{1}{4}=\frac{1}{2}\cdot\frac{1}{2}=P(A)P(B^c);$$
+  $$P(A^c\cap B)=P(\{ht\})=\frac{1}{4}=\frac{1}{2}\cdot\frac{1}{2}=P(A^c)P(B);$$
+  $$P(A^c\cap B^c)=P(\{hh\})=\frac{1}{4}=\frac{1}{2}\cdot\frac{1}{2}=P(A^c)P(B^c).$$
+Thus ${\cal F}_A$ and ${\cal F}_B$ are independent by definition.
+\end{document} 

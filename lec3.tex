@@ -1,0 +1,725 @@
+\def\blacksquare{\hbox{\vrule width 10pt height 10pt depth 0pt}}
+
+\documentclass[a4paper,10pt]{article}
+\usepackage{anysize}
+\marginsize{3.0cm}{3.0cm}{2.5cm}{1.5cm}
+
+\usepackage{latexsym,amsfonts,amsmath}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+
+\def\inter{\mathop{\cap}}
+\def\NN{\mathbb{N}}
+\def\ZZ{\mathbb{Z}}
+\def\RR{\mathbb{R}}
+\def\QQ{\mathbb{Q}}
+\def\CC{\mathbb{C}}
+\def\II{\mathbb{I}}
+\def\EE{\mathbb{E}}
+\def\union{\mathop{\cup}}
+\def\inter{\mathop{\cap}}
+\def\liminf{\mathop{\underline{\lim}}}
+\def\limsup{\mathop{\overline{\lim}}}
+\def\ds{\displaystyle}
+\def\SS{\scriptscriptstyle}
+\def\nl{\mbox{} \newline }
+\newcommand{\widebar}[1]{\overline{#1}}
+\newcommand{\1}[1]{\mathbf{1}_{\{#1\}}}
+\newcommand{\I}[1]{I_{\{#1\}}}
+\newcommand{\rond}[1]{\mathop{\mbox{$#1$}}\limits^{\circ}}
+\newcommand{\defi}{\stackrel{\triangle}{=}}
+
+\newtheorem{condition}{Condition}{\bfseries}{\itshape}
+
+\newtheorem{theorem}{Theorem}{\bfseries}{\itshape}
+
+\newtheorem{corollary}{Corollary}{\bfseries}{\itshape}
+
+\newtheorem{proposition}{Proposition}{\bfseries}{\itshape}
+
+\newtheorem{example}{Example}{\bfseries}{\itshape}
+
+\newtheorem{lemma}{Lemma}{\bfseries}{\itshape}
+
+\newtheorem{remark}{Remark}{\bfseries}{\itshape}
+
+\newtheorem{definition}{Definition}{\bfseries}{\itshape}
+
+%\renewcommand{\baselinestretch}{2}
+\begin{document}\Large
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 6. Spaces of Integrable Functions}\\
+\hline\end{tabular}
+\vspace{5mm}
+
+\begin{center}\bf\underline{Normed spaces} \end{center}
+
+{\bf Definition.} A \underline{vector space} (over $\RR$) is a set $X$ which satisfies the following axioms:\\
+(i) if $x,y\in X$ then there is uniquely defined element $z\in X$ such that
+  $$z=x+y=y+x;~~~~~u+(x+y)=(u+x)+y;$$
+(ii) there is an element $0\in X$ such that $\forall x\in X$ $x+0=x$; for any $x\in X$ there is an element $y=-x\in X$ such that $x+y=x+(-x)=0$;\\
+(iii) for any $c\in \RR$, $x\in X$, there is a uniquely defined element $z\in X$ denoted as $z=cx$;
+  $$c(x+y)=cx+cy;~~~~~(c+d)x=cx+dx$$
+(for any $c,d\in\RR$)\\
+(iv) if $c=1$ then $cx=1\cdot x=x$.\vspace{5mm}
+
+{\bf Definition.} Let $X$ be a vector space. The function $x\to \|x\|$ from $X$ into $\RR$ is a \underline{norm} on $X$ if it satisfies\\
+(i) $\|x\|\ge 0$ for all $x\in X$;\\
+(ii) $\|x\|=0$ if and only if $x=0$;\\
+(iii) $\|cx\|=|c|\cdot\|x\|$ for all $c\in\RR$, $x\in X$;\\
+(iv) $\|x+y\|\le \|x\|+\|y\|$ for all $x,y\in X$.\vspace{3mm}
+
+\underline{Examples.} (1) Ordinary $n$-dimensional vectors $x=(x_1,x_2,\ldots,x_n)\in\RR^n$ with the standard operations $x+y$ and $cx$ (with $c\in\RR$) form the Euclidean vector space $\RR^n$ where the norm (`distance from zero') is, for instance, given by $\|x\|=\sqrt{x_1^2+x_2^2+\ldots x_n^2}$. Other norms: $\|x\|_1=\sum_{i=1}^n|x_i|$; $\|x\|_\infty=\max_{i=1,2,\ldots,n} |x_i|$.
+
+(2) Uniformly bounded functions $f$ on an interval $[a,b]$ also form a vector space: $g=f_1+f_2$ is another bounded function defined as $g(x)=f_1(x)+f_2(x)$ for all $x\in[a,b]$; if $f$ is a bounded function then $\forall c\in \RR$ $u=cf$ is again a bounded function defined as $u(x)=cf(x)$. The norm can be defined as follows: $\|f\|_\infty =\sup_{x\in[a,b]}|f(x)|$. (Compare with the last case in the previous example.)\vspace{3mm}
+
+{\bf Definition.} If $X$ is a vector space with a norm $\|x\|$, then we say that $\lim_{n\to\infty} x_n=x$ if $\lim_{n\to\infty} \|x-x_n\|=0$. Different norms can define different types of convergence in $X$.
+\vspace{3mm}
+
+\begin{center}\bf\underline{Space $L^1$} \end{center}\vspace{3mm}
+
+We denoted the set of all functions, integrable over $E\in{\cal M}$, by ${\cal L}^1(E)$. The target is to adopt the norm $\|x\|_1=\sum_{i=1}^n |x_i|$ introduced for vectors $x\in\RR^n$.
+
+It is natural to consider $\|f\|_1=\int_E |f| ~dm$ and say that $f_n$ converges to $f$ in the $\|\cdot\|_1$ norm (`in $L^1$-norm') if $\lim_{n\to\infty}\int_E |f_n-f|~dm=0$.\\
+But we face the following difficulty:\\
+-- the zero function $f(x)\equiv 0$ of course has the norm $\|f\|_1=0$,\\
+-- but if $\|g\|_1=0$ then $g=0$ almost everywhere and $g$ can take other values on a null set.
+
+The solution is to {\bf identify} all functions which are almost everywhere equal, that is, the space $L^1(E)$ contains {\bf sets} of functions (temporarily) denoted as $[f]=\{g:~g=f \mbox{ almost everywhere}\}$. Now $L^1(E)$ is a vector space: $[f_1]+[f_2]=[f_1+f_2]$ and so on. By the way, the zero element $[0]$ is the set of all functions which equal zero almost everywhere.
+
+Now $\|[f]\|_1=\int_E |f|~dm$. (One can take any element $g\in[f]$, the value will be the same because $g=f$ almost everywhere.) Moreover, $\|[f]\|_1=0\Longleftrightarrow [f]=[0]$ is the set of all functions which equal zero almost everywhere.
+
+If $f\in{\cal L}^1(E)$ then $[f]\in L^1(E)$ and if $[f]\in L^1(E)$ then any element of $[f]$ belongs to ${\cal L}^1(E)$. \vspace{3mm}
+
+{\bf Definition.} For the measure space $(E\in{\cal M},{\cal M}_E,m)$, \ \ \  $L^1(E)=\left.{\cal L}^1(E)\right/_\equiv$\ \ \  is the quotient (identification, factor) space with respect to the equivalence relation $\equiv$ given by
+  $$f\equiv g\Longleftrightarrow f=g \mbox{ almost everywhere.}$$
+\vspace{3mm}
+
+Now a sequence $[f_n]$ converges to $[f]$ on $E$ in $L^1$-norm, if  the sequence $\|[f_n]-[f]\|_1$ converges to zero as $n\to\infty$, i.e. $\lim_{n\to\infty} \int_E |f_n-f|~dm=0$. Here $f_n\in[f_n]$; $f\in[f]$ are arbitrary representatives. \vspace{3mm}
+
+\underline{Example.} Let $E=[0,1]$ and consider functions \\ $f_n(x)=\left\{\begin{array}{ll} 1, & \mbox{ if } x\in[0,1/n]; \\ 0 & \mbox{ otherwise}, \end{array}\right.$ where $n=1,2,\ldots$.\\ Clearly,
+$\lim_{n\to\infty} f_n(x)=f(x)=\left\{\begin{array}{ll} 1, & \mbox{ if } x=0; \\ 0 & \mbox{ otherwise} \end{array}\right.$ and $\lim_{n\to\infty} \int_E |f_n-f|~dm=\lim_{n\to\infty} \frac{1}{n}=0$, so that the sequence $f_n$ converges to $f$ in the $L^1$-norm. But $f_n$ converges also to the {\bf identical zero} function in the $L^1$-norm, and $f$ is not identical zero: it equals zero almost everywhere. It is more accurate to say that the class of functions $[f_n]$ converges to the class $[0]$ in the $L^1$-norm. This means that, if we take any function $g_n$ equal to $f_n$ almost everywhere and any function $g$ equal to $f$ almost everywhere then still $\lim_{n\to\infty} \int_E |g_n-g|~dm=0$.
+But it is standard practice to omit the square brackets and remember that two functions in the space $L^1$ are indistinguishable (`coincide' in $L^1$) if they coincide almost everywhere. Therefore, we say that the sequence $f_n$ converges to zero in the $L^1$-norm. Note that $f_n$ converges to $f$ pointwise (and $f$ is not the zero function). If we introduce the `uniform' norm $\|f\|_\infty=\sup_{x\in E} |f(x)|$ then the sequence $f_n$ has no limit at all: $\sup_{x\in E} |f_n(x)-0|=1$ for all $n$.\vspace{3mm}
+
+\begin{center}\bf\underline{$L^p$ spaces} \end{center}\vspace{3mm}
+
+Again, the elements of $L^p$ are the equivalence classes $[f]$ ($f_1,f_2\in[f] \Longleftrightarrow f_1=f_2$ almost everywhere), but we omit the square brackets. The measurable domain $E\subset\RR$ is asumed to be fixed.\vspace{3mm}
+
+{\bf Definition.} For a natural $p\ge 1$, we say that $f\in L^p(E)$ if $|f|^p$ is integrable over $E$: $\displaystyle \int_E |f|^pdm<\infty$; the norm is given by $\displaystyle \|f\|_p\defi\left(\int_E |f|^p dm\right)^{\frac{1}{p}}$.\\
+A sequence $f_n$ converges to $f$ in $L^p$-norm, if
+  $$\lim_{n\to\infty} \|f_n-f\|_p=\lim_{n\to\infty} \left(\int_E |f_n-f|^pdm\right)^{1/p}=0.$$\vspace{3mm}
+
+The space $L^2$ plays a special role. If $f,g\in L^2$ then the \underline{inner product} is well defined:
+  $$(f,g)=\int_E(fg)~dm.$$
+This is an analog of the standard dot-product $(x,y)=\sum_{i=1}^n x_iy_i$ in finite-dimensional spaces. \vspace{3mm}
+
+All spaces $L^p$ are complete. A complete normed space whose norm is induced by the inner product
+  $$\|f\|_2=\sqrt{(f,f)},$$
+is called \underline{Hilbert} space. \vspace{3mm}
+
+We say that two functions $f,g\in L^2$ are \underline{orthogonal} if $(f,g)=0$; moreover, we can define the \underline{angle} between  functions $f$ and $g$ by setting
+  $$\cos\theta=\frac{(f,g)}{\|f\|_2\cdot \|g\|_2}.$$\vspace{3mm}
+
+\underline{Example.} Let $E=\RR$, $f(x)=\II_{[0,1]}(x)$. Then $g\in L^2$ is orthogonal to $f$ if and only if $\int_{[0,1]} g~dm=0$: \vspace{5cm}
+
+{\bf Theorem.} If $m(E)<\infty$ and $1\le p\le q<\infty$ then $L^q(E)\subset L^p(E)$ and, in case $f_n\to f$ in $L^q$-norm, the sequence $f_n$ converges to $f$ also in the $L^p$-norm.
+\vspace{3mm}
+
+\begin{center}\bf\underline{Convergence in measure} \end{center}\vspace{3mm}
+
+{\bf Definition.} Let $(\Omega,{\cal F},\mu)$ be a measure space and $\mu(\Omega)<\infty$, that is, the $\mu$ measure is finite. A sequence of real measurable functions $f_n$ \underline{converges in measure} to a measurable function $f$ if
+  $$\forall\varepsilon>0~\lim_{n\to\infty} \mu(\{\omega:~|f_n(\omega)-f(\omega)|>\varepsilon\})=0.$$
+If $\mu(\Omega)=1$, i.e. $\mu$ is a probability, we say that $f_n\to f$ \underline{in probability}.\vspace{3mm}
+
+\underline{Example.} Suppose $\Omega=[0,1]$, ${\cal F}={\cal M}_{[0,1]}$, $\mu=m$, \\
+ $$f_n(x)=\left\{\begin{array}{ll} 1, & \mbox{ if } x\in[0,1/n]; \\ 0 & \mbox{ otherwise}. \end{array}\right.$$
+ Then, if $\varepsilon\ge 1$, then
+ $$\mu(\{x:~|f_n(x)-0|>\varepsilon\})=\mu(\emptyset)=0.$$
+If $\varepsilon<1$ then
+ $$\mu(\{x:~|f_n(x)-0|>\varepsilon\})=\mu([0,1/n])=\frac{1}{n}.$$
+In any case
+$\lim_{n\to\infty}\mu(\{x:~|f_n(x)-0|>\varepsilon\})=0$, so that $f_n\to 0$ in measure $\mu$ as $n\to\infty$. \vspace{3mm}
+
+\begin{center}\bf\underline{Types of functional convergence (summary)} \end{center}\vspace{3mm}
+
+We consider (measurable) real functions on a given domain $E\in{\cal M}$. The measure space $(E\subset\RR,{\cal M}_E,m)$ is fixed, $m(E)<\infty$.
+
+1. \underline{Point-wise convergence}: $f_n\to f$, if
+  $$\forall x\in E~~~\lim_{n\to\infty} |f_n(x)-f(x)|=0.$$
+(Note, the measure $m$ is not involved here.)
+
+2. \underline{Uniform convergence}: $f_n\to f$, if
+  $$\lim_{n\to\infty} \left[\sup_{x\in E} |f_n(x)-f(x)|\right]=0.$$
+(Note, the measure $m$ is not involved here.)
+
+3. Convergence \underline{almost everywhere}:
+  $$f_n\to f,~~\mbox{ if } ~~ m(\{x:~\lim_{n\to\infty} f_n(x)\ne f(x)\})=0.$$
+
+4. Convergence \underline{in measure}:
+  $$f_n\to f~~\mbox{ if }~~\forall \varepsilon>0~\lim_{n\to\infty} m(\{x:~|f_n(x)-f(x)|>\varepsilon\})=0.$$
+
+5. Convergence in \underline{$L^2$-norm}:
+  $$f_n\to f,~~\mbox{ if } ~~ \lim_{n\to\infty}\left(\int_E|f_n-f|^2~dm\right)^{1/2}=0.$$
+
+6. Convergence in  \underline{$L^1$-norm}:
+  $$f_n\to f,~~\mbox{ if } ~~ \lim_{n\to\infty}\int_E|f_n-f|~dm=0.$$ \vspace{3mm}
+
+{\bf Relationship:}\\
+(a) Uniform convergence $\Longrightarrow$ convergence almost everywhere $\Longrightarrow$ convergence in measure.\\
+(b) Uniform convergence $\Longrightarrow$ convergence in $L^2$-norm $\Longrightarrow$ convergence in $L^1$-norm $\Longrightarrow$ convergence in measure.\vspace{3mm}
+
+\begin{center}\bf\underline{Chebyshev inequality} \end{center}\vspace{3mm}
+
+Let $(\Omega,{\cal F},P)$ be a probability space and let $Y\ge 0$ be a RV. Then
+  $$\forall\varepsilon>0~\forall p\in(0,\infty)~~~P(\{\omega:~Y(\omega)\ge\varepsilon\})\le\frac{\EE(Y^p)}{\varepsilon^p}.$$\vspace{3mm}
+
+\underline{Proof.} Let $A=\{\omega:~ Y(\omega)\ge\varepsilon\}$; then
+  $$\EE(Y^p)=\int_\Omega Y^p~dP\ge \int_A Y^p~dP\ge \varepsilon^p\cdot P(A).$$
+\blacksquare \vspace{3mm}
+
+\underline{Remark.} If $(\Omega,{\cal F}, \mu)$ is an arbitrary measure space ($\mu$ is a finite measure, not necessarily a probability measure) then
+  $$\mu(\{\omega:~ Y(\omega)\ge\varepsilon\})\le \frac{\int_\Omega Y^p~d\mu}{\varepsilon^p}.$$
+\vspace{3mm}
+
+{\bf Corollary.} Consider the measure space $(E,{\cal M}_E,m)$ with $E\in{\cal M}$, $m(E)<\infty$. If a sequence $f_n$ converges to $f$ in $L^1$-norm then it also converges in measure.\vspace{3mm}
+
+\underline{Proof.} We have $\int_E |f_n-f|~dm \to 0$ as $n\to\infty$. Using the Chebyshev inequality with $p=1$, we obtain:
+  $$\forall\varepsilon>0~~\lim_{n\to\infty} m(\{x:~|f_n(x)-f(x)|>\varepsilon\})\le\lim_{n\to\infty} \frac{1}{\varepsilon}\cdot\int_E|f_n-f|~dm=0.$$
+\blacksquare\vspace{3mm}
+
+\underline{Example.} Let $E=[0,1]$; ${\cal F}={\cal M}_{[0,1]}$; $m$ is the Lebesgue measure. Consider the following sequence of functions:
+  $$f_1(x)=1;$$
+  $$f_2(x)=\left\{\begin{array}{ll} \sqrt{2}, & \mbox{ if } x\in[0,1/2]; \\ 0 & \mbox{ otherwise}; \end{array}\right.~~~~~
+f_3(x)=\left\{\begin{array}{ll} \sqrt{2}, & \mbox{ if } x\in[1/2,1]; \\ 0 & \mbox{ otherwise}; \end{array}\right.$$
+And so on: for every $n=1,2,\ldots$,
+  $$f_{\frac{n\cdot(n-1)}{2}+1}(x)=\left\{\begin{array}{ll} \sqrt{n}, & \mbox{ if } x\in[0,1/n]; \\ 0 & \mbox{ otherwise}; \end{array}\right.$$
+  $$f_{\frac{n\cdot(n-1)}{2}+2}(x)=\left\{\begin{array}{ll} \sqrt{n}, & \mbox{ if } x\in[1/n,2/n]; \\ 0 & \mbox{ otherwise}; \end{array}\right.~~~\ldots$$
+  $$f_{\frac{n\cdot(n-1)}{2}+n}(x)=\left\{\begin{array}{ll} \sqrt{n}, & \mbox{ if } x\in[(n-1)/n,1]; \\ 0 & \mbox{ otherwise}. \end{array}\right.$$
+
+(a) For any $x\in[0,1]$ the sequence $f_i(x)$ ($i=1,2,\ldots$) has no limit. For example, if $x=0$
+  $$f_1(x)=1,~~f_2(x)=\sqrt{2},~~f_3(x)=0,~~f_4(x)=\sqrt{3},~~f_5(x)=0,~~f_6(x)=0,$$
+  $$f_7(x)=\sqrt{4},~~f_8(x)=0,\ldots$$
+Thus $\{f_n\}$ does not converge uniformly and does not converge almost everywhere.
+
+(b) This sequence of functions converges in measure to zero. Indeed, for an arbitrary $\varepsilon>0,~\delta>0$, take $n>\frac{1}{\delta}$. Then all functions $f_i$ with $i>\frac{n(n-1)}{2}$ are different from zero (equal $\sqrt{n}$) on the intervals of the length smaller than $\frac{1}{n}<\delta$ meaning that $\forall i>\frac{n(n-1)}{2}=I$
+  $$m(\{x:~|f_i(x)|>\varepsilon\})<\delta.$$
+Thus (under arbitrarily fixed $\varepsilon>0$)
+  $$\forall\delta>0 ~~\exists I:~\forall i>I~~m(\{x:~ |f_i(x)-0|>\varepsilon\})<\delta,$$
+i.e.
+  $$\lim_{i\to\infty} m(\{x:~|f_i(x)-0|>\varepsilon\})=0.$$
+
+(c) Any one function $f_i$ belongs to $L^p$ (for any $p=1,2,\ldots$). Calculate the norms $\|f_i\|_p$, i.e. the $L^p$-distances from the zero function $f=0$:\\
+(i) $\|f_i\|_1=\frac{\sqrt{n}}{n}$ if $i=\frac{n(n-1)}{2}+1,\ldots,\frac{(n+1)n}{2}$. Obviously, $\lim_{n\to\infty} \frac{\sqrt{n}}{n}=0$, so that $f_i\to 0$ in the $L^1$-norm, as $i\to\infty$. ($n\to\infty$, as well)\\
+(ii) $\|f_i\|^2_2=\frac{(\sqrt{n})^2}{n}=1$ for all $i=1,2,\ldots$, so that the sequence $\{f_i\}$ does not converge to zero in the $L^2$-norm. It does not converge in the $L^p$-norm for all $p=2,3,\ldots$, either.
+\vspace{5mm}
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 7. Product Measures and  Riesz Representation}\\
+\hline\end{tabular}.\vspace{5mm}
+
+The basis for the Lebesgue measure on $\RR^1$ was the notion of the length of an interval. In the two-dimensional case, we start with standard rectangles and their areas. \vspace{3mm}
+
+{\bf Definition.} A (standard) \underline{rectangle} in $\RR^2$ is the cartesian product  $R=I_1\times I_2$, where $I_1,I_2$ are intervals. The area (or the `length') of a rectangle is  $a(R)=l(I_1)\cdot l(I_2)$. \vspace{3mm}
+
+The notion of a null set in $\RR^2$ is obvious, defined similarly to the one-dimensional case. The whole construction of the Lebesgue measure and of the $\sigma$-field of Lebesgue-measurable subsets goes through without change.
+
+Another way briefly described below is to concentrate on the Borel $\sigma$-fields, define the Lebesgue measure and complete the (two-dimen\-sional) Borel $\sigma$-field. As a result we obatin the same $\sigma$-field of Lebesgue-measurable subsets in $\RR^2$.
+
+If we take the measurable spaces $(\Omega_1=\RR,{\cal F}_1={\cal B})$ and $(\Omega_2=\RR,{\cal F}_2={\cal B})$ then the product $\sigma$-field (the Borel $\sigma$-field in $\RR^2$) is the minimal one containing rectangles $A_1\times A_2$ with $A_1\in{\cal F}_1,A_2\in{\cal F}_2$. Measures $\mu_1=\mu_2=m$ on $(\Omega_1,{\cal F}_1)$ and $(\Omega_2,{\cal F}_2)$ correspondingly are fixed.
+The (two-dimensional) Lebesgue measure on rectangles equals
+  $$P(A_1\times A_2)=m(A_1)\cdot m(A_2),$$
+and we want to generalise this equation to all sets from the product $\sigma$-field.
+
+The approach presented below works for arbitrary two measure spaces $(\Omega_1,{\cal F}_1,\mu_1)$ and $(\Omega_2,{\cal F}_2,\mu_2)$. We keep in mind the case $\Omega_1=\Omega_2=\RR$, ${\cal F}_1={\cal F}_2={\cal B}$, $\mu_1=\mu_2=m$; ${\cal F}\defi {\cal F}_1\times{\cal F}_2$. \vspace{5mm}
+
+{\bf Definition.} The \underline{sections} of a subset $A\subset \Omega_1\times\Omega_2$ are as follows:\\
+for $\omega_2\in\Omega_2$, $A_{\omega_2}=\{\omega_1\in\Omega_1:~(\omega_1,\omega_2)\in A\}\subset \Omega_1$;\\
+for $\omega_1\in\Omega_1$, $A_{\omega_1}=\{\omega_2\in\Omega_2:~(\omega_1,\omega_2)\in A\}\subset \Omega_2$. \vspace{3mm}
+
+{\bf Theorem.} If $A\in{\cal F}={\cal F}_1\times{\cal F}_2$ then $\forall\omega_2\in\Omega_2$ $A_{\omega_2}\in{\cal F}_1$ and $\forall\omega_1\in\Omega_1$ $A_{\omega_1}\in{\cal F}_2$.\vspace{3mm}
+
+Obviously, if $A=A_1\times A_2$ then
+  $$\mu_1(A_{\omega_2})=\left\{\begin{array}{ll}
+\mu_1(A_1), & \mbox{ if } \omega_2\in A_2; \\ 0, & \mbox{ if } \omega_2\notin A_2. \end{array}\right. $$ \vspace{4cm}
+
+Therefore,
+  $$P(A)=\mu_1(A_1)\cdot \mu_2(A_2)=\int_{\Omega_2}\mu_1(A_{\omega_2}) d\mu_2(\omega_2).$$
+(Clearly, $\displaystyle P(A)=\int_{\Omega_1}\mu_2(A_{\omega_1}) d\mu_1(\omega_1)$.) In the general case, we will accept the formula
+  $$P(A)=\int_{\Omega_2} \mu_1(A_{\omega_2}) d\mu_2(\omega_2)$$
+for an arbitrary $A\in{\cal F}$ and call $P(A)$ the \underline{product measure} of the set $A\in{\cal F}$. \vspace{3mm}
+
+{\bf Theorem.} Suppose $\mu_1$ and $\mu_2$ are finite and $A\in{\cal F}$. Then the functions $\omega_2\to\mu_1(A_{\omega_2})$ and $\omega_1\to\mu_2(A_{\omega_1})$ are measurable wrt ${\cal F}_2$ and ${\cal F}_1$ respectively, and
+  $$\int_{\Omega_2}\mu_1(A_{\omega_2})d\mu_2(\omega_2)=\int_{\Omega_1}\mu_2(A_{\omega_1})d\mu_1(\omega_1).$$ \vspace{3mm}
+
+\underline{Proof.} (Sketch). Consider
+  $${\cal G}=\{A\in{\cal F}:~\omega_2\to \mu_1(A_{\omega_2}) \mbox{ and } \omega_1\to \mu_2(A_{\omega_1}) \mbox{ are measurable and }$$
+  $$\int_{\Omega_2} \mu_1(A_{\omega_2})d\mu_2(\omega_2)=\int_{\Omega_1}\mu_2(A_{\omega_1})d\mu_1(\omega_1)\}.$$
+Let ${\cal R}$ be the collection of all rectangles $A=A_1\times A_2$ with $A_1\in{\cal F}_1$, $A_2\in{\cal F}_2$, and ${\cal A}$ be the family of all finite unions of such disjoint rectangles.
+
+It is easy to show that ${\cal R}\subset{\cal G}$ and ${\cal A}\subset{\cal G}$. Moreover, ${\cal A}$ is a field. If we show that ${\cal G}$ is a monotone class then $\cal G$ contains the $\sigma$-field generated by $\cal A$, and the latter is exactly $\cal F$. Thus ${\cal G}\supset {\cal F}$, what we want to prove.
+
+Let $A_1\subset A_2\subset\ldots$ be sets from $\cal G$. Measurable functions $\omega_2\to\mu_1((A_i)_{\omega_2})$ {\bf increase} and hence converge (point-wise) to function
+  $$\omega_2\to \mu_1(\cup_i(A_i)_{\omega_2})=\mu_1((\cup_i A_i)_{\omega_2})$$
+which is measurable. Similarly, function $\omega_1\to\mu_2((\cup_i A_i)_{\omega_1})$ is measurable.
+
+Equalities
+  $$\int_{\Omega_2} \mu_1((\cup_i A_i)_{\omega_2})d\mu_2(\omega_2)=\lim_{i\to\infty}\int_{\Omega_2} \mu_1((A_i)_{\omega_2})d\mu_2(\omega_2)$$
+  $$=\lim_{i\to\infty}\int_{\Omega_1} \mu_2((A_i)_{\omega_1})d\mu_1(\omega_1)=\int_{\Omega_1} \mu_2((\cup_i A_i)_{\omega_1})d\mu_1(\omega_1)$$
+hold due to the Monotone Convergence Theorem.
+
+Other steps of the proof are similar. \blacksquare\vspace{3mm}
+
+{\bf Theorem.} If $\mu_1$ and $\mu_2$ are finite measures then the set function on ${\cal F}$
+$$P(A)=\int_{\Omega_2}\mu_1(A_{\omega_2})d\mu_2(\omega_2)=\int_{\Omega_1}\mu_2(A_{\omega_1})d\mu_1(\omega_1)$$
+is a measure (called \underline{product} $P=\mu_1\times\mu_2$). Any other measure coinciding with $P$ on rectangles is equal to $P$ on ${\cal F}$.\vspace{3mm}
+
+The Lebesgue measures $\mu_1=\mu_2=m$ are not finite, but \underline{$\sigma$-finite}:
+  $$\RR=\ldots\cup [-n,-n+1)\cup [-n+1,-n+2)\cup\ldots \cup [-1,0)\cup [0,1)\cup\ldots\cup [n,n+1)\cup\ldots$$
+We build the two-dimensional Lebesgue measure separately on the rectangles $R_{n_1,n_2}=[n_1,n_1+1)\times [n_2,n_2+1)$ with $n_1,n_2\in\ZZ$. A set $A\subset\RR^2$ is Lebesgue-measurable if $A\cap R_{n_1,n_2}$ is measurable (wrt the completed $\sigma$-field) for any $(n_1,n_2)\in\ZZ^2$ and
+  $$P(A)\defi \sum_{n_1\in\ZZ}\sum_{n_2\in\ZZ} P(A\cap R_{n_1,n_2}).$$
+The two-dimensional Lebesgue measure is denoted as $m_2$.\vspace{3mm}
+
+\begin{center}\bf\underline{Fubini's Theorem} \end{center}\vspace{3mm}
+
+Let $(\Omega_1,{\cal F}_1,\mu_1)$ and  $(\Omega_2,{\cal F}_2,\mu_2)$ be two measure spaces and let $P=\mu_1\times\mu_2$ be the product measure on ${\cal F}={\cal F}_1\times{\cal F}_2$. For a function $f:~\Omega_1\times\Omega_2\to\RR$ we consider \underline{sections} $\omega_2\to f(\omega_1,\omega_2)$ and $\omega_1\to f(\omega_1,\omega_2)$, where $\omega_1\in\Omega_1$ and $\omega_2\in\Omega_2$ are (respectively) arbitrarily fixed.  \vspace{3mm}
+
+{\bf Theorem.} If $f\in L^1(\Omega_1\times\Omega_2)$ wrt $P$, then the sections are integrable, the functions
+  $$\omega_1\to\int_{\Omega_2} f(\omega_1,\omega_2)~d\mu_2(\omega_2),$$
+  $$\omega_2\to\int_{\Omega_1} f(\omega_1,\omega_2)~d\mu_1(\omega_1)$$
+are in $L^1(\Omega_1),~L^1(\Omega_2)$, respectively, and
+  $$\int_{\Omega_1\times\Omega_2} f~dP=\int_{\Omega_1}\left(\int_{\Omega_2} f~d\mu_2\right)d\mu_1=\int_{\Omega_2}\left(\int_{\Omega_1} f~d\mu_1\right)d\mu_2.$$
+\vspace{3mm}
+
+\underline{Example.} Let $\Omega_1=\Omega_2=[0,1]$, ${\cal F}_1={\cal F}_2={\cal M}_{[0,1]}$; $\mu_1=\mu_2=m$;
+  $$f(x,y)=\left\{\begin{array}{ll} \frac{1}{x^2}, & \mbox{ if } 0<y<x<1; \\  -\frac{1}{y^2}, & \mbox{ if } 0<x<y<1; \\ 0 & \mbox{ otherwise}. \end{array} \right. $$
+  $$\int_{\Omega_1}\left(\int_{\Omega_2} f~d\mu_2\right) d\mu_1=\int_{\Omega_1}\left(\int_0^x \frac{1}{x^2} dy+\int_x^1 \left(-\frac{1}{y^2}\right) dy\right) d\mu_1(x)$$
+  $$=\int_0^1\left(\frac{1}{x}+(1-\frac{1}{x})\right) dx=1;$$
+  $$\int_{\Omega_2}\left(\int_{\Omega_1} f~d\mu_1\right) d\mu_2=\int_{\Omega_2}\left(\int_0^y\left(-\frac{1}{y^2}\right) dx+\int_y^1 \frac{1}{x^2} dx\right) d\mu_2(y)$$
+  $$=\int_0^1\left(-\frac{1}{y}+(-1+\frac{1}{y})\right) dy=-1.$$
+The statement of the Fubini Theorem is false because the condition $f\in L^1(\Omega_1\times\Omega_2)$ is not satisfied: for $P=\mu_1\times\mu_2$, $\displaystyle \int_{\Omega_1\times\Omega_2}|f|~dP=+\infty$. (see Capinski, Example 6.15.)\vspace{3mm}
+
+\underline{Example.} For the same measure spaces, compute $\int_{\Omega_1\times\Omega_2} g~dP$ for $g(x,y)=x^2(y-\frac{x}{3})$.
+
+Now $|g|\le \frac{4}{3}$ is a bounded function and $g\in L^1(\Omega_1\times\Omega_2)$. Thus, according to Fubini's theorem,
+  $$\int_{\Omega_1\times\Omega_2} g~dP=\int_0^1\int_0^1 x^2(y-\frac{x}{3}) ~dx~dy=\int_0^1\left(\frac{y}{3}-\frac{1}{12}\right) dy=\frac{1}{6}-\frac{1}{12}=\frac{1}{12}$$
+and
+  $$\int_{\Omega_1\times\Omega_2} g~dP=\int_0^1\int_0^1 x^2(y-\frac{x}{3}) ~dy~dx=\int_0^1\left(\frac{x^2}{2}-\frac{x^3}{3}\right) dx=\frac{1}{6}-\frac{1}{12}=\frac{1}{12}$$
+(the same). \vspace{3mm}
+
+\begin{center}\bf\underline{Joint Distributions} \end{center}\vspace{3mm}
+
+Let $X,Y$ be two RVs defined on the same probability space $(\Omega,{\cal F},P)$.
+
+Consider the random vector $(X,Y):~\Omega\to \RR^2$. Its distribution is the measure defined for the Borel sets on the plane by
+  $$P_{(X,Y)}(B)=P((X,Y)\in B),~~~B\subset\RR^2.$$
+If this measure can be written as
+  $$P_{(X,Y)}(B)=\int_B f_{(X,Y)}(x,y)~dm_2(x,y)$$
+for some integrable function $f_{(X,Y)}$, then we say that $X,Y$ have a \linebreak \underline{joint density}, or "the distribution $P_{(X,Y)}$ has density $f_{(X,Y)}$".
+\vspace{3mm}
+
+\underline{Example.} (Problem 8, Assignment 3). $\Omega=[0,1]$, ${\cal F}={\cal M}_{[0,1]}$, $P=m$, $X(\omega)=\left\{\begin{array}{ll} 1, & \mbox{ if } \omega\in [0,\frac{1}{3}); \\ 0 & \mbox{ otherwise}, \end{array}\right.$~~~~~ $Y(\omega)=\omega$.~~~ Here the joint density does not exist. Indeed, consider rectangles $B=[a,b]\times[c,d]$. If $0,1\notin[a,b]$ then $P((X,Y)\in B)=0$. Therefore, if
+  $$P_{(X,Y)}(B)=\int_B f_{(X,Y)}(x,y)~ dm_2(x,y)$$
+then $f_{(X,Y)}(x,y)=0$ if $x\ne 0,1$, that is, $f_{(X,Y)}=0$ almost everywhere wrt $m_2$. Hence for any measurable $B\subset \RR^2$~~$P_{(X,Y)}(B)=0$. Contradiction, because $P_{(X,Y)}([0,1]\times[0,1])=1$.\vspace{3mm}
+
+\underline{Example.} Let $\Omega=[0,1]\times[0,1]$, ${\cal F}={\cal M}_{[0,1]^2}$ (two-dimensional Lebesgue-measurable sets), $P=m_2$; $X(\omega_1,\omega_2)=\omega_1$, $Y(\omega_1,\omega_2)=\frac{1}{2}(\omega_1-\omega_2)$.
+
+(i) Range of the random vector $(X,Y)$: $\omega_1=X$, $\omega_2=\omega_1-2Y=X-2Y$; thus $0\le X\le 1$, $0\le X-2Y\le 1$. \vspace{5cm}
+
+(ii) Joint distribution:
+  $$P_{(X,Y)}(B)=P((X,Y)\in B)=\int_\Omega \II_B((X(\omega),Y(\omega)))~dm_2(\omega)$$
+  $$=\int_0^1\int_0^1 \II_B((\omega_1,\frac{1}{2}(\omega_1-\omega_2)))~d\omega_1~d\omega_2$$
+(change of variables: $x=\omega_1$, $y=\frac{1}{2}(\omega_1-\omega_2)$ )
+  $$=\int_B |Jn| dm_2(x,y),$$
+where
+  $$Jn=det\left[\begin{array}{cc}
+\frac{\partial \omega_1}{\partial x} & \frac{\partial \omega_1}{\partial y} \\
+\frac{\partial \omega_2}{\partial x} & \frac{\partial \omega_2}{\partial y} \end{array}\right]=det\left[\begin{array}{cc} 1 & 0 \\ 1 & -2 \end{array}\right]=-2.$$
+Thus, the joint density is $f_{(X,Y)}(x,y)=2$.
+
+(iii) For example, for $B=\{(x,y):~ x\ge \frac{1}{2},~y\le 0\}$, we have
+  $$P_{(X,Y)}(B)=\int_B 2 ~dm_2(x,y)= \mbox{ (Fubini's theorem) }$$
+  $$=\int_{1/2}^1\left(\int_{\frac{x-1}{2}}^0 2~dy\right)dx=\int_{1/2}^1 [-(x-1)]dx=\frac{1}{2}-\left.\frac{x^2}{2}\right|_{1/2}^1=\frac{1}{8}.$$
+\underline{Remark*.} To be more rigorous, equality $P_{(X,Y)}(B)=\int_B 2~dm_2(x,y)$ was established for, e.g., standard rectangles $B=(a,b)\times(c,d)$. Since the measure $P_{(X,Y)}(B)$ is uniquely defined by its values on those rectangles and the set function $B\to \int_B 2~dm_2(x,y)$ is a measure on $\{(x,y):~0\le x\le 1,~0\le x-2y\le 1\}$, one can conclude that $P_{(X,Y)}(B)=\int_B 2~dm_2(x,y)$ for all Borel sets $B$.
+\vspace{3mm}
+
+{\bf Theorem.} The random variables $X$ and $Y$ are independent if and only if
+  $$P_{(X,Y)}=P_X\times P_Y.$$
+\vspace{3mm}
+
+\begin{center}\bf\underline{Riesz Representation Theorem} \end{center}\vspace{3mm}
+
+Let $C([a,b])$ be the space of all bounded real continuous functions on a finite closed interval $[a,b]$ and suppose
+  $$\Lambda:~C([a,b])\to\RR$$
+is a normalized non-negative linear functional, that is,
+
+(i) $\Lambda(1)=1$, $\Lambda(f)\ge 0$ whenever $f\ge 0$;
+
+(ii) $\Lambda(af+bg)=a\Lambda(f)+b\Lambda(g)$ for all $a,b\in\RR$ and $f,g\in C([a,b])$. \vspace{3mm}
+
+Then there is a unique probability measure $\mu$ on the Borel $\sigma$-field ${\cal B}_{[a,b]}$ such that
+  $$\Lambda(f)=\int_{[a,b]} f~d\mu~~\mbox{ for all } f\in C([a,b]).~~~~~~~~~~(*)$$
+
+Conversely, every probability measure $\mu$ on ${\cal B}_{[a,b]}$ determines a normalized non-negative linear functional on $C([a,b])$ given by (*). \vspace{3mm}
+
+\underline{Examples.} 1. Consider interval $[0,2]$ and probability measure $\mu$ on $([0,2],{\cal B}_{[0,2]})$ defined by $\mu(A)=\frac{1}{2}\int_A x~dm(x)$. Then $\Lambda(f)=\int_{[0,2]} f~d\mu$ is a normalized non-negative linear functional on $C([0,2])$. Indeed,
+  $$\Lambda(1)=\int_{[0,2]} ~d\mu=\mu([0,2])=\frac{1}{2}\int_0^2 x~dx=1.$$
+Here and below, all integrals are the standard Riemann integrals.
+  $$\Lambda(f)=\int_{[0,2]} f~d\mu\ge 0 ~~~\mbox{ whenever } f\ge 0;$$
+  $$\Lambda(af+bg)=\int_{[0,2]}[af(x)+bg(x)]d\mu(x)=\frac{1}{2}\left[\int_0^2 af(x)x~dx+\int_0^2 bg(x)x~dx\right]$$
+  $$=a\int_{[0,2]} f~d\mu+b\int_{[0,2]} g~d\mu=a\Lambda(f)+b\Lambda(g).$$
+All equalities are correct because $f$ and $g$ are bounded integrable functions.
+
+2. On the same interval $[0,2]$, consider the following functional $\Lambda:~C([0,2])\to\RR$:
+  $$\Lambda(f)=\frac{1}{4}\int_{[0,2]} f(x)x~dm(x)+\frac{1}{4} f(1)+\frac{1}{4} f(2).$$
+Check at home that $\Lambda$ is normalized, non-negative and linear.
+
+According to the Riesz Theorem, there is a probability measure $\mu$ on $([0,2],{\cal B}_{[0,2]})$ such that $\Lambda(f)=\int_{[0,2]} f~d\mu$.
+
+Obviously, the term $\frac{1}{4}\int_{[0,2]} f(x)x~dm(x)$ gives the component $\mu_1(A)=\frac{1}{4}\int_{A} x~dm(x)$ of the desired measure $\mu$. The terms $\frac{1}{4}f(1)$ and $\frac{1}{4}f(2)$ correspond to Dirac measures $\mu_2(A)=\frac{1}{4}\delta_1(A)$ and $\mu_3(A)=\frac{1}{4}\delta_2(A)$ because $\forall f\in C([0,2])$
+  $$\int_{[0,2]} f~d\mu_2=\frac{1}{4}\int_{[0,2]} f(x)~d\delta_1(x)=\frac{1}{4} f(1)~~\mbox{ and }$$
+  $$\int_{[0,2]} f~d\mu_3=\frac{1}{4}\int_{[0,2]} f(x)~d\delta_2(x)=\frac{1}{4} f(2).$$
+Therefore, $\mu=\mu_1+\mu_2+\mu_3$.
+\vspace{5mm}
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 8. Conditional Expectation and}  \\ {\LARGE\bf Elements of Random Processes}\\
+\hline\end{tabular}.\vspace{5mm}
+
+\begin{center}\bf\underline{Radon-Nikodym Theorem} \end{center}\vspace{3mm}
+
+{\bf Definition.} Let $(\Omega,{\cal F})$ be a measurable space. Suppose that $\nu$ and $\mu$ are measures on $(\Omega,{\cal F})$. We say that $\nu$ is \underline{absolutely continuous} with respect to $\mu$ if $\mu(A)=0$ implies $\nu(A)=0$ for $A\in{\cal F}$. We write this as $\nu\ll \mu$. \vspace{3mm}
+
+\underline{Examples.} Let $\Omega=[0,1]$, ${\cal F}={\cal M}_{[0,1]}$.
+
+1. Consider the following map from ${\cal M}_{[0,1]}$ to $\RR$: $A\to\int_A x^2~ dm(x)$. We know, this map is a measure (check at home); denote it as $\nu$. Now \\
+(i) $\nu\ll m$. Indeed, if $m(A)=0$ then $\nu(A)=\int_A x^2~ dm(x)=0$.\\
+(ii) $m\ll\nu$ because, if $\int_A x^2~dm(x)=0$, then $m(A\setminus\{0\})=0$. (Remember, $x^2>0$ if $x\in A\setminus\{0\}$.) And hence $m(A)=0$.
+
+2. Let $f(x)=\left\{\begin{array}{rl} x, & \mbox{ if } x\in[0,1/2); \\ 0 & \mbox{ otherwise} \end{array}\right.$ and consider the measure $\nu$ given by $\nu(A)=\int_A f~dm$. Similarly to the previous example, $\nu\ll m$, but $m$ is not absolutely continuous wrt $\nu$ because, e.g. $\nu([1/2,1])=0$, but $m([1/2,1])=1/2>0$.
+
+3. Dirac measure $\delta_{1/2}$ is not absolutely continuous wrt $m$, and $m$ is not absolutely continuous wrt $\delta_{1/2}$.\vspace{3mm}
+
+{\bf Definition.} A measure $\mu$ on a measurable space $(\Omega,{\cal F})$ is called $\sigma$-finite if
+  $$\exists A_n\in{\cal F}~(n=1,2,\ldots):~\Omega=\bigcup_{n=1}^\infty A_n \mbox{ and } \mu(A_n)<\infty \mbox{ for all } n.$$ \vspace{3mm}
+
+For example, the Lebesgue measure $m$ on $(\RR,{\cal M})$ is $\sigma$-finite. \vspace{3mm}
+
+{\bf Theorem (Radon-Nikodym).} Suppose $\nu$ and $\mu$ are two $\sigma$-finite measures on a measurable space $(\Omega,{\cal F})$. Then $\nu\ll\mu$ if and only if there is a non-negative measurable function $h:\Omega\to\RR$ such that $\nu(A)=\displaystyle \int_A h~d\mu$ for every $A\in{\cal F}$.
+
+We write the function $h$ defined above as $\frac{d\nu}{d\mu}$ and call it the\linebreak \underline{Radon-Nikodym derivative} of $\nu$ wrt $\mu$.\vspace{3mm}
+
+\underline{Example.} Let $\Omega=[0,2]$, ${\cal F}={\cal M}_{[0,2]}$, $\mu=3m+\delta_1$ and $\nu$ is given by equation $\nu(A)=\int_A x~dm$. (Here, as usual, $m$ is the Lebesgue measure and $\delta$ is the Dirac measure.)
+
+(i) If $\mu(A)=0$ then $m(A)=0$ and hence $\nu(A)=0$. Therefore $\nu\ll\mu$.\\
+But $\mu$ is not absolutely continuous wrt $\nu$ because $\nu(\{1\})=0$ and $\mu(\{1\})=1$.
+
+(ii) According to the definition, $\frac{ d\nu}{d\mu}$ is such a non-negative measurable function $h$ that, for any $A\in{\cal F}$,
+  $$\nu(A)=\int_A x~dm=3\int_A h~dm+h(1)\delta_1(A).~~~~~~~~~~~~~~~(*)$$
+In case $A=\{1\}$ we obtain equation $0=0+h(1)$ meaning that $h(1)=0$.\\
+If $A\not\ni 1$ then we have equation $\int_A x~dm=\int_A 3h~dm$. Clearly, one can take $h(x)=\frac{x}{3}$ for $x\ne 1$. Now (*) holds for any $A\in{\cal F}$, and
+  $$\frac{d\nu}{d\mu}=h(x)=\left\{\begin{array}{ll} 0, & \mbox{ if } x=1; \\ \frac{x}{3} & \mbox{ otherwise}. \end{array}\right. $$
+One can take any other function coincident with $h(x)$ $\mu$-almost everywhere. \vspace{3mm}
+
+{\bf Theorem.} Let $\nu\ll\mu$ be two measures on the measurable space $(\Omega,{\cal F})$ and $h=\frac{d\nu}{d\mu}$. Then, for any real non-negative ${\cal F}$-measurable function $g$ on $\Omega$ and for any $A\in{\cal F}$,
+  $$\int_A g~d\nu=\int_A gh~d\mu.$$
+The same holds for any $g\in L^1(\nu)$, that is, for any integrable wrt $\nu$ function on $A$.
+
+\underline{Proof.} (Sketch) As is known, for the non-negative function $g$, there is a sequence $\varphi_n$ of non-negative simple functions increasing to $g$ point-wise. For any $n=1,2,\ldots$, for any $A\in{\cal F}$
+  $$\int_A \varphi_n~d\nu=\sum_i a_{i,n}~\nu(E_{i,n}),$$
+where $a_{i,n}\ge 0$ are the (different) values of the function $\varphi_n$ and $E_{i,n}=\varphi^{-1}_n(\{a_{i,n}\})\cap A$ are disjoint subsets. Now $\nu(E_{i,n})=\int_{E_{i,n}} h~d\mu$, so that
+  $$\int_A \varphi_n~d\nu=\sum_i \int_{E_{i,n}}(a_{i,n}\cdot h)~d\mu=\int_A h_n~d\mu,$$
+where $h_n=\varphi_n\cdot h$.
+
+Since $\varphi_n\uparrow g$ and $h_n\uparrow gh$, we have from the Monotone Convergence Theorem:
+  $$\int_A g~d\nu=\lim_{n\to\infty} \int_A \varphi_n~d\nu=\lim_{n\to\infty} \int_A h_n~d\mu=\int_A gh~d\mu.$$
+For an arbitrary function $g\in L^1(\nu)$ we apply the proved equality to $g^+=\max\{ g,0\}$ and to $g^-=\max\{-g,0\}$. \blacksquare
+
+\underline{Example.} (One of the previous ones: see "Integration with respect to arbitrary measures".)
+
+Let the measure space be $(\Omega=[0,\frac{\pi}{2}),{\cal F}={\cal B}_{[0,\frac{\pi}{2})},\mu)$ with $\mu((a,b))=\sin(b)-\sin(a)$. Calculate $\int_{[0,\frac{\pi}{2})} x~d\mu(x)$.
+
+\underline{Solution.} Measure $\mu$ is absolutely continuous with respect to the Lebesgue measure $m$: if $\mu(A)=0$ then $m(A)=0$. To see this, note that, for each interval $(a,b)$, $\mu((a,b))\le b-a=m((a,b))$; hence every null set with respect to the Lebesgue measure $m$ is automatically null  with respect to the measure $\mu$.
+
+Thus, there exists the Radon-Nikodym derivative $h(x)=\frac{d\mu}{dm}(x)$. The expression for $h(x)$ comes from the formula
+$$\mu((a,b))=\int_{(a,b)}\mu(dx)=\sin(b)-\sin(a)$$
+$$=\int_a^b\cos(x)~dx \mbox{ (Riemann integral) }=\int_{(a,b)}\cos(x)~dm(x).$$
+Therefore, for $h(x)=\cos(x)$, the required formula $\mu(A)=\int_A h~dm$ is valid for intervals $A=(a,b)$. Now function $A\to\int_A h~dm$ is a measure on $(\Omega,{\cal F})$ which is \underline{uniquely} defined, given its values on the intervals. (See the Lebesgue construction: null sets, outer measure etc. Actually, the uniqueness of the extension of a measure is not obvious.) The uniqueness implies that the map $A\to\int_A h~dm$ coincides with the original measure $\mu$, so that
+$$\forall A\in{\cal F}~~~\mu(A)=\int_A h~dm$$
+and $h(x)=\cos(x)$, indeed.
+
+Now for the (real, bounded, ${\cal F}$-measurable) function $g(x)=x$, we have
+$$\int_{[0,\frac{\pi}{2})} x~d\mu=\int_{[0,\frac{\pi}{2})} x\cdot \frac{d\mu}{dm}(x)~dm(x)=\int_{[0,\frac{\pi}{2})} x~\cos(x) ~dm(x)=\frac{\pi}{2}-1,$$
+and the latter integral coincides with the standard Riemann integral because the function $x~\cos(x)$ is Riemann-integrable on $[0,\frac{\pi}{2})$.
+\vspace{3mm}
+
+\begin{center}\bf\underline{Conditional expectation} \end{center}\vspace{3mm}
+
+{\bf Definition.} Suppose $X$ is an integrable RV on a probability space $(\Omega,{\cal F},P)$ and ${\cal G}\subset{\cal F}$ is a sub-$\sigma$-field of $\cal F$. A RV $Y$ is called the \linebreak \underline{conditional expectation} of $X$ relative to $\cal G$ if\\
+(i) $Y$ is $\cal G$-measurable and\\
+(ii) $\displaystyle \int_{G} Y~dP=\int_{G} X~dP~~\mbox{ for all } G\in{\cal G}$.\vspace{3mm}
+
+Using the Radon-Nikodym theorem, one can easily prove the existence of the conditional expectation. First, we represent $X$ as $X^+-X^-$, where as usual $X^+=\max\{X,0\}$, $X^-=\max\{-X,0\}$. For $X^+$, consider the finite measure $\nu^+(G)=\int_G X^+~dP$ on $(\Omega,{\cal G})$ and measure $\mu$ being the restriction of $P$ to $\cal G$, that is, $\mu(G)=P(G)$ for all $G\in{\cal G}$. Obviously, $\nu^+\ll\mu$, so that there is a non-negative ${\cal G}$-measurable function $h^+:~\Omega\to\RR$ such that $\nu^+(G)=\int_G h^+~d\mu$ for all $G\in{\cal G}$.
+
+Similarly, $\exists h^-:~~\nu^-(G)=\int_G h^-~d\mu$, where $\nu^-(G)=\int_G X^-~dP$. It remains to subtract these equalities and replace $\mu$ with $P$: for any $G\in{\cal G}$
+  $$\nu^+(G)-\nu^-(G)=\int_G X~dP=\int_G (h^+-h^-)~dP.$$
+Remember, $\nu^+,\nu^-<\infty$, so that $h^+,h^-<\infty$ almost everywhere (we say: almost surely) and expressions like $\infty-\infty$ are excluded.
+
+Now function $Y= h^+-h^-$ is ${\cal G}$-measurable and
+  $$\int_G X~dP=\int_G Y~dP~~~\mbox{ for all }~~G\in{\cal G}.$$ \vspace{3mm}
+
+The conditional expectation is denoted as $Y=\EE(X|{\cal G})$. It is usually not unique: one can modify $Y$ on a $P$-measure zero subset $A\in{\cal G}$.\vspace{3mm}
+
+Suppose $X$ and $Z$ are two RVs on a probability space $(\Omega,{\cal F},P)$ and ${\cal G}={\cal F}_Z$ is the $\sigma$-field generated by $Z$; assume that $X$ is integrable. Then $\EE(X|{\cal G})=\EE(X|{\cal F}_Z)$ is often denoted as $\EE(X|Z)$; one can show that this conditional expectation $Y$ can be represented as $Y(\omega)=f(Z(\omega))$, where $f:~\RR\to\RR$ is a Borel function. This function $f(z)$ equals the (conditional) mathematical expectation of $X$ after the value $z=Z(\omega)$ was observed.\vspace{3mm}
+
+\underline{Examples.} 1. A fair die is rolled. $X$ is the resulting number, and $Z=\left\{\begin{array}{ll} 0, & \mbox{ if } X \mbox{ is even; } \\ 1, & \mbox{ if } X \mbox{ is odd.} \end{array}\right. $ Compute $\EE(X|Z)$.
+
+In this experiment, $\Omega=\{1,2,3,4,5,6\}$; ${\cal F}$ is the $\sigma$-field of all subsets of $\Omega$; $P$ is the uniform measure: $P(\{\omega\})=\frac{1}{6}$ for all $\omega\in\Omega$; $X(\omega)=\omega$; $Z(\omega)=\left\{\begin{array}{ll} 0, & \mbox{ if } \omega\in\{2,4,6\}; \\ 1, & \mbox{ if } \omega\in\{1,3,5\}; \end{array}\right. $ ${\cal G}={\cal F}_Z=\{\emptyset,~ \{1,3,5\},~\{2,4,6\},~\Omega\}$, and a RV $Y$ is ${\cal F}_Z$-measurable if and only if it has the form
+  $$Y(\omega)=\left\{\begin{array}{ll} y_0, & \mbox{ if } \omega\in\{2,4,6\}; \\ y_1, & \mbox{ if } \omega\in\{1,3,5\}. \end{array}\right. $$
+For $Y$ to be the conditional expectation, we need the following equations:
+  $$\int_G Y~dP=\int_G X~dP~~~~~\mbox{ for all } G\in{\cal F}_Z.$$
+(a) $G=\{1,3,5\}$: $y_1\cdot\frac{1}{2}=1\cdot\frac{1}{6}+3\cdot\frac{1}{6}+5\cdot\frac{1}{6}~ \Longrightarrow ~ y_1=3.$\\
+(b) $G=\{2,4,6\}$: $y_0\cdot\frac{1}{2}=2\cdot\frac{1}{6}+4\cdot\frac{1}{6}+6\cdot\frac{1}{6}~ \Longrightarrow ~ y_0=4.$\\
+(c) For $G=\emptyset$ and $G=\Omega$, the required equation is now obvious.
+
+Thus
+  $$Y(\omega)=\EE(X|Z)=\left\{\begin{array}{ll} 4, & \mbox{ if } \omega\in\{2,4,6\}; \\ 3, & \mbox{ if } \omega\in\{1,3,5\} \end{array}\right. =f(Z(\omega)),$$
+where $f(z)=\left\{\begin{array}{ll} 4, & \mbox{ if } z=0; \\ 3, & \mbox{ if } z=1. \end{array}\right. $ \vspace{3mm}
+
+2. Let $\Omega=[0,2]$; ${\cal F}={\cal M}_{[0,2]}$; $P=\frac{1}{2}m$; $X(\omega)=\omega$;\\ $Y(\omega)=\left\{\begin{array}{ll} 1, & \mbox{ if } \omega\in[0,\frac{1}{2}]; \\ 0 & \mbox{ otherwise}. \end{array}\right. $ Compute $\EE(X|Y)$.
+
+Since $\EE(X|Y)$ must be ${\cal F}_Y$-measurable, it takes only two values:
+  $$\EE(X|{\cal F}_Y)=\EE(X|Y)=\left\{\begin{array}{ll} a, & \mbox{ if } \omega\in[0,\frac{1}{2}]; \\ b, & \mbox{ if } \omega\in(\frac{1}{2},2]. \end{array}\right. $$
+For any $G\in{\cal G}={\cal F}_Y$, we need
+  $$\int_G \EE(X|Y)~dP=\int_G X~dP.$$
+
+The cases $G=\emptyset$ and $G=\Omega$ are obvious:
+  $$\int_\emptyset \EE(X|Y)~dP=\int_\emptyset X~dP=0;$$
+  $$\int_\Omega \EE(X|Y)~dP=a\cdot\frac{1}{4}+b\cdot\frac{3}{4}=\int_\Omega X~dP=\int_0^2 x\cdot\frac{1}{2}~dx=1.$$
+For $G=[0,\frac{1}{2}]$ and $G=(\frac{1}{2},2]$, we have:
+  $$\int_{[0,\frac{1}{2}]} \EE(X|Y)~dP=\frac{a}{4}=\int_{[0,\frac{1}{2}]} X~dP=\int_0^{1/2} \frac{x}{2}~dx=\frac{1}{16}\Longrightarrow a=\frac{1}{4};$$
+  $$\int_{(\frac{1}{2},2]} \EE(X|Y)~dP=\frac{3b}{4}=\int_{(\frac{1}{2},2]} X~dP=\int_{1/2}^{2} \frac{x}{2}~dx=\frac{15}{16}\Longrightarrow b=\frac{5}{4}.$$
+Thus
+  $$\EE(X|{\cal F}_Y)=\EE(X|Y)=\left\{\begin{array}{ll} 1/4, & \mbox{ if } \omega\in[0,\frac{1}{2}]; \\ 5/4, & \mbox{ if } \omega\in(\frac{1}{2},2] \end{array}\right.=f(Y(\omega)), $$
+where
+  $$f(z)=\left\{\begin{array}{ll} 1/4, & \mbox{ if }z=1; \\ 5/4, & \mbox{ if } z=0. \end{array}\right.$$
+
+By the way, $\EE(Y|X)=Y$ (prove). \vspace{3mm}
+
+{\bf Properties of the conditional expectation $\EE(X|{\cal G})$}\\
+Assume all RVs below are integrable on $(\Omega,{\cal F},P)$.\\
+1. $\EE(\EE(X|{\cal G}))=\EE(X)$.\\
+2. If $X$ is ${\cal G}$-measurable, then $\EE(X|{\cal G})=X$.\\
+3. If $X$ is independent of $\cal G$, then $\EE(X|{\cal G})=\EE(X)$.\\
+4. $\EE(aX+bY|{\cal G})=a\EE(X|{\cal G})+b\EE(Y|{\cal G})$ for any real numbers $a$ and $b$.\\
+5. If $X_n$, $n=1,2,\ldots$ are non-negative RVs increasing to $X$ almost everywhere, then $\EE(X_n|{\cal G})$ increase to $\EE(X|{\cal G})$ almost everywhere.\\
+6. If $Y$ is ${\cal G}$-measurable and $XY$ is integrable, then $\EE(XY|{\cal G})=Y\cdot\EE(X|{\cal G})$.\\
+7. If ${\cal H}\subset{\cal G}$ then $\EE(\EE(X|{\cal G})|{\cal H})=\EE(X|{\cal H})$.
+
+\underline{Example.} On the measure space $(\Omega=[-1,1],{\cal B}_{[-1,1]}, \frac{1}{2}m)$ consider the random variable $X(\omega)=\omega^2$. Describe the $\sigma$-field ${\cal F}_X$ generated by $X$. For an arbitrary integrable random variable $Y$, construct the conditional expectation $\EE(Y|{\cal F}_X)$ as a function of $\omega$ and also as a function of $Y$ and $X$.
+
+For each $B\in{\cal B}$, subset of $\RR$, the set $X^{-1}(B)$ has the form of $A^+\cup A^-$, where  $A^+=X^{-1}(B)\cap[0,1]$ and $A^-=\{\omega:~-\omega\in A^+\}$. For different $B\in{\cal B}$, one can obtain all possible sets $A^+\in{\cal B}_{[0,1]}$.
+Therefore, the required $\sigma$-field ${\cal F}_X$ is $\{A^+\cup A^-:~A^+\in{\cal B}_{[0,1]}\}$.
+
+A random variable $Z$ is ${\cal F}_X$-measurable if and only if $Z(\omega)=Z(-\omega)$ and $Z:~[0,1]\to\RR$ is ${\cal B}_{[0,1]}$-measurable. Indeed, otherwise, if $\exists\omega^*\in\Omega$ such that $Z(\omega^*)\ne Z(-\omega^*)$, then, for $B=\{Z(\omega^*)\}\in{\cal B}$, $Z^{-1}(B)$ includes $\omega^*$ and does not include $-\omega^*$; hence $Z^{-1}(B)$ does not have the form $A^+\cup A^-$ and $Z^{-1}(B)\notin{\cal F}_X$.
+
+For an arbitrary integrable random variable $Y$, $Z(\omega)=\EE(Y|{\cal F}_X)=\frac{Y(\omega)+Y(-\omega)}{2}$. Let us check the definition:\\
+(i) Since $Z(\omega)=Z(-\omega)$, for each $B\in{\cal B}$, the set
+$$Z^{-1}(B)=(Z^{-1}(B)\cap[0,1])\cup (Z^{-1}(B)\cap[-1,0])$$
+has the form $A^+\cup A^-$ with $A^+=Z^{-1}(B)\cap[0,1])\in{\cal B}_{[0,1]}$, hence belongs to ${\cal F}_X$.\\
+(ii) Every set $G\in{\cal F}_X$ has the form $G=G^+\cup G^-$ with $G^+\in{\cal B}_{[0,1]}$ and $G^-=\{\omega:~-\omega\in G^+\}$. Therefore, for the integrable random variable $Y$ we have
+$$\frac{1}{2}\int_G Y~dm=\frac{1}{2}\left(\int_{G^+} Y~dm+ \int_{G^-} Y~dm\right)$$
+$$=\frac{1}{2}\left(\int_{G^+} Y(\omega)~dm(\omega)+ \int_{G^+} Y(-\omega)~dm(\omega)\right)$$
+$$=\int_{G^+} Z(\omega)dm(\omega)=\frac{1}{2}\left(\int_{G^+} Z~dm+ \int_{G^-} Z~dm\right)=\frac{1}{2}\int_G Z~dm.$$
+
+Obviously, $Z=\EE(Y|{\cal F}_X)=\frac{Y(\sqrt{X})+Y(-\sqrt{X})}{2}$.
+
+For a fixed $t\in\RR$, let $W_t(\omega)=\II_{\{\omega:~Y(\omega)\le t\}}(\omega)$. Then
+$$\EE(W_t|{\cal F}_X)=\frac{W_t(\omega)+W_t(-\omega)}{2}.$$
+For a fixed $\omega\in\Omega$, the conditional expectation $F_\omega(t)=\EE(W_t|{\cal F}_X)$, as the function of $t$, exhibits the following properties.\\
+(i) $F_\omega(t)$ is non-negative and non-decreasing because the both $W_t(\omega)$ and $W_t(-\omega)$ are non-negative and non-decreasing. \vspace{3cm}
+
+\noindent(ii) $\lim_{t\to -\infty} F_\omega(t)=0$, $\lim_{t\to \infty} F_\omega(t)=1$ because so are the both $W_t(\omega)$ and $W_t(-\omega)$.\\
+(iii) Similarly, $F_\omega(t)$ is right-continuous. \vspace{3mm}
+
+Therefore, under a fixed $\omega$, $F_\omega(t)$ is a CDF. It describes the conditional (wrt ${\cal F}_X$) distribution of the random variable $Y$. This distribution consists of two atoms at $Y(\omega)$ and $Y(-\omega)$, i.e., $Y(\sqrt{X})$ and $Y(-\sqrt{X})$, where $X(\omega)=\omega^2$ is the original random variable. To summarise, after one observes $X$, he (she) cannot exactly identify $Y(\omega)$, because $\omega=\pm\sqrt{X}$ is not unique. The values $Y(\omega)$ and $Y(-\omega)$ are equally probable.
+\vspace{3mm}
+
+\begin{center}\bf\underline{Introduction to Random Processes}\end{center}
+\vspace{3mm}
+
+\noindent Consider the standard probability space $(\Omega=[0,1],{\cal F}={\cal M}_{[0,1]}, P=m)$ and the following random variables
+\begin{eqnarray*}
+X_1(\omega)&=&\left\{\begin{array}{ll}
+1, & \mbox{ if } \omega\in[0,\frac{1}{2}); \\
+2, & \mbox{ if } \omega\in[\frac{1}{2},1];
+\end{array}\right. \\
+X_2(\omega)&=&\left\{\begin{array}{ll}
+0, & \mbox{ if } \omega\in[0,\frac{1}{6})\cup[\frac{1}{2},\frac{3}{4}); \\
+1, & \mbox{ if } \omega\in[\frac{1}{6},\frac{1}{4}); \\
+2, & \mbox{ if } \omega\in[\frac{1}{4},\frac{1}{2})\cup[\frac{3}{4},1];
+\end{array}\right. \\
+X_3(\omega)&=&\left\{\begin{array}{ll}
+1, & \mbox{ if } \omega\in[\frac{1}{9},\frac{5}{24})\cup[\frac{1}{4},\frac{5}{16})\cup[\frac{1}{2},\frac{7}{12})\cup [\frac{3}{4},\frac{13}{16}); \\
+2, & \mbox{ if } \omega\in[0,\frac{1}{9})\cup[\frac{5}{24},\frac{1}{4})\cup[\frac{5}{16},\frac{1}{2})\cup [\frac{7}{12},\frac{3}{4})\cup[\frac{13}{16},1].
+\end{array}\right.
+\end{eqnarray*}
+
+\begin{eqnarray*}
+{\cal F}_{X_1}&=&\{\emptyset, [0,\frac{1}{2}), [\frac{1}{2},1], \Omega\};\\
+{\cal F}_{X_2}&=&\{\emptyset, [0,\frac{1}{6})\cup[\frac{1}{2},\frac{3}{4}),[\frac{1}{6},\frac{1}{4}),[\frac{1}{4},\frac{1}{2})\cup[\frac{3}{4},1],[0,\frac{1}{4})\cup [\frac{1}{2},\frac{3}{4}), [0,\frac{1}{6})\cup [\frac{1}{4},1],\\
+&& [\frac{1}{6},\frac{1}{2})\cup [\frac{3}{4},1], \Omega\};\\
+{\cal F}_{X_3}&=& \{\emptyset,[\frac{1}{9},\frac{5}{24})\cup[\frac{1}{4},\frac{5}{16})\cup[\frac{1}{2},\frac{7}{12})\cup [\frac{3}{4},\frac{13}{16}),\\
+&&[0,\frac{1}{9})\cup[\frac{5}{24},\frac{1}{4})\cup[\frac{5}{16},\frac{1}{2})\cup [\frac{7}{12},\frac{3}{4})\cup[\frac{13}{16},1],\Omega\}.
+\end{eqnarray*}
+
+We consider $X_1,X_2,X_3$ as the values of a random process at time moments 1,2,3.\\
+${\cal F}_1={\cal F}_{X_1}$ is generated by $X_1$.\\
+${\cal F}_2={\cal F}_{X_1}\vee{\cal F}_{X_2}=\{\emptyset, [0,\frac{1}{2}), [0,\frac{1}{6})\cup [\frac{1}{2}, \frac{3}{4}), [0,\frac{3}{4}),\ldots, \Omega\}$ is the minimal $\sigma$-field which contains both ${\cal F}_{X_1}$ and ${\cal F}_{X_2}$, i.e. generated by $X_1,X_2$.\\
+${\cal F}_3={\cal F}_{X_1}\vee{\cal F}_{X_2}\vee{\cal F}_{X_3}$ is the minimal $\sigma$-field in $\Omega$ which contains all subsets from ${\cal F}_{X_1}$, ${\cal F}_{X_2}$ and ${\cal F}_{X_3}$, i.e. generated by $X_1,X_2$ and $X_3$. \\
+${\cal F}_1\subset {\cal F}_2\subset{\cal F}_3$. Such a sequence of $\sigma$-fields is called `a filtration'.\vspace{5mm}
+
+Probabilities:
+\begin{eqnarray*}
+P(X_1=1,X_2=0,X_3=1)=\frac{1}{18}; && P(X_1=1,X_2=0,X_3=2)=\frac{1}{9};\\
+P(X_1=1,X_2=1,X_3=1)=\frac{1}{24}; && P(X_1=1,X_2=1,X_3=2)=\frac{1}{24};\\
+P(X_1=1,X_2=2,X_3=1)=\frac{1}{16}; && P(X_1=1,X_2=2,X_3=2)=\frac{3}{16};\\
+P(X_1=2,X_2=0,X_3=1)=\frac{1}{12}; && P(X_1=2,X_2=0,X_3=2)=\frac{1}{6};\\
+P(X_1=2,X_2=1,X_3=1) &=& P(X_1=2,X_2=1,X_3=2)=0;\\
+P(X_1=2,X_2=2,X_3=1)=\frac{1}{16}; && P(X_1=2,X_2=2,X_3=2)=\frac{3}{16}.
+\end{eqnarray*}
+
+Conditional probabilities are just the conditional expectations of the indicator functions, e.g.
+$$P(X_2=0|X_1)=P(X_2=0|{\cal F}_1)= E(I_{[0,\frac{1}{6})\cup[\frac{1}{2},\frac{3}{4})}(\omega)|{\cal F}_1).$$
+Direct calculations give
+\begin{eqnarray*}
+P(X_1=1)&=&P(X_1=2)=\frac{1}{2};\\
+P(X_2=0|X_1)&=&\left\{\begin{array}{ll} \frac{1}{3}, \mbox{ if } X_1=1; \\ \frac{1}{2}, \mbox{ if } X_1=2; \end{array}\right. \\
+P(X_2=1|X_1)&=&\left\{\begin{array}{ll} \frac{1}{6}, \mbox{ if } X_1=1; \\ 0, \mbox{ if } X_1=2; \end{array}\right. \\
+P(X_2=2|X_1)&=&\left\{\begin{array}{ll} \frac{1}{2}, \mbox{ if } X_1=1; \\ \frac{1}{2}, \mbox{ if } X_1=2. \end{array}\right.
+\end{eqnarray*}
+In this example,
+\begin{eqnarray*}
+&&P(X_3=1|{\cal F}_2)=P(X_3=1|X_2)=P(X_3=1|{\cal F}_{X_2})\\
+&=&\left\{\begin{array}{ll} \frac{1}{3}, \mbox{ if } X_2=0; \\ \frac{1}{2}, \mbox{ if } X_2=1; \\ \frac{1}{4}, \mbox{ if } X_2=2 \end{array}\right.
+\end{eqnarray*}
+and (automatically)
+\begin{eqnarray*}
+&&P(X_3=2|{\cal F}_2)=P(X_3=1|X_2)=P(X_3=1|{\cal F}_{X_2})\\
+&=&\left\{\begin{array}{ll} \frac{2}{3}, \mbox{ if } X_2=0; \\ \frac{1}{2}, \mbox{ if } X_2=1; \\ \frac{3}{4}, \mbox{ if } X_2=2. \end{array}\right.
+\end{eqnarray*}
+These expressions represent the markovian property of the random process $X_t$ ($t=1,2,3$). Function $f(i,\omega)=P(X_3=i|{\cal F}_2)$ must be ${\cal F}_2$-measurable for any $i=1,2$. In this example, (by chance!) it is ${\cal F}_{X_2}$-measurable for any $i=1,2$. This is the Markov property. Another viewpoint:
+$$P(X_3=i|(X_1,X_2)~)=P(X_3=i|X_2)$$
+does not depend on $X_1$: if the "current" state $X_2$ is known, then the "future" $X_3$ does not depend on the "past" $X_1$.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=15cm]{pic1.eps}
+\end{center}
+\end{figure}
+
+One can certainly suggest other rigorous mathematical models for this random process. For example, the following "canonical" representation is popular.
+$$\Omega=\{1,2\}\times\{0,1,2\}\times\{1,2\}=\{(1,0,1),(1,0,2),(1,1,1),\ldots\}.$$
+The elements of $\Omega$ are just the possible trajectories of the process: $\omega_1$ corresponds to $(x_1=1,~x_2=0,~x_3=1)$,  $\omega_2$ corresponds to $(x_1=1,~x_2=0,~x_3=2)$, $\omega_3$ corresponds to $(x_1=1,~x_2=1,~x_3=1)$, and so on. The $\sigma$-field ${\cal F}=2^\Omega$ is just the collection of all subsets of $\Omega$, and the probability is defined by its values on the singletons, see the table above:
+$$P(\{\omega_1\})=1/18,~~~P(\{\omega_2\})=1/9,~~~P(\{\omega_3\})=1/24,~~~\mbox{ and so on.}$$
+Other probabilities are calculated in the usual way: $P(\{\omega_1,\omega_3\})=1/18+1/24=7/72$ etc. The values of the random process $X_1(\omega)$, $X_2(\omega)$ and $X_3(\omega)$ are just the corresponding components of $\omega$:
+$$X_1(\omega_1)=1,~~~X_3(\omega_1)=1,~~~X_3(\omega_2)=2,~~~X_3(\omega_3)=1,~~~ \mbox{ and so on.}$$
+The filtration in $\Omega$: ${\cal F}_1={\cal F}_{X_1}$, ${\cal F}_2={\cal F}_{X_1}\vee{\cal F}_{X_2}$,  ${\cal F}_3={\cal F}_{X_1}\vee{\cal F}_{X_2}\vee{\cal F}_{X_3}$ can be easily built. The Markov property $P(X_3=i|(X_1,X_2)~)=P(X_3=i|X_2)$ is certainly satisfied (check!).
+
+{\bf Definition.} A (discrete-time) random process with real values on a probability space $(\Omega,{\cal F},P)$ is just a function $X_t(\omega)$ on $\{1,2,\ldots\}\times\Omega$ such that for each $t\in\{1,2,\ldots\}$ $X_t$ is a random variable. For a fixed $\omega\in\Omega$, the sequence $\{X_1(\omega),X_2(\omega),\ldots\}$ is called the \underline{sample path} (or \underline{trajectory)} of the process at $\omega$.
+
+{\bf Definition.} A collection $\{{\cal F}_t\}=\{{\cal F}_t,~t\in\{1,2,\ldots\}\}$ of $\sigma$-fields is called a \underline{filtration} if ${\cal F}_t\subseteq{\cal F}_{t+1}\subseteq{\cal F}$ for all $t\in\{1,2,\ldots\}$. A process $X$ is \underline{adapted} to a filtration $\{{\cal F}_t\}$ if $X_t$ is ${\cal F}_t$-measurable for each $t\in\{1,2,\ldots\}$. The quadruple $(\Omega,{\cal F},\{{\cal F}_t\},P)$ is called a \underline{filtered} probability space. The \underline{natural} filtration is defined by ${\cal F}_t={\cal F}_{X_1}\vee{\cal F}_{X_2}\vee\ldots \vee{\cal F}_{X_t}$.
+
+{\bf Definition.} A real-valued process $X$ with $E(|X_t|)<\infty$ for all $t\in\{1,2,\ldots\}$ and adapted to a filtration $\{{\cal F}_t\}$ is an $\{{\cal F}_t\}$-\underline{martingale} if $E(X_{t+s}|{\cal F}_t)=X_t$ $P$-a.s. for all $t,s\in\{1,2,\ldots\}$. It is called an $\{{\cal F}_t\}$-\underline{submartingale} (\underline{supermartingale}) if
+$$E(X_{t+s}|{\cal F}_t)\ge X_t~~~~~(E(X_{t+s}|{\cal F}_t)\le X_t)~~~P-a.s.$$
+
+In the previous example,
+$$E(X_2|{\cal F}_1)=\left\{\begin{array}{ll}
+7/6, & \mbox{ if } X_1=1;\\ 1,& \mbox{ if } X_1=2; \end{array}\right.$$
+$$E(X_3|{\cal F}_2)=E(X_3|{\cal F}_{X_2})=\left\{\begin{array}{ll}
+1/3+4/3=5/3, & \mbox{ if } X_2=0;\\ 3/2, & \mbox{ if } X_2=1;\\ 1/4+3/2=7/4, & \mbox{ if } X_2=2. \end{array}\right.$$
+The process $X$ is not a (sub-, super-) martingale.
+
+\underline{Exercise.} Suppose an adapted real-valued process $X$ on $(\Omega,{\cal F},\{{\cal F}_t\},P)$ with $E(|X_t|)<\infty$ for all $t\in\{1,2,\ldots\}$ is such that for all $t\in\{1,2,\ldots\}$ $E(X_{t+1}|{\cal F}_t)=X_t$ $P$-a.s. Show that $X$ is a martingale.
+
+\underline{Proof.} Fix arbitrary $t,s\in\{1,2,\ldots\}$. We know that ${\cal F}_t\subset{\cal F}_{t+1}\subset\ldots\subset {\cal F}_{t+s-1}$. By property 7 of the conditional expectation,
+\begin{eqnarray*}
+E(X_{t+s}|{\cal F}_t)&=& E(E(X_{t+s}|{\cal F}_{t+1})|{\cal F}_t)=E(E(E(X_{t+s}|{\cal F}_{t+2})|{\cal F}_{t+1})|{\cal F}_t) \\
+=\ldots &=& E(E(\ldots E(E(X_{t+s}|{\cal F}_{t+s-1})|{\cal F}_{t+s-2})\ldots|{\cal F}_{t+1})|{\cal F}_t)\\
+&=& E(E(\ldots E(E(X_{t+s-1}|{\cal F}_{t+s-2})\ldots|{\cal F}_{t+1})|{\cal F}_t)\\
+&=& \ldots = E(X_{t+1}|{\cal F}_t)=X_t.
+\end{eqnarray*}
+$~$\hfill \blacksquare
+
+\underline{Example.} Consider the following Markov process defined by the transition probabilities according to the diagram:
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=15cm]{pic2.eps}
+\end{center}
+\end{figure}
+
+One can build the filtered probability space $(\Omega,{\cal F},\{{\cal F}_t\},P)$ in many different ways, and $X$ is a martingale as soon as the filtration is natural. If, e.g., the filtration is trivial: ${\cal F}_t\equiv{\cal F}$, and $X_t$ is as usual $\cal F$-measurable, then  $E(X_{t+1}|{\cal F}_t)=X_{t+1}$ which not necessarily coincides with $X_t$ at all $\omega\in\Omega$, so that  the process $X$ is not a martingale. The property of being a martingale depends on the filtration!
+
+{\bf Theorem.} Suppose $X$ is a martingale on $(\Omega,{\cal F},\{{\cal F}_t\},P)$ and $\forall t\in\{1,2,\ldots\}$ $X_t\in L^2(\RR,P)$ meaning that $\int_\RR X_t^2(\omega)P(d\omega)<\infty$. Then
+$$E(X_t\cdot X_{t+s})=E(X_t^2)~~~\mbox{ for all } s=0,1,2,\ldots$$
+
+\underline{Proof.}
+$$E(X_t\cdot X_{t+s})=E(E(X_t\cdot X_{t+s}|{\cal F}_t))=E(X_t\cdot E(X_{t+s}|{\cal F}_t)).$$
+We used properties 1 and 6 of the conditional expectation. Finally, by the martingale property, $E(X_t\cdot X_{t+s})=E(X^2_t)$.\hfill \blacksquare
+
+This theorem is also valid for the continuous-time martingales when $t\in[0,\infty)$.\vspace{5mm}
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 9. Measures on Metric Spaces}\\
+\hline\end{tabular}
+\vspace{5mm}
+
+\underline{Definition.} A metric space is the pair $(X,\rho)$, where $X$ is an arbitrary set and $\rho$ is a metric ("distance"), that is, the mapping $\rho:~X\times X\to\RR$ satisfying the following axioms\\
+(i) $\rho(x,x)=0$ for all $x\in X$, and $\rho(x,y)>0$ for all $x\ne y$. \\
+(ii) $\rho(x,y)=\rho(y,x)$ for all $x,y\in X$.\\
+(iii) $\rho(x,z)\le \rho(x,y)+\rho(y,z)$ for all $x,y,z\in X$.\vspace{3mm}
+
+Convergence: $x_n\to x$ as $n\to\infty$ iff $\lim_{n\to\infty} \rho(x_n,x)=0$.\vspace{2mm}
+
+\underline{Definition.} A set $O\subset X$ is called \underline{open} if
+$$\forall x\in O~\exists \varepsilon>0:~\forall y\in X \mbox{ if } \rho(y,x)<\varepsilon \mbox{ then } y\in O.$$
+Complements of open sets are called \underline{closed}.
+
+\underline{Definition.} A point $x\in X$ is called a \underline{limiting} point of $A\subset X$ if
+$$\forall\varepsilon>0~\exists y\in A:~\rho(y,x)<\varepsilon.$$
+$\bar A$ (\underline{closure} of $A\subset X$) is the set of all points from $X$ which are limiting points of $A$.
+
+\underline{Definition.} If there is a countable subset $B\subset X$ such that $\bar B=X$ then the metric space $(X,\rho)$ is called \underline{separable}.
+
+\underline{Definition.} A sequence $\{x_n\}_{n=1}^\infty$ is called a \underline{Cauchy} sequence if
+$$\forall\varepsilon>0~\exists N:~ \forall m,n>N~\rho(x_m,x_n)<\varepsilon.$$
+If every Cauchy sequence has a limit then the metric space $(X,\rho)$ is called \underline{complete}.
+
+\underline{Definition.} The minimal $\sigma$-field containing all open sets in $(X,\rho)$ is called \underline{Borel}, denoted as $\cal B$.
+
+\underline{Definition.} A (finite) \underline{measure} on a metric space $(X,\rho)$ is a mapping $\mu:~{\cal B}\to\RR$ satisfying the following properties:\\
+(i) $\mu(X)<\infty$ (if $\mu(X)=1$ then $\mu$ is a probability).\\
+(ii) $\mu(A)\ge 0$ for all $A\in{\cal B}$.\\
+(iii) For any sequence of disjoint subsets $E_n\in{\cal B}$,
+$$\mu\left(\bigcup_{n=1}^\infty E_n\right)=\sum_{n=1}^\infty \mu(E_n).$$
+
+\underline{Example.} $C([0,1])$, the space of all continuous real functions on $[0,1]$ with metric
+$$\rho(f,g)=\sup_{0\le t\le 1}|f(t)-g(t)|$$
+is a complete separable metric space.
+\vspace{3mm}
+
+\begin{center}\bf\underline{Skorohod Space}\end{center}
+\vspace{3mm}
+
+Consider the space $D[0,1]$ of all (real, bounded) functions $f$ on $[0,1]$ such that\\
+(i) $\lim_{t\to 1-} f(t)=f(1)$;\\
+(ii) $\forall \tau\in[0,1)$, $\lim_{t\to \tau+} f(t)=f(\tau)$.\\
+(iii) $\forall \tau\in(0,1]$ $\exists \lim_{t\to\tau-} f(t)$.\\
+On this space ("cadlag" functions), one can introduce the so called Skorohod metric in the following way. Let $H$ be the space of all 1-1 continuous functions from $[0,1]$ to $[0,1]$ such that the inverse function is also continuous. Then $\forall f,g\in D[0,1]$
+$$s(f,g)=\inf_{\lambda\in H}\left[ \sup_{t\in[0,1]} |f(t)-g(\lambda(t))|+\sup_{t\in[0,1]} |t-\lambda(t)|\right]$$
+is a metric called \underline{Skorohod}. Now $(D[0,1],s)$ is a separable metric space. Moreover, one can introduce an equivalent metric $s^*$ making $(D[0,1],s^*)$ complete and separable.
+
+Jump diffusions can be rigorously described and investigated using the Skorohod space.
+\end{document} 

@@ -1,0 +1,529 @@
+\documentclass[reqno]{amsart}
+\usepackage{lipsum}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{remark}{Remark}{\normalfont}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{example}{Example}
+
+\begin{document}
+\author{Tianjian Che}
+\title{Proof to Theorems Related to Lebesgue Measure}
+\date{\today}
+\maketitle
+
+\section{Why introducing measure - The deficiency of Riemann Integral}
+We introduced measure and Lebesgue Integral due to the deficiency of Riemann Integral. In general, there are at least three issues about Riemann Integral:
+\begin{enumerate}
+\item Riemann integration does not handle functions with many discontinuities.
+\item Riemann integration does not handle unbounded functions.
+\item Riemann integration does not work well with limits.
+\end{enumerate}
+\subsection{Problem with many discontinuities: Dirichlet function on $[0, 1]$}
+\begin{example}
+Define $f:[0,1] \rightarrow \mathbb{R}$ by:
+$$
+f(x) = 
+\begin{cases}
+1 & \mbox{if }\; x \in [0, 1]\cap\mathbb{Q}\\
+0 & \mbox{if }\; x \in [0, 1]\setminus\mathbb{Q}
+\end{cases}
+$$
+\end{example}
+
+According to the definition, for the Riemann integral defined on $[a, b]$, define partition $P:= \left\{a_{0}, a_{1}, ...,a_{n-1}, a_{n}\right\}$ with $a = a_{0} < a_{1} < ... < a_{n-1} < a_{n} = b$. Partition $P$ gives us lower and upper Riemann sums:
+
+\begin{align*}
+&L(P, f):= \sum\limits^{n}_{i=1}m_{i}\cdot\Delta a_{i} = \sum\limits^{n}_{i=1}\inf_{\scriptscriptstyle a_{i-1}\leq x \leq a_{i}}{f(x)\cdot(a_{i}-a_{i-1})}\\
+&U(P, f):= \sum\limits^{n}_{i=1}M_{i}\cdot\Delta a_{i} = \sum\limits^{n}_{i=1}\sup_{\scriptscriptstyle a_{i-1}\leq x \leq a_{i}}{f(x)\cdot(a_{i}-a_{i-1})}
+\end{align*}
+
+The Riemann integral exists if and only if the lower integral equals to the upper integral of $f$ on $[a, b]$, i.e.:
+
+$$
+\sup\left\{L(P, f):\mbox{ $P$ is a partition on }[a, b]\right\} = \inf\left\{U(P, f):\mbox{ $P$ is a partition on }[a, b]\right\}
+$$
+
+For any partition $P$ and for any interval $[a_{i-1}, a_{i}]$ it gives, since both rational numbers and irrational numbers exist in any interval, thus we have:
+\begin{align*}
+&\inf_{\scriptscriptstyle a_{i-1}\leq x \leq a_{i}}{f(x)\cdot(a_{i}-a_{i-1})} = 0\\
+&\sup_{\scriptscriptstyle a_{i-1}\leq x \leq a_{i}}{f(x)\cdot(a_{i}-a_{i-1})} = a_{i}-a_{i-1}
+\end{align*}
+
+Then: $L(P, f) = 0$ and $U(P,f) = \sum\limits^{n}_{i=1}(a_{i}-a_{i-1}) = 1$ for any partition $P$, and hence the upper integral does not equal to the lower integral, since:
+\begin{align*}
+&\sup\left\{L(P, f):\mbox{ $P$ is a partition on }[a, b]\right\} = 0\\
+&\inf\left\{U(P, f):\mbox{ $P$ is a partition on }[a, b]\right\} = 1
+\end{align*}
+
+Therefore we can conclude that $f$ is not Riemann integrable, but since there are far more irrational number than rationals numbers, $f$ should, in some sense, have integral 0. However, the Riemann integral of $f$ is not defined.
+
+\subsection{Problem with unbounded functions}
+\begin{example}
+Define $f: [0, 1] \rightarrow \mathbb{R}$ by:
+$$
+f(x)= 
+\begin{cases}
+\frac{1}{\sqrt{x}} & \text{if }\; 0 < x \leq 1\\
+0 & \text{if }\; x = 0
+\end{cases}
+$$
+\end{example}
+
+For any partition $P:=  \left\{a_{0}, a_{1}, ..., a_{n}\right\}$ on [0, 1], for the first interval $[a_{0}, a_{1}] = [0, a_{1}]$, we always have:\\
+$$
+\sup_{\scriptscriptstyle a_{0}= 0 \leq x \leq a_{1}}f(x) \cdot a_{1} = \infty
+$$
+
+and then for any partition $P$ of $[0, 1]$:
+$$
+U(P, f):= \sum\limits^{n}_{i=1}\sup_{\scriptscriptstyle a_{i-1}\leq x \leq a_{i}}{f(x)\cdot(a_{i}-a_{i-1})} = \infty
+$$ 
+
+However, we should consider the area under the graph of $f$ to be $2$, not $\infty$, because $\lim\limits_{a\rightarrow0^{+}}\int^{1}_{a}f(x) dx = \lim\limits_{a\rightarrow 0^{+}}(2-2\sqrt{a}) = 2$. Calculus courses deal with this example by defining $\int^{1}_{0}\frac{1}{\sqrt{x}} dx = \lim\limits_{a\rightarrow 0^{+}}\int^{1}_{a}\frac{1}{\sqrt{x}}dx$.That is, we can use the approach in Calculus to calculating Riemann integrals for these functions. 
+
+\begin{example}
+Using the same approach above, and
+$$
+f(x) = \frac{1}{\sqrt{x}} + \frac{1}{\sqrt{1-x}}
+$$
+
+Then we would define $\int^{1}_{0} f(x) dx$ to be:\
+$$
+\int^{1}_{0} f(x) dx = \lim\limits_{a\rightarrow 0^{+}}\int^{\frac{1}{2}}_{a} f(x) dx + \lim\limits_{b\rightarrow 1^{-}}\int^{b}_{\frac{1}{2}} f(x) dx
+$$ 
+
+However, this technique (i.e. taking Riemann integrals over subdomains and then taking limits can fail with more complicated functions, as shown in the following example.
+\end{example}
+
+\begin{example}
+Let $\left\{r_{k}\right\}_{k \in \mathbb{Z}^{+}}$, be a sequence which includes each rational number in $(0, 1)$ exactly once. For $k \in \mathbb{Z}^{+}$, define $f_{k}: [0, 1] \rightarrow \mathbb{R}$ by:
+$$
+f_{k}(x) = 
+\begin{cases}
+\frac{1}{\sqrt{x-r_{k}}} & \mbox{ if } \; x > r_{k}\\
+0 & \mbox{ if } x \; \leq r_{k}
+\end{cases}
+$$
+
+Define $f: [0, 1] \rightarrow [0, \infty]$ by:
+$$
+f(x) = \sum\limits^{\infty}_{k=1}\frac{f_{k}(x)}{2^{k}}
+$$
+\end{example}
+
+For every non-empty open sub-interval $(a, b) \subset [0, 1]$, it must contains a rational number $r_{h} \in (a, b)$, then $a < r_{h} < b$. Note that $r_{h}$ is also belongs to the sequence ${r_{k}}_{k \in \mathbb{Z}^{+}}$ because $r_{h}$ is a rational number in $[0, 1]$. Hence for that $r_{h}$, we have:
+
+$$
+f_{h}(x) =
+\begin{cases}
+\frac{1}{\sqrt{x-r_{h}}} & \mbox{ if } \; x > r_{h}\\
+0 & \mbox{ if } \; x \leq r_{h}
+\end{cases}
+$$
+
+For $x\rightarrow r^{+}_{h}, f_{h}(x)\rightarrow \infty$, meaning $f_{h}(x)$ is unbounded. Thus, function $f$ is unbounded on every its non-empty open sub-interval. Therefore, the Riemann integral of $f$ is undefined on every its non-empty open sub-interval.
+
+However, the area under the graph of each $f_{k}$ is less than 2:
+$$
+\int^{1}_{0} f_{k}(x) dx =\lim\limits_{\scriptscriptstyle t \rightarrow 1^{-}, s \rightarrow r^{+}_{k}}\int^{t}_{s} \frac{1}{\sqrt{x-r_{k}}} dx \;=\; 2\sqrt{1-r_{k}} \;< \; 2
+$$
+
+Then the formula defining $f$: $f(x) = \sum\limits^{\infty}_{k=1}\frac{f_{k}(x)}{2^{k}}$ shows that we should expect the area under the graph of $f$ to be less than 2, instead of being undefined. 
+
+\subsection{Problem with point-wise limits}
+\begin{example}
+Let $\left\{r_{k}\right\}_{k \in \mathbb{Z}^{+}}$, be a sequence which includes each rational number in $[0, 1]$ exactly once. For $k \in \mathbb{Z}^{+}$, define $f_{k}: [0, 1] \rightarrow \mathbb{R}$ by:
+$$
+f_{k}(x) = 
+\begin{cases}
+1 &  \mbox{ if } \; x \in \left\{r_{1},..., r_{k}\right\}\\
+0 &  \mbox{ otherwise}
+\end{cases}
+$$
+\end{example}
+
+\begin{remark}
+Note that the difference between each function $f_{k}$ in this example and function $f$ mentioned in \textbf{Example 1} is that, $f_{k}$ is a function which takes $1$ on finite points $r_{1},...,r_{k}$, while $f$ is a function which takes $1$ on all rational numbers on $[0, 1]$.
+\end{remark}
+
+For any $k \in \mathbb{Z}^{+}$, function $f_{k}$ is Riemann integrable: For lower integral, $L(P, f_{k}) = 0$ for any partition $P$ on $[0, 1]$, since $\inf\limits_{\scriptscriptstyle a_{i-1} \leq x \leq a_{i}}f_{k}(x) = 0$ for all $a_{i-1}, a_{i} \in P$. Hence the lower integral of $f_{k}$ is $0$. 
+
+For upper integral and the pair $a_{m-1}, a_{m}$ such that $r_{k} \in [a_{m-1}, a_{m}]$, we have:
+$$
+\sup\limits_{\scriptscriptstyle a_{m-1} \leq x \leq a_{m}}f_{k}(x)\cdot(a_{m}-a_{m-1}) = a_{m}-a_{m-1},
+$$
+
+and $f_{k} = 0$ on other intervals which do not include $r_{k}$, thus $\inf(a_{m}-a_{m-1}) = 0$ by refining partition $P$. Hence the upper integral of $f_{k}$ is also $0$. Because both lower and upper integral are 0, $f_{k}$ is Riemann integrable with $\int^{1}_{0}f_{k}(x) dx = 0$.
+
+Define $f: [0, 1] \rightarrow \mathbb{R}$ by:
+$$
+f(x) = 
+\begin{cases}
+1 & \; \mbox{ if x is rational}\\
+0 & \; \mbox{ if x is irrational}
+\end{cases}
+$$
+
+Clearly $\lim\limits_{k \rightarrow \infty}f_{k}(x) = f(x)$ for each $x \in [0, 1]$.
+
+However, $f$ is not Riemann integrable (\textbf{Example 1}) even though $f$ is the point-wise limit of a sequence of integrable functions bounded by 1.\\
+~\\
+
+\begin{proposition}
+There does not exist a function $\mu$ with all the following properties:\\
+
+(a) $\mu$ is a function from the set of all subsets of $\mathbb{R}$ to $[0, \infty]$.\\
+
+(b) $\mu(I) = l(I)$ for every open interval $I$ of $\mathbb{R}$.\\
+
+(c) $\mu\left(\bigcup\limits^{\infty}_{k=1}A_{k}\right) = \sum\limits^{\infty}_{k=1}\mu(A_{k})$ for every disjoint sequence $A_{1}, A_{2},...$ of subsets of $\mathbb{R}$.\\
+
+(d) $\mu(A + t) = \mu(A)$ for every $A \subset \mathbb{R}$ and every $t \in \mathbb{R}$.
+\end{proposition}
+
+\begin{proof}
+
+Suppose there exists a function $\mu$ with all the properties listed above. Observe that $\mu(\emptyset) = 0$ by (b), because empty set is an open interval with length $0$. We are now showing that $\mu$ has all the properties of outer measure that were used in the \textbf{disproof of additivity of outer measure}.
+
+If $A \subset B \subset \mathbb{R}$, then $\mu(A) \leq \mu(B)$ by (c), because we can rewrite $B$ as the unions of disjoint sequence: $A, B \setminus A, \emptyset, \emptyset,...$, thus:
+
+$$
+\mu(B) = \mu(A) + \mu(B \setminus A) + 0 + 0 + ... = \mu(A) + \mu(B \setminus A) \geq \mu(A)
+$$
+
+If $a, b \in \mathbb{R}$ with $a < b$, then $(a, b) \subset [a, b] \subset (a-\epsilon, b+\epsilon)$ for every $\epsilon > 0$. Thus $b-a \leq \mu([a, b]) \leq b-a+2\epsilon$ for every $\epsilon > 0$. Hence $\mu([a, b]) = b-a$.
+
+If $A_{1}, A_{2}, ...$ is a sequence of subsets of $\mathbb{R}$, then $A_{1}, A_{2}\setminus A_{1}, A_{3}\setminus (A_{1} \cup A_{2}), ...$ is a disjoint sequence of subsets of $\mathbb{R}$ whose union is $\bigcup\limits^{\infty}_{k=1}A_{k}$, thus:
+
+\begin{align*}
+\mu\left(\bigcup\limits^{\infty}_{k=1}A_{k}\right) &= \mu(A_{1} \cup (A_{2}\setminus A_{1}) \cup (A_{3}\setminus (A_{1} \cup A_{2})) \cup ...)\\
+&= \mu(A_{1}) + \mu(A_{2}\setminus A_{1}) + \mu(A_{3}\setminus (A_{1} \cup A_{2}))) + ...\\
+&\leq \sum\limits^{\infty}_{k=1}\mu(A_{k})
+\end{align*}
+
+Until now, we have shown that $\mu$ has all the properties of outer measure that were used in the \textbf{disproof of additivity of outer measure}. However, from the disproof we know that there exist disjoint subsets $A, B$ of $\mathbb{R}$ such that $\mu(A \cup B) \neq \mu(A) + \mu(B)$. Thus the disjoint seqeunce $A, B, \emptyset, \emptyset, ...$ does not satisfy the countable additivity required by (c). This contradiction completes the proof.
+\end{proof}
+\newpage
+The last-page result shows that we need to give up one of the desirable properties in our goal of extending the notion of size from intervals to more general subsets of $\mathbb{R}$. 
+
+We cannot give up (b) because the size of an interval needs to be its length. 
+
+We cannot give up (c) because countable additivity is needed to prove theorems about limits. 
+
+We cannot give up (d) because a size that is not translation invariant does not satisfy our intuitive notion of size as a generalization of length.
+
+Thus we are forced to relax the requirement in (a) that the size is defined for all subsets of $\mathbb{R}$. Experience shows that to have a viable theory that allows for taking
+limits, the collection of subsets for which the size is defined should be closed under
+complementation and closed under countable unions. Therefore, we have the definition of $\sigma-\mbox{field}$.\\
+~\\
+\section{Theorems of Lebesgue Measure}
+
+\begin{theorem}
+Any null set N is measurable and $m(N) = 0$.\\
+i.e. For $\forall \mbox{ null set } N: \forall A \subset \mathbb{R}: m^{*}(A) = m^{*}(A \cap N) + m^{*}(A \cap N^{c})$
+\end{theorem}
+
+\begin{proof}
+Firstly, since $(A \cap N) \subset N$, by theorem of outer measure proved before, we have $0 \leq m^{*}(A \cap N) \leq m^{*}(N) = 0$, then we have $m^{*}(A \cap N) = 0$. Now we prove $m^{*}(A \cap N^{c}) = m^{*}(A)$.
+
+Since $(A \cap N^{c}) \subset A$, similarly, $m^{*}(A \cap N^{c}) \leq m^{*}(A)$. Let's suppose that $m^{*}(A \cap N^{c}) < m^{*}(A)$. By sub-additivity of outer measure, $m^{*}(A) = m^{*}\big((A \cap N^{c})\cup N\big) \leq m^{*}(A \cap N^{c}) + m^{*}(N)$ , which means $m^{*}(A \cap N^{c}) < m^{*}(A \cap N^{c}) + m^{*}(N) \iff m^{*}(N) > 0$, which is a contradiction to the Theorem(i) proved before. Hence, $m^{*}(A \cap N^{c}) = m^{*}(A)$.
+
+Therefore, we can see that any null set N is Lebesgue-measurable, and then its Lebesgue measure equals to its outer measure: $m(N) = m^{*}(N) = 0$.
+\end{proof}
+~\\
+\begin{theorem}{\mbox{}}
+Any interval $\big([a, b], (a, b) and etc.\big)$ is measurable, and for $-\infty < a \leq b < \infty$: $m\big([a, b]\big) = m\big((a, b)\big) = b - a$.
+
+Noted that this theorem is very similar and may be equivalent to another theorem (but I haven't prove it yet), that is, if $A$ and $G$ are disjoint and $G$ is open, then $m^{*}(A \cup G) = m^{*}(A) + m^{*}(G)$.
+\end{theorem}
+
+
+
+\begin{proof}
+~\
+With out loss of generality, let $E = (a, b]$. $E$ is measurable $\iff$: 
+$$
+\forall A \subset \mathbb{R}: m^{*}(A) = m^{*}(A \cap E) + m^{*}(A \cap E^{c})
+$$
+
+By sub-additivity of outer measure, we have:
+$$
+m^{*}(A) \leq m^{*}(A \cap E) + m^{*}(A \cap E^{c})
+$$
+
+Now prove that the other side of above inequality holds, the LHS:
+\begin{align*}
+m^{*}(A \cap E) + m^{*}(A \cap E^{c}) & = m^{*}(A \cap (a, b]) + m^{*}(A \cap ((-\infty, a] \cup (b, \infty)))\\
+& = m^{*}(A \cap (a, b]) + m^{*}((A \cap (-\infty, a]) \cup (A \cap (b, \infty)))\\
+\bigstar & \leq m^{*}(A \cap (a, b]) + m^{*}(A \cap (-\infty, a]) + m^{*}(A \cap (b, \infty))\\
+& = m^{*}(A \cap (a, b)) + m^{*}(A \cap (-\infty, a)) + m^{*}(A \cap (b, \infty))
+\end{align*}
+
+Note that $\left\{ a, b \right\}$ are also excluded in step $\bigstar$, because a few single points don't affect the outer measure. Since $m^{*}(A)$ is the outer measure of set $A$, by definition,
+$$
+\forall \epsilon > 0: \exists \left\{ L_{n} \right\}^{\infty}_{n=1}, L_{n} \mbox{ are open intervals, }, A \subset \bigcup\limits^{\infty}_{n=1}L_{n}: \sum\limits^{\infty}_{n=1} l(L_{n}) < m^{*}(A) + \epsilon
+$$
+
+Notice that ``open intervals" are used to construct a cover to $A$, this is equivalent to the construction of ``intervals", because outer measure is the infimum of such cover, for the same reason as above, wouldn't be changed by a few points.\\
+
+Then for any $\epsilon > 0$ and the cover $\left\{ L_{n} \right\}^{\infty}_{n=1}$ that exists correspondingly, let:\\
+
+$\qquad I_{n} = L_{n} \cap (-\infty, a)$, $\qquad J_{n} = L_{n} \cap (a, b)$, $\qquad K_{n} = L_{n} \cap (b, \infty)$
+
+We thus have:
+\begin{align*}
+& (A \cap (-\infty, a)) \subset \left( \left( \bigcup^{\infty}_{n=1}L_{n} \right) \bigcap (-\infty, a) \right) = \bigcup^{\infty}_{n=1}(L_{n} \cap (-\infty, a)) = \bigcup^{\infty}_{n=1}I_{n}\\
+& (A \cap (a, b)) \subset \left( \left( \bigcup^{\infty}_{n=1}L_{n} \right) \bigcap (a, b) \right) = \bigcup^{\infty}_{n=1}(L_{n} \cap (a, b)) = \bigcup^{\infty}_{n=1}J_{n}\\\
+& (A \cap (b, \infty)) \subset \left( \left( \bigcup^{\infty}_{n=1}L_{n} \right) \bigcap (b, \infty) \right) = \bigcup^{\infty}_{n=1}(L_{n} \cap (b, \infty)) = \bigcup^{\infty}_{n=1}K_{n}\\
+& \implies (A \cap (-\infty, a)) \subset \bigcup^{\infty}_{n=1}I_{n}, \quad (A \cap (a, b)) \subset \bigcup^{\infty}_{n=1}J_{n}, \quad (A \cap (b, \infty)) \subset \bigcup^{\infty}_{n=1}K_{n}
+\end{align*}
+
+Moreover, since intervals on $\mathbb{R}$ are closed under intersection, i.e. the intersection of any two intervals is a interval. In special, the intersection of any two open intervals is an open interval. Thus, for any $n \in \mathbb{N}^{+}$, $I_{n}, J_{n}, K_{n}$ are pair-wise disjoint open intervals, which implies that $m^{*}(I_{n} \cup J_{n} \cup K_{n}) = l(I_{n}) + l(J_{n}) + l(K_{n})$. We also have:
+$$
+I_{n} \cup J_{n} \cup K_{n} = L_{n} \cap (\mathbb{R} \setminus \left\{ a, b \right\}) = L_{n} \setminus \left\{ a, b \right\} \implies m^{*}(I_{n} \cup J_{n} \cup K_{n}) = l(L_{n})
+$$ 
+~\\
+Then $l(L_{n}) = l(I_{n}) + l(J_{n}) + l(K_{n})$. Since: 
+\begin{align*}
+& m^{*}(A \cap (a, b)) + m^{*}(A \cap (-\infty, a)) + m^{*}(A \cup (b, \infty))\\
+& \leq m^{*}(\bigcup^{\infty}_{n=1}I_{n}) + m^{*}(\bigcup^{\infty}_{n=1}J_{n}) + m^{*}(\bigcup^{\infty}_{n=1}K_{n})\\
+& \leq \sum\limits^{\infty}_{n=1}m^{*}(I_{n}) + \sum\limits^{\infty}_{n=1}m^{*}(J_{n}) + \sum\limits^{\infty}_{n=1}m^{*}(K_{n})\\
+& = \sum\limits^{\infty}_{n=1}\left( l(I_{n}) + l(J_{n}) + l(K_{n}) \right) = \sum\limits^{\infty}_{n=1}l(L_{n})
+\end{align*}
+
+Therefore, for any $\epsilon > 0$, and for that cover $\left\{ L_{n} \right\}^{\infty}_{n=1}$ exists correspondingly, we have the following inequality holds:
+$$
+m^{*}(A \cap (a, b)) + m^{*}(A \cap (-\infty, a)) + m^{*}(A \cap (b, \infty)) \leq \sum\limits^{\infty}_{n=1}l(L_{n}) < m^{*}(A) + \epsilon
+$$
+
+Along with another property of infimum, that $m^{*}(A) \leq \sum\limits^{\infty}_{n=1}l(L_{n})$ for any cover $\left\{ L_{n} \right\}^{\infty}_{n=1}$, 
+$$
+m^{*}(A) \leq \sum\limits^{\infty}_{n=1}l(L_{n}) < m^{*}(A)
+$$
+
+By letting $\epsilon \rightarrow 0$, we have:
+\begin{align*}
+m^{*}(A) = \sum\limits^{\infty}_{n=1}l(L_{n}) & \geq m^{*}(A \cap (a, b)) + m^{*}(A \cap (-\infty, a)) + m^{*}(A \cup (b, \infty))\\
+& \geq m^{*}(A \cap (a, b]) + m^{*}(A \cap ((-\infty, a] \cup (b, \infty)))
+\end{align*}
+
+Along with the conclusion drawed by the sub-additivity of outer measure, we have both: 
+\begin{align*}
+m^{*}(A) \geq m^{*}(A \cap (a, b]) + m^{*}(A \cap ((-\infty, a] \cup (b, \infty)))\\
+m^{*}(A) \leq m^{*}(A \cap (a, b]) + m^{*}(A \cap ((-\infty, a] \cup (b, \infty)))
+\end{align*}
+
+Therefore, $m^{*}(A) = m^{*}(A \cap (a, b]) + m^{*}(A \cap ((-\infty, a] \cup (b, \infty)))$. It shows that for any interval $E \subset \mathbb{R}$, $E$ is measurable, and its Lebesgue-measure equals to its outer measure, i.e. the length of the interval.
+\end{proof}
+~\\
+\begin{theorem}
+$\mathbb{R} \in \mathcal{M}$; of course $m(\mathbb{R}) = \infty$.
+\end{theorem}
+
+\begin{proof}
+For any $A \subset \mathbb{R}$, we have $m^{*}(A \cap \mathbb{R}) = m^{*}(A), m^{*}(A \cap \mathbb{R}^{c}) = m^{*}(\emptyset) = 0$, hence $m^{c}(A) = m^{*}(A \cap \mathbb{R}) + m^{*}(A \cap \mathbb{R})^{c}$. Then $\mathbb{R}$ is Lebesgue-measurable with $m(\mathbb{R}) = \infty$.
+\end{proof}
+~\\
+\begin{theorem}[\textbf{Lebesgue-measure is Closed under Complement}]{\mbox{}}
+If $E \in \mathcal{M}$, then $E^{c} \in \mathcal{M}$.
+\end{theorem}
+
+\begin{proof}
+If  $E \in \mathcal{M}$, i.e. $E$ is Lebesgue-measurable, then:
+$$
+\forall A \subset \mathbb{R}: m^{*}(A) = m^{*}(A \cap E) + m^{*}(A \cap E^{c})
+$$
+
+Since $(E^{c})^{c} = E$, then for any $A \subset \mathbb{R}$,
+\begin{align*}
+m^{*}(A \cap E^{c}) + m^{*}\left(A \cap (E^{c})^{c}\right) & = m^{*}(A \cap E) + m^{*}(A \cap E^{c})\\
+& = m^{*}(A)
+\end{align*}
+
+Hence $E^{c}$ is also Lebesgue-measurable. The proof shows that $\mathcal{M}$ is closed under complement.
+\end{proof}
+~\\
+\begin{theorem}[\textbf{Lebesgue-Measure is Closed under Countable Unions}]{\mbox{}}
+
+If $E_{n} \in \mathcal{M}$ for all $n = 1, 2, 3, ...$, then $\bigcup\limits^{\infty}_{n=1}E_{n} \in \mathcal{M}$.
+\end{theorem}
+
+\begin{proof}
+Proof by induction:
+
+For $n = 1, 2$, that is, prove $E_{1} \cup E_{2}$ is Lebesgue-measurable if both $E_{1}$ and $E_{2}$ are Lebesgue-measurable, i.e.,
+$$
+\forall A \subset \mathbb{R}: m^{*}(A) = m^{*}\left((A \cap (E_{1} \cup E_{2})\right) + m^{*}\left( A \cap (E_{1}, E_{2})^{c} \right)
+$$
+
+Using the technique that $M \cup N = (M \setminus N) \cup (N \setminus M) \cup (M \cap N)$. For $A \subset \mathbb{R}$, the RHS:
+
+\begin{align*}
+m^{*} & \left(A \cap (E_{1} \cup E_{2})\right) + m^{*}\left( A \cap (E_{1} \cup E_{2})^{c} \right)\\
+& = m^{*}\left(A \cap (E_{1} \cup E_{2})\right) + m^{*}\left( A \setminus (E_{1} \cup E_{2}) \right)\\
+& = m^{*} \left(A \cap \left((E_{1} \setminus E_{2}) \cup (E_{2} \setminus E_{1}) \cup (E_{1} \cap E_{2})\right)\right) + m^{*}\left( A \setminus (E_{1} \cup E_{2}) \right)\\
+& = m^{*} \left((A \cap (E_{1} \setminus E_{2})) \cup (A \cap (E_{2} \setminus E_{1})) \cup (A \cap E_{1} \cap E_{2})\right) + m^{*}\left( A \setminus (E_{1} \cup E_{2}) \right)\\
+& \leq m^{*} \left(A \cap (E_{1} \setminus E_{2})\right) + m^{*}\left(A \cap (E_{2} \setminus E_{1})\right) + m^{*}\left(A \cap E_{1} \cap E_{2}\right) + \left( A \setminus (E_{1} \cup E_{2}) \right)\\
+& = \left[ m^{*}\left((A \cap E_{1}) \cap E_{2}\right) + m^{*}\left((A \cap E_{1}) \setminus E_{2} \right)\right]\\
+& \qquad \qquad \qquad \qquad \qquad + \left[ m^{*}\left((A \setminus E_{1}) \cap E_{2}\right) + m^{*}\left((A \setminus E_{1}) \setminus E_{2} \right)\right]
+\end{align*}
+~\\
+
+Since $E_{2}$ is Lebesgue-measurable, by definition: 
+$$
+\forall F \subset \mathbb{R}: m^{*}(F) = m^{*}(F \cap E_{2}) + m^{*}(F \cap E^{c}_{2})
+$$
+
+For $F = A \cap E_{1}$ where $A$ is determined, we have:
+\begin{align*}
+m^{*}(A \cap E_{1}) & = m^{*}\left((A \cap E_{1}) \cap E_{2}\right) + m^{*}\left((A \cap E_{1}) \setminus E_{2}\right)\\
+& = m^{*}\left((A \cap E_{1}) \cap E_{2}\right) + m^{*}\left((A \cap E_{1}) \cap E^{c}_{2}\right)
+\end{align*}
+
+For $F = A \setminus E_{1}$ where $A$ is determined, we have:
+\begin{align*}
+m^{*}(A \setminus E_{1}) & = m^{*}\left((A \setminus E_{1}) \cap E_{2}\right) + m^{*}\left((A \setminus E_{1}) \setminus E_{2}\right)\\
+& = m^{*}\left((A \setminus E_{1}) \cap E_{2}\right) + m^{*}\left((A \setminus E_{1}) \cap E^{c}_{2}\right)
+\end{align*}
+
+Therefore, continued from the above, that:
+\begin{align*}
+m^{*} & \left(A \cap (E_{1} \cup E_{2})\right) + m^{*}\left( A \cap (E_{1} \cup E_{2})^{c} \right)\\
+& \leq \left[ m^{*}\left((A \cap E_{1}) \cap E_{2}\right) + m^{*}\left((A \cap E_{1}) \setminus E_{2} \right)\right]\\
+& \qquad \qquad \qquad \qquad \qquad + \left[ m^{*}\left((A \setminus E_{1}) \cap E_{2}\right) + m^{*}\left((A \setminus E_{1}) \setminus E_{2} \right)\right]\\
+& = m^{*}\left(A \cap E_{1} \right) + m^{*}\left(A \setminus E_{1} \right) = m^{*}\left(A \cap E_{1} \right) + m^{*}\left(A \cap E^{c}_{1} \right)\\
+& = m^{*}\left( A \right)
+\end{align*}
+
+The last equality holds because $E_{1}$ is also Lebesgue-measurable. Therefore, we have: 
+$$
+m^{*} \left(A \cap (E_{1} \cup E_{2})\right) + m^{*}\left( A \cap (E_{1} \cup E_{2})^{c} \right) \leq m^{*}\left( A \right)
+$$
+
+Combined with conclusion directly drawed by the sub-additivity of outer measure that: $ m^{*} \left(A \cap (E_{1} \cup E_{2})\right) + m^{*}\left( A \cap (E_{1} \cup E_{2})^{c} \right) \geq m^{*}\left( A \right)$, we therefore have: 
+$$
+m^{*} \left(A \cap (E_{1} \cup E_{2})\right) + m^{*}\left( A \cap (E_{1} \cup E_{2})^{c} \right) = m^{*}\left( A \right)
+$$
+
+By induction, for general case that $E_{1}, E_{2}, ...$ are all Lebesgue-measurable, then $E_{1} \cup E_{2}$ is Lebesgue-measurable, then $E_{1} \cup E_{2} \cup E_{3}$ is Lebesgue-measurable, ... The proof hence to be completed and shows that $\mathcal{M}$ is closed under countable unions.
+\end{proof}
+
+\begin{remark}{\mbox{}}
+Combining the above three theorems, $\mathcal{M}$ is therefore a $\sigma$-field. The Lebesgue-measure is a function with mapping relation: $\mathcal{M} \rightarrow [0, \infty]$. Besides, it is also countably additive as the following theorem.
+\end{remark}
+~\\
+\begin{theorem}[\textbf{Countable Additivity of Lebesgure-Measure}]
+~\
+
+If $E_{n} \in \mathcal{M}$ for $n = 1, 2 ,...$, and $E_{j} \cap E_{k} = \emptyset$ for $j \neq k$, then:
+$$
+m\left( \bigcup\limits^{\infty}_{n=1}E_{n} \right) = \sum\limits^{\infty}_{n=1}m\left( E_{n} \right)
+$$
+\end{theorem}
+
+\begin{proof}
+Let $E_{n}$ be Lebesgue-measurable sets for $\forall n \in \mathbb{N}^{+}$, becuase Lebesgue-measure is closed under countable unions as proved above, we have: $\bigcup\limits^{\infty}_{n=1} E_{n}$ is Lebesgue-measurable, with Lebesgue measure equals to its outer measure, i.e.
+$$
+m\left(\bigcup\limits^{\infty}_{n=1} E_{n}\right) = m^{*}\left(\bigcup\limits^{\infty}_{n=1} E_{n}\right)
+$$ 
+By sub-additivity of outer measure, we have:
+$$
+m^{*}\left(\bigcup\limits^{\infty}_{n=1} E_{n}\right) \leq \sum\limits^{\infty}_{n=1} m^{*}(E_{n}) = \sum\limits^{\infty}_{n=1} m(E_{n})
+$$
+
+The last equality holds because $E_{n}$ is Lebesgue-measurable.
+
+For any $E_{n}$, by definition, for any $\epsilon > 0$, there exists a cover $\left\{ I^{n}_{m} \right\}^{\infty}_{m=1}$ where $E_{n} \subset \bigcup\limits^{\infty}_{m=1} I^{n}_{m}$ and $I^{n}_{m}$ are open intervals, such that: $\sum\limits^{\infty}_{m=1}l(I^{n}_{m}) < m^{*}\left(E_{n}\right) + \epsilon$.
+\end{proof}
+
+\newpage
+\begin{corollary}[\textbf{Equivalences for being a Lebesgue-Measurable Set}]
+\normalfont
+~\\
+
+Suppose $E \subset \mathbb{R}$. Then the following are equivalent.\\
+\begin{enumerate}
+\item $E$ is Lebesgue-measurable.\\
+\item For any $\epsilon > 0$: there exists a closed set $F \subset E$ with $m^{*}(E \setminus F) < \epsilon$.\\
+\item There exist closed sets $F_{1}, F_{2}, ...$ contained in $E$ such that:\\
+$m^{*}\left( E \setminus\bigcup\limits^{\infty}_{k=1} F_{k} \right) = 0.$\\
+\item There exists a Borel set $B \subset E$ such that $m^{*}\left( E \setminus B \right) = 0$.\\
+\item For any $\epsilon > 0$: there exists an open set $G \supset E$ such that: \\
+$m^{*}\left( \left( \bigcap\limits^{\infty}_{k=1} G_{k} \right) \setminus E \right) = 0$.
+\end{enumerate}
+\end{corollary}
+~\\
+\begin{definition}[\textbf{Measurable Space; Measurable Set; Measure}]{\mbox{}}
+\begin{enumerate}
+\normalfont
+\item[$\bullet$] A measurable space is on ordered pair $\left( \Omega, \mathcal{F} \right)$, where $\Omega$ is a set and $\mathcal{F}$ is a $\sigma$-field on $\Omega$.\\
+
+\item[$\bullet$] An element of $\mathcal{F}$ is called an $\mathcal{F}$-measurable set, or just a measurable set if $\mathcal{F}$ is clear from the context.\\
+
+\item[$\bullet$] A real-valued function $\mathbf{\mu}: \mathcal{F} \rightarrow [0, \infty]$ is called a measure, if:
+\begin{enumerate}
+\item $\mu\left( \emptyset \right) = 0$
+\item For any sequence of disjoint subsets $E_{n} \in \mathcal{F}, n = 1, 2, ...$, \\
+we have: $\mu\left( \bigcup\limits^{\infty}_{n=1} E_{n} \right) = \sum\limits^{\infty}_{n=1}\mu\left( E_{n} \right)$
+\end{enumerate}
+$\left( \Omega, \mathcal{F}, \mu \right)$ is called a \underline{measure space}; $\left( \Omega, \mathcal{F} \right)$ is called a \underline{measurable space}.
+\end{enumerate}
+\end{definition}
+~\\
+\begin{remark}
+The \textbf{Borel $\mathbf{\sigma}$-field} is the minimal $\sigma$-field on $\Omega$ containing all open sets. When $\Omega = \mathbb{R}$ specifically, $\mathbf{B}$ (or $\mathcal{B}(\mathbb{R})$ specifically) is also the minimal $\sigma$-field containing all open intervals. This is because any open set can be written as the unions of open intervals, and  $\sigma$-field is closed under countable unions. 
+~\\
+
+Recall that $\mathcal{M}$ is the collection of all Lebesgue-measurable set on $\mathbb{R}$. Since $\mathcal{M}$ is a $\sigma$-field including all open intervals, $\mathcal{B}$ is the smallest $\sigma$-field generated by all open intervals, therefore $\mathcal{B} \subset \mathcal{M}$, or for any Borel set $B$, $B \in \mathcal{M}$.
+
+\end{remark}
+\newpage
+\begin{definition}[\textbf{Complete Measurable Space and Completion}]{\mbox{}}
+
+A measure space $\left(\Omega, \mathcal{F}, \mu \right)$ is \textbf{complete} in which any subset of any null set is $\mu$-measurable, i.e. $\mbox{for: }\forall G \in \mathcal{F}, \mu(G) = 0: \forall N \subset G: N \in \mathcal{F}$. $\mathcal{F}$ is also called a \textbf{complete measurable space}.
+~\\
+
+Given any measure space $\left( \Omega, \mathcal{G}, \mu^{*} \right)$ (possibly imcomplete), there is an extension of this measure space that is complete. The smallest such extension is called a \textbf{completion} of the measure space $\left( \Omega, \mathcal{G}, \mu^{*} \right)$. $\mu$ is the extension of $\mu^{*}$, which is given by $\mu(E):= \inf{\left\{ \mu^{*}(E): E \subset D \in \mathcal{F}\right\}}$.
+
+Alternatively, a \textbf{completion} $\mathcal{F}$ of a $\sigma$-field $\mathcal{G}$, relative to a given measure $\mu$ (or complete measure space $\left( \Omega, \mathcal{G}, \mu^{*} \right)$) is the minimal $\sigma$-field containing $\mathcal{G}$, such that any subset N of any null set $G \in \mathcal{G}$ is in $\mathcal{G}$, i.e. $\forall G \in \mathcal{G}, \mu^{*}(G)= 0: \forall N \subset G: N \in \mathcal{G}$. 
+~\\
+
+Notice the difference between above two definitions, the former defines completion as a measure space, while the latter defines completion as a $\sigma$-field. By no means, $\mathcal{M}$ is the completion of Borel $\sigma$-field $\mathcal{B}$ relative to the Lebesgue measure, and the Lebesgue measure is well-defined on Borel $\sigma$-field $\mathcal{B}$
+\end{definition}
+~\\
+
+\begin{example}{\mbox{}}
+Let $B \in \mathcal{M}$ be a fixed measurable set with $m(B) > 0$. Define $M_{B}:= \left\{A \cap B: A \in \mathcal{M}\right\}$. For $E \in \mathcal{M}_{B}$, define $m_{B}(E) = m(E)$. $\mathcal{M}_{B}$ is the collection of the Lebesgue-measurable subsets of $B$, and $m_{B}$ is the Lebesgue measure on $\mathcal{M}_{B}$, the \textbf{restriction} (or \textbf{trace}) of the Lebesgue measure $m$ to $B$. Now $(B, \mathcal{M}_{B}, m_{B})$ is a complete measure space.
+~\\
+
+First of all, $M_{B}$ is constructed by $A \cap B$, since $A$ and $B$ are Lebesgue-measurable, then $A \cap B$ is also Lebesgue-measurable, (i.e. any element in $\mathcal{M}_{B}$ is Lebesgue-measurable). Secondly, for any measurable set $E \subset B$, we have $E \cap B$ also measurable, then by contruction we have $E \cap B = E \in \mathcal{M}_{B}$, which shows that $\mathcal{M}_{B}$ contains all measurable subsets of $B$. Therefore, $\mathcal{M}_{B}$ contains and only contains all measurable subsets of $B$. Thirdly, for $G \in \mathcal{M}_{B}$ where $m_{B}(G) = 0$, we have $G \in \mathcal{M}$. Since $\mathcal{M}$ is complete, then for any $N \subset G$ we have $N \in \mathcal{M}$. Therefore $N \in \mathcal{M}_{B}$ because $N$ is a subset of $B$ and $\mathcal{M}_{B}$ contains all measurable subsets of $B$.
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document} 

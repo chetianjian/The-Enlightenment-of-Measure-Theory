@@ -1,0 +1,821 @@
+\def\blacksquare{\hbox{\vrule width 10pt height 10pt depth 0pt}}
+
+\documentclass[a4paper,10pt]{article}
+\usepackage{anysize}
+\marginsize{3.0cm}{3.0cm}{2.5cm}{1.5cm}
+
+\usepackage{latexsym,amsfonts,amsmath}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+
+\def\inter{\mathop{\cap}}
+\def\NN{\mathbb{N}}
+\def\ZZ{\mathbb{Z}}
+\def\RR{\mathbb{R}}
+\def\QQ{\mathbb{Q}}
+\def\CC{\mathbb{C}}
+\def\II{\mathbb{I}}
+\def\EE{\mathbb{E}}
+\def\union{\mathop{\cup}}
+\def\inter{\mathop{\cap}}
+\def\liminf{\mathop{\underline{\lim}}}
+\def\limsup{\mathop{\overline{\lim}}}
+\def\ds{\displaystyle}
+\def\SS{\scriptscriptstyle}
+\def\nl{\mbox{} \newline }
+\newcommand{\widebar}[1]{\overline{#1}}
+\newcommand{\1}[1]{\mathbf{1}_{\{#1\}}}
+\newcommand{\I}[1]{I_{\{#1\}}}
+\newcommand{\rond}[1]{\mathop{\mbox{$#1$}}\limits^{\circ}}
+\newcommand{\defi}{\stackrel{\triangle}{=}}
+
+\newtheorem{condition}{Condition}{\bfseries}{\itshape}
+
+\newtheorem{theorem}{Theorem}{\bfseries}{\itshape}
+
+\newtheorem{corollary}{Corollary}{\bfseries}{\itshape}
+
+\newtheorem{proposition}{Proposition}{\bfseries}{\itshape}
+
+\newtheorem{example}{Example}{\bfseries}{\itshape}
+
+\newtheorem{lemma}{Lemma}{\bfseries}{\itshape}
+
+\newtheorem{remark}{Remark}{\bfseries}{\itshape}
+
+\newtheorem{definition}{Definition}{\bfseries}{\itshape}
+
+%\renewcommand{\baselinestretch}{2}
+\begin{document}\Large
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 3. Measurable Functions}\\
+\hline\end{tabular}
+\vspace{5mm}
+
+The domain of the functions we shall be considering is usually $\RR$ (or a measurable subset $E\subset\RR$), as well as the range.\vspace{3mm}
+
+{\bf Definition.} We say that a function $f:~E\to\RR$ is (Lebesgue)-measurable if for any interval $I\subset\RR$
+  $$f^{-1}(I)=\{x\in E:~f(x)\in I\}\in{\cal M},$$
+that is, the complete pre-image of any interval is Lebesgue-measurable.\vspace{3mm}
+
+Equivalently, the pre-image of any (a) open (or (b) Borel, or closed) set is Lebesgue-measurable. Equivalently,
+  $$\forall c\in\RR~~~f^{-1}((-\infty,c))=\{x:~f(x)<c\}\in{\cal M}.$$\vspace{3mm}
+
+\underline{Proof (sketch).} (a) Suppose, for any interval $I\subset \RR$, $f^{-1}(I)\in{\cal M}$ and consider an arbitrary open set $O$. We know that $O$ is a union of a countable number of (disjoint) open intervals: $O=\bigcup_{n=1}^\infty I_n$. Now
+  $$f^{-1}(O)=\bigcup_{n=1}^\infty f^{-1}(I_n)$$
+is the countable union of subsets from $\cal M$, hence $f^{-1}(O)\in{\cal M}$.
+
+(b) Collection $\cal F$ of subsets $A\subset\RR$ such that $f^{-1}(A)\in{\cal M}$ is a $\sigma$-field:\\
+-- $f^{-1}(\RR)=E\in{\cal M}\Longrightarrow \RR\in{\cal F}$;\\
+-- if $f^{-1}(A)\in{\cal M}$ then $f^{-1}(A^c)=E\setminus f^{-1}(A)\in{\cal M}\Longrightarrow A^c\in{\cal F}$;\\
+-- if $A_n\in{\cal F}$, i.e. $f^{-1}(A_n)\in{\cal M}$, then
+  $$f^{-1}(\bigcup_{n=1}^\infty A_n)=\bigcup_{n=1}^\infty f^{-1}(A_n)\in{\cal M}\Longrightarrow \bigcup_{n=1}^\infty A_n\in{\cal F}.$$
+
+$\cal F$ contains all open subsets of $\RR$, hence $\cal F$ contains the Borel $\sigma$-field (which is the minimal $\sigma$-field containing all open subsets). Therefore, for any $A\in{\cal B}$, $f^{-1}(A)\in{\cal M}$: the pre-image of any Borel set is Lebesgue-measurable. \vspace{3cm}
+
+(c) If $f$ is measurable, then
+  $$\forall c\in\RR~~~f^{-1}((-\infty,c))\in{\cal M}$$
+because $(-\infty,c)$ is an interval.
+
+Conversely, let $\forall c\in\RR~~~f^{-1}((-\infty,c))\in{\cal M}$. Then
+  $$\forall a<b~~(a,b\ne\pm\infty)~~~f^{-1}([a,b))=f^{-1}((-\infty,b)\setminus(-\infty,a))$$
+    $$=f^{-1}((-\infty,b))\setminus f^{-1}((-\infty,a))\in{\cal M}.$$
+Hence, for $\{a\}=\bigcap_{n=1}^\infty [a,a+\frac{1}{n})$ we have
+  $$f^{-1}(\{a\})=\bigcap_{n=1}^\infty f^{-1}([a,a+\frac{1}{n}))\in{\cal M},$$
+and any interval, e.g. $[a,b]$ can be represented as $[(-\infty,b)\setminus(-\infty,a)]\cup\{b\}$; therefore
+  $$f^{-1}([a,b])=[f^{-1}((-\infty,b))\setminus f^{-1}((-\infty,a))]\cup f^{-1}(\{b\})\in{\cal M}.$$
+\blacksquare \vspace{3mm}
+
+{\bf Theorem.} If $f$ and $g$ are measurable functions then $f+g$ and $fg$ are also measurable.\vspace{3mm}
+
+\underline{Proof.} (a) Our goal is to show that for each $a\in\RR$
+  $$B\defi (f+g)^{-1}((-\infty,a))=\{t:~f(t)+g(t)<a\}\in{\cal M}.$$
+
+(i) Firstly, we show that, for a fixed $a\in\RR$,
+  $$B=\bigcup_{n=1}^\infty\{t:~f(t)<q_n,~g(t)<a-q_n\},~~~~~~~~~~(*)$$
+where $q_1,q_2,\ldots$ is the sequence of all rational numbers.
+
+If $t$ is such that $f(t)<q$ and $g(t)<a-q$ for a (rational) $q$ then $f(t)+g(t)<a$, so that $t\in B$. Thus
+  $$B\supset \bigcup_{n=1}^\infty \{t:~f(t)<q_n,~g(t)<a-q_n\}.$$
+Suppose $\exists t\in B$ such that $\forall n$ either $f(t)\ge q_n$ or $g(t)\ge a-q_n$. Let $A=\{q\in\QQ:~ f(t)\ge q\}$ and take $r\defi\sup\{z:~z\in A\}\in\RR$ (a real number). For any $q\in\QQ$, if $q>r$ then $q\notin A$, so that $g(t)\ge a-q$. Thus, if $q_i\to r$ and $q_i>r$, then we can pass to the limit in the inequality $g(t)\ge a-q_i$:
+  $$g(t)\ge a-r.$$
+On the other hand, $f(t)\ge q_j$ for all $q_j<r$ and, if $q_j\to r$ then we conclude that
+  $$f(t)\ge r.$$
+Therefore, $f(t)+g(t)\ge a$ and $t\notin B$. Contradiction. Formula (*) is proved.
+
+(ii) Now the set
+  $$\{t:~f(t)<q_n,~g(t)<a-q_n\}=\{t:~ f(t)<q_n\}\cap\{t:~ g(t)<a-q_n\}$$
+is measurable and $B\in{\cal M}$ as a countable union of elements of $\cal M$.
+
+(b) If $f$ and $g$ are measurable then (obviously) $-g$ is measurable and both $f+g$ and $f-g$ are measurable.
+
+If $h:~E\to\RR$ is  measurable, then, for an arbitrary $a\in\RR$,
+  $$\{t:~h^2(t)>a\}=\left\{\begin{array}{ll}
+E, & \mbox{ if } a<0; \\ \{t:~h(t)>\sqrt{a}\}\cup\{t:~h(t)<-\sqrt{a}\}, &\mbox{ if } a\ge 0. \end{array}\right. $$
+Thus $h^2$ is measurable; hence $v\defi[(f+g)^2-(f-g)^2]$ is measurable and
+  $$\{t:~\frac{1}{4}v(t)<a\}=\{t:~ v(t)<4a\}\in{\cal M},$$
+so that $\frac{1}{4}v=fg$ is measurable. \blacksquare \vspace{3mm}
+
+{\bf Definition.} Let $\{z_n\}_{n=1}^\infty$ be a sequence of real numbers. Then
+  $$\limsup_{n\to\infty} z_n =\lim \sup_{n\to\infty} z_n \defi \lim_{N\to\infty}\left[\sup_{n\ge N} z_n\right]=\inf_{N\ge 1}\left[\sup_{n\ge N} z_n\right];$$
+  $$\liminf_{n\to\infty} z_n =\lim \inf_{n\to\infty} z_n \defi \lim_{N\to\infty}\left[\inf_{n\ge N} z_n\right]=\sup_{N\ge 1}\left[\inf_{n\ge N} z_n\right].$$
+\vspace{3mm}
+
+{\bf Theorem.} If $\{f_n\}$ is a sequence of measurable functions on $E\subset\RR$ then the following are measurable functions, too:
+  $$\max_{n\le k} f_n,~~\min_{n\le k} f_n,~~\sup_{n\in\NN}f_n,~~\inf_{n\in\NN}f_n,~~\limsup_{n\to\infty} f_n,~~\liminf_{n\to\infty} f_n.$$
+\vspace{3mm}
+
+For the proof (simple enough) see p.64 of Capinski and Kopp.\vspace{3mm}
+
+{\bf Corollary.} If a sequence of measurable functions $\{f_n\}_{n=1}^\infty$ converges point-wise then the limit is a measurable function. \vspace{3mm}
+
+Let $P(t)$ be some property of points $t\in E\in{\cal M}$ which may be satisfied or not. If $E\setminus\{t\in E:~P(t)\}$ is a null set then we say the property $P(t)$ is satisfied \underline{almost everywhere} in $E$.\vspace{3mm}
+
+{\bf Theorem.} If $E\in{\cal M}$, $f:~E\to\RR$ is measurable, and $g:~E\to\RR$ is such a function that the set $\{x:~f(x)\ne g(x)\}$ is null, then $g$ is measurable. (We say $f(x)=g(x)$ almost everywhere, or almost surely.) \vspace{3mm}
+
+\underline{Proof.}  Consider the difference $d(x)=g(x)-f(x)$. It is zero except on a null set, so
+  $$\{x:~d(x)>a\}=\left\{\begin{array}{l}
+\mbox{ a null set, if } a\ge 0; \\ \mbox{ a full set, if } a<0, \end{array}\right.$$
+where a full set is the complement of a null set. Both null and full sets are measurable, hence $d$ is a measurable function and $g=f+d$ is measurable. \blacksquare \vspace{3mm}
+
+{\bf Corollary.} If a sequence of measurable functions $\{f_n(x)\}_{n=1}^\infty$ converges to $f(x)$ almost everywhere in $E$ then $f$ is measurable. (One can say: $f_n\to f$ almost everywhere or almost surely.)
+\vspace{3mm}
+
+\underline{Proof.} Let $A$ be the null set such that
+  $$\forall x\in E\setminus A~~~\lim_{n\to\infty} f_n(x)=f(x).$$
+Then function $\II_{A^c}(x) f_n(x)$ converges everywhere to $g(x)=\II_{A^c}(x)f(x)$ which is therefore measurable. But $f=g$ almost everywhere, so $f$ is also measurable. \blacksquare\vspace{3mm}
+
+\begin{center}\bf\underline{Random variables} \end{center}\vspace{3mm}
+
+{\bf Definition.} In the special case of probability space $(\Omega,{\cal F},P)$, we use the phrase \underline{random variable} (RV) to mean a measurable function, that is, $X:\Omega\to \RR$ is a random variable if $\forall a \in \RR$
+  $$\{\omega\in\Omega:~X(\omega)<a\}\in{\cal F}.$$
+Equivalently,
+  $$\forall A\in{\cal B}~~~X^{-1}(A)\in{\cal F}.$$
+(We say $\cal F$-measurable, if we want to underline what is the $\sigma$-field in $\Omega$.)
+\vspace{3mm}
+
+In the case when $\Omega\subset\RR$ is a Borel set and $\cal F$ is the $\sigma$-field of Borel subsets of $\Omega$, random variables are just Borel-measurable (or simply Borel) functions $\Omega\to\RR$.
+
+Borel functions exhibit similar properties as the Lebesgue-measurable functions.
+
+{\bf Theorem.} Suppose the probability space $(\Omega,{\cal F},P)$ is fixed. Let $X$ be a RV. The family of sets
+  $$\{S\in{\cal F}:~S=X^{-1}(B) \mbox{ for some } B\in{\cal B}\}\defi X^{-1}({\cal B})$$
+is a $\sigma$-field. \vspace{3mm}
+
+\underline{Proof.} (i) $\Omega\in X^{-1}({\cal B})$ because $\Omega\in{\cal F}$ and $\Omega=X^{-1}(\RR)$; $\RR\in{\cal B}$.
+
+(ii) If $A\in X^{-1}({\cal B})$, i.e. $A\in{\cal F}$ and $A=X^{-1}(B)$ for $B\in{\cal B}$, then $A^c\in{\cal F}$ and $A^c=X^{-1}(B^c)$ with $B^c\in{\cal B}$. Hence $A^c\in X^{-1}({\cal B})$.
+
+(iii) If $A_n\in X^{-1}({\cal B})$, i.e. $A_n\in{\cal F}$ and $A_n=X^{-1}(B_n)$ for $B_n\in{\cal B}$, then $\bigcup_{n=1}^\infty A_n\in{\cal F}$ and $\bigcup_{n=1}^\infty A_n=X^{-1}(\bigcup_{n=1}^\infty B_n)$ with $\bigcup_{n=1}^\infty B_n\in{\cal B}$. Hence $\bigcup_{n=1}^\infty A_n\in X^{-1}({\cal B})$. \blacksquare \vspace{3mm}
+
+Clearly, $X^{-1}({\cal B})\subset{\cal F}$, and this $\sigma$-field may be smaller than $\cal F$. We denote this $\sigma$-field by ${\cal F}_X$ and call it the $\sigma$-field \underline{generated} by $X$. If $\cal G$ is a $\sigma$-field in $\Omega$ such that $X$ is ${\cal G}$-measurable then ${\cal F}_X\subset{\cal G}$; ${\cal F}_X$ is the smallest $\sigma$-field among all such $\sigma$-fields $\cal G$ (the intersection of all such $\sigma$-fields $\cal G$).
+\vspace{3mm}
+
+\underline{Examples.} Let $\Omega=[0,1]$, ${\cal F}={\cal B}_{[0,1]}$ is the $\sigma$-field of Borel subsets of $\Omega$ and $P$ is the Lebesgue measure.
+
+(a) Suppose $X(\omega)=a$ (a constant). Then
+  $$X^{-1}(B)=\left\{\begin{array}{ll}
+\Omega, & \mbox{ if } a\in B; \\ \emptyset, & \mbox{ if } a\notin B \end{array}\right.$$
+and $X^{-1}({\cal B})={\cal F}_X=\{\emptyset, \Omega\}$. \vspace{3mm}
+
+$~$\hspace{5cm} $B\ni a\Longrightarrow X^{-1}(B)=\Omega$: for all $\omega\in\Omega$\\
+$~$\hspace{5cm} we have $X(\omega)\in B$. \vspace{3mm}
+
+$~$\hspace{5cm} $a\notin B\Longrightarrow X^{-1}(B)=\emptyset$: there are no \\
+$~$\hspace{5cm} such points $\omega$ that $X(\omega)\in B$.
+
+(b) Suppose
+$$X(\omega)=\left\{\begin{array}{ll} a, & \mbox{ if } \omega\in[0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4});\\ \\ b, & \mbox{ if } \omega\in[\frac{1}{4},\frac{2}{4})\cup [\frac{3}{4},1]; \end{array}\right. $$\vspace{1cm}
+
+$~$\hspace{8cm} $a\ne b$. \vspace{1cm}
+
+Then
+  $$X^{-1}({\cal B})={\cal F}_X=\{\emptyset; [0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4}); [\frac{1}{4},\frac{2}{4})\cup [\frac{3}{4},1]; \Omega=[0,1]\}:$$
+If $a,b\notin B$ then $X^{-1}(B)=\emptyset$.\\
+If $B\ni a$ and $b\notin B$ then
+  $$X^{-1}(B)=X^{-1}(\{a\})=[0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4}).$$
+If $B\ni b$ and $a\notin B$ then
+  $$X^{-1}(B)=X^{-1}(\{b\})=[\frac{1}{4},\frac{2}{4})\cup [\frac{3}{4},1].$$
+If $a,b\in B$ then $X^{-1}(B)=\Omega$. \vspace{3mm}
+
+\underline{Remark.} If a real function $f$ on $\Omega$ is ${\cal F}_X$-measurable then there are two numbers, say, $f_1$ and $f_2$ such that
+  $$f(\omega)=\left\{\begin{array}{ll} f_1, & \mbox{ if } \omega\in[0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4});\\ \\ f_2, & \mbox{ if } \omega\in[\frac{1}{4},\frac{2}{4})\cup [\frac{3}{4},1]. \end{array}\right. $$
+Indeed, suppose $\exists\omega_1,\omega_2\in[0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4})$ such that $f(\omega_1)=F_1\ne f(\omega_2)=F_2$. Then
+  $$f^{-1}(\{F_1\})=\left[ f^{-1}(\{F_1\})\cap \left([0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4})\right)\right]\cup \left[ f^{-1}(\{F_1\})\cap \left([\frac{1}{4},\frac{2}{4})\cup [\frac{3}{4},1]\right)\right].$$
+The first set here is different form $\emptyset$ (includes $\omega_1$) and from $\left([0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4})\right)$ (does not include $\omega_2$); it is a proper subset of $\left([0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4})\right)$, hence not in the $\sigma$-field ${\cal F}_X$, and $f^{-1}(\{F_1\})\notin{\cal F}_X$.
+
+Thus $\exists f_1:~~f(\omega)=f_1$ for all $\omega\in[0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4})$. The second case can be studied similarly. \vspace{3mm}
+
+(c) $X(\omega)=\omega$. Now $X^{-1}({\cal B})={\cal F}_X={\cal F}={\cal B}_{[0,1]}$.\vspace{4cm}
+
+The $\sigma$-field ${\cal F}_X$ generated  by a RV $X$ represents the amount of information (about the outcome $\omega$) produced by this random variable.
+In case (c), after observing $X$ we know the value of $\omega$. Hence ${\cal F}_X={\cal F}$. In case (b), after observing $X$ we can only say that\\
+$\omega\in[0,\frac{1}{4})\cup [\frac{2}{4},\frac{3}{4})=X^{-1}(\{a\})$, if $X=a$, or \\
+$\omega\in[\frac{1}{4},\frac{2}{4})\cup [\frac{3}{4},1]=X^{-1}(\{b\})$, if $X=b$.\\
+Therefore, ${\cal F}_X$ is the minimal $\sigma$-field containing $X^{-1}(\{a\})$ and $X^{-1}(\{b\})$.\vspace{3mm}
+
+{\bf Definition.} Random variables $X_1,X_2,\ldots,X_n$ are \underline{independent} if the $\sigma$-fields generated by them are (mutually) independent:\\
+  $\forall ~A_1,A_2,\ldots,A_n\in{\cal B}$
+  $$P(X_1^{-1}(A_1)\cap X_2^{-1}(A_2)\cap \ldots\cap X_n^{-1}(A_n))$$
+  $$=P(X_1^{-1}(A_1))\cdot P(X_2^{-1}(A_2))\cdot\ldots\cdot P(X_n^{-1}(A_n)).$$
+\vspace{3mm}
+
+\underline{Remark.} Any subset of $\{X_1,X_2,\ldots, X_n\}$ is also independent: it is sufficient to put e.g. $A_i=\RR$: then $X^{-1}_i(\RR)=\Omega$, and $P(\Omega)=1$ can be omitted in the above formula. \vspace{3mm}
+
+\underline{Examples.} (a) Let $\Omega=[0,1]$; $\cal F$ is the $\sigma$-field of Borel subsets of $\Omega$ and $P$ is the Lebesgue measure. Suppose $X(\omega)=a$ (a constant), $Y(\omega)=\omega$. Then ${\cal F}_X=\{\emptyset,\Omega\}$, ${\cal F}_Y={\cal B}_{[0,1]}$ and, for any $B\in{\cal F}_Y$,
+  $$P(\emptyset\cap B)=0=P(\emptyset)\cdot P(B);$$
+  $$P(\Omega\cap B)=P(B)=P(\Omega)\cdot P(B).$$
+So $X$ and $Y$ are independent. Moreover, $X$ is independent of any other RV.
+\vspace{3mm}
+
+\underline{Remark.} Suppose ${\cal F}_X={\cal F}_Y={\cal G}$. Then $X$ and $Y$ are independent only if
+  $$\forall A\in{\cal G}~~~P(A\cap A)=P(A)=P(A)\cdot P(A),$$
+i.e. $P(A)\in\{0,1\}$ for any $A\in{\cal G}$.
+\vspace{3mm}
+
+(b) Let $\Omega=(0,1]$, $\cal F$ be the $\sigma$-field of Borel subsets of $\Omega$ and $P$ be the Lebesgue measure. Suppose $X(\omega)=2\omega$, $Y(\omega)=-\ln \omega$. Then ${\cal F}_X={\cal B}_{(0,1]}$ and ${\cal F}_Y={\cal B}_{(0,1]}$; hence $X$ and $Y$ are not independent. (After observing $X$, one can calculate the exact value of $Y$.)
+
+(c) For the same probability space as in (b), suppose
+  $$X(\omega)=\left\{\begin{array}{ll}
+0, & \mbox{ if } \omega\in(0,\frac{1}{2}); \\ \\ 1, & \mbox{ if } \omega\in[\frac{1}{2},1]; \end{array}\right.
+Y(\omega)=\left\{\begin{array}{ll}
+1, & \mbox{ if } \omega\in[\frac{1}{4},\frac{3}{4}]; \\ \\ 0, & \mbox{ otherwise. } \end{array}\right.$$
+Then
+  $${\cal F}_X=\left\{\emptyset,\Omega,(0,\frac{1}{2}), [\frac{1}{2},1]\right\},~~~~~{\cal F}_Y=\left\{\emptyset,\Omega,[\frac{1}{4},\frac{3}{4}], (0,\frac{1}{4})\cup(\frac{3}{4},1]\right\},$$
+and these $\sigma$-fields are independent. \vspace{3mm}
+
+\begin{center}\bf\underline{Probability distributions} \end{center}\vspace{3mm}
+
+Let $(\Omega,{\cal F},P)$ be a probability space and $X$ be a RV. \vspace{3mm}
+
+{\bf Definition.} \underline{Probability distribution} of the random variable $X$ is the measure on $(\RR,{\cal B})$ defined by
+  $$P_X(B)=P(X^{-1}(B)).$$
+\vspace{3mm}
+
+In the example (b) above (the last but one series of examples),\\
+if $a,b\notin B$ then $X^{-1}(B)=\emptyset$ and $P(X^{-1}(B))=P_X(B)=0$;\\
+if  $a\in B$ and $b\notin B$ then $X^{-1}(B)=[0,\frac{1}{4})\cup[\frac{2}{4},\frac{3}{4})$ and
+  $$P(X^{-1}(B))=P_X(B)=\left(\frac{1}{4}-0\right)+\left(\frac{3}{4}-\frac{2}{4}\right)=\frac{1}{2};$$
+if $b\in B$ and $a\notin B$ then similarly $P(X^{-1}(B))=P_X(B)=\frac{1}{2}$;\\
+if $a,b\in B$ then $P_X(B)=1$.\vspace{3mm}
+
+{\bf Theorem.} The set function $P_X$ is a measure. \vspace{3mm}
+
+\underline{Proof.} Given pair-wise disjoint Borel sets $B_i$, $i=1,2,\ldots$, their inverse images $X^{-1}(B_i)$ are pair-wise disjoint and
+  $$X^{-1}\left(\bigcup_{i=1}^\infty B_i\right)=\bigcup_{i=1}^\infty X^{-1}(B_i),$$
+so
+  $$P_X\left(\bigcup_{i=1}^\infty B_i\right)=P\left(X^{-1}\left(\bigcup_{i=1}^\infty B_i\right)\right)=P\left(\bigcup_{i=1}^\infty X^{-1}(B_i)\right)$$
+    $$=\sum_{i=1}^\infty P(X^{-1}(B_i))=\sum_{i=1}^\infty P_X(B_i).$$
+\blacksquare\vspace{3mm}
+
+Thus $(\RR,{\cal B}, P_X)$ is a probability space. (Obviously, $P_X(\RR)=P(\Omega)=1$.)\vspace{3mm}
+
+\underline{Examples.}  Let $\Omega=[0,1]$; ${\cal F}={\cal B}_{[0,1]}$ is the Borel $\sigma$-field and $P$ is the Lebesgue measure.
+
+(a) Suppose $X(\omega)=a$ (a constant); then
+  $$P_X(B)=P(X^{-1}(B))=\left\{\begin{array}{ll} P(\Omega)=1, & \mbox{ if } a\in B; \\  P(\emptyset)=0, & \mbox{ if } a\notin B. \end{array}\right. $$
+This measure is called the \underline{Dirac measure} and denoted as $\delta_a$:
+$$P_X(B)=\delta_a(B)=\left\{\begin{array}{ll} 1, & \mbox{ if } a\in B; \\  0, & \mbox{ if } a\notin B. \end{array}\right. $$
+The probability distribution of a constant is the Dirac measure. Note that $\delta_a$ is the function of sets $B$ (the value of $a$ is fixed), and
+  $$\II_B(a)=\left\{\begin{array}{ll} 1, & \mbox{ if } a\in B; \\  0, & \mbox{ if } a\notin B \end{array}\right. $$
+is the function of the argument $a\in\RR$ (the set $B$ is fixed).
+
+(b) Suppose
+  $$X(\omega)=\left\{\begin{array}{ll} a, & \mbox{ if } \omega\in [0,\frac{3}{4}); \\  b, & \mbox{ if } \omega\in[\frac{3}{4},1]. \end{array}\right. $$
+Then the probability distribution of $X$ is
+  $$P_X(B)=\left\{\begin{array}{ll}
+0, & \mbox{ if } a,b\notin B;\\ \\ \frac{3}{4}, & \mbox{ if } a\in B \mbox{ and } b\notin B;\\ \\
+\frac{1}{4}, & \mbox{ if } b\in B \mbox{ and } a\notin B;\\ \\ 1,& \mbox{ if } a,b\in B. \end{array}\right. $$
+  $$P_X(B)=\frac{3}{4}\delta_a(B)+\frac{1}{4}\delta_b(B).$$
+
+Function of the variable $t$
+  $$P_X((-\infty,t])=F_X(t)$$
+is the cumulative distribution function (CDF).
+\vspace{5mm}
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 4. Integration}\\
+\hline\end{tabular}
+\vspace{5mm}
+
+\begin{center}\bf\underline{Nonnegative functions} \end{center}
+
+We develop the theory dealing with the Lebesgue measure, for the measure space $(\RR,{\cal M},m)$. However, all the statements remain valid for a given abstract measure space $(\Omega,{\cal F},\mu)$.
+
+{\bf Definition.} Let $E\subset \RR$. A non-negative function $\varphi:~E\to\RR$ which takes only finitely many values $\{a_1,a_2,\ldots,a_n\}$ is a \underline{simple} function if all the sets
+  $$A_i=\varphi^{-1}(\{a_i\})=\{x:~\varphi(x)=a_i\},~~~i=1,2,\ldots,n$$
+are measurable.
+
+Clearly, any simple function is measurable.
+
+The (Lebesgue) \underline{integral} over $E\in{\cal M}$ of a simple function $\varphi$ is given by
+  $$\int_E\varphi~dm=\sum_{i=1}^n a_i~m(A_i\cap E),$$ \vspace{2cm} \\
+where $0\times\infty=0$.
+(Sometimes we write $\displaystyle \int_E\varphi(x)~dm(x)$.) Note, the integral can equal $+\infty$ if, for some $i$, $a_i>0$ and $m(A_i\cap E)=\infty$.
+\vspace{3mm}
+
+\underline{Example.} Let
+  $$\varphi(x)=\left\{\begin{array}{ll} 1, & \mbox{ if } x\in\QQ; \\ 0 & \mbox{ otherwise} \end{array}\right. = \II_{\QQ}(x).$$
+Then
+  $$\int_\RR\varphi~ dm=1\cdot m(\QQ)+0\cdot m(\RR\setminus\QQ)=0$$
+since $\QQ$ is the null set. Recall that this function is NOT Riemann-integrable!
+
+{\bf Definition.} For any non-negative measurable function $f$ and $E\in{\cal M}$ the \underline{integral} $\displaystyle\int_E f(x)~dm(x)=\int_E f~dm$ is defined as
+  $$\int_E f~dm=\sup Y(E,f),$$
+    $$ \mbox{ where } Y(E,f)=\{\int_E\varphi~dm:~~0\le\varphi\le f \mbox{ and } \varphi \mbox{ is simple} \}.$$
+Note that the set $Y(E,f)$ is always of the form $[0,z]$ or $[0,z)$, where $z\in\RR$ and the value $z=+\infty$ is not excluded.
+If $E=[a,b]$ (or $E=(a,b)$) we write the integral as
+  $$\int_a^b f~dm=\int_a^b f(x) dm(x).$$
+Note that
+  $$\int_A f~dm=\int_{\RR} \II_A\cdot f~dm.$$
+\vspace{3mm}
+
+{\bf Basic properties of integrals.}\\
+(All of them are obvious for simple functions and follow from the properties of $\sup$.)
+\vspace{3mm}\\
+(i) If $A\in{\cal M}$ and $f\le g$ on $A$, then $\displaystyle \int_A f~dm\le\int_A g~dm.$\\
+(ii) If $B\subset A$; $A,B\in{\cal M}$, then $\displaystyle\int_B f~dm\le \int_A f~dm$.\\
+(iii) For a non-negative number $a$, $\displaystyle\int_A af~dm=a\int_A f~dm$.\\
+(iv) If $A$ is null then $\displaystyle\int_A f~dm=0$.\\
+(v) If $A,B\in{\cal M}$ and $A\cap B=\emptyset$, then $\displaystyle\int_{A\cup B}f~dm=\int_A f~dm+\int_B f~dm$.\vspace{5mm}
+
+{\bf Theorem.} Suppose $f$ is a non-negative measurable function. Then $f=0$ almost everywhere if and only if $\displaystyle\int_{\RR} f~dm=0$.\vspace{3mm}
+
+\underline{Proof.} (a) If $f=0$ almost everywhere and $0\le\varphi\le f$ is a simple function, then $\varphi=0$ almost everywhere; hence $\int_\RR \varphi~dm=0\Rightarrow \int_\RR f~dm=0$.
+
+(b) Let $\int_\RR f~dm=0$ and let $E=\{x:~f(x)>0\}$. Our goal is to show that $m(E)=0$.
+
+If $x\in E$ then $f(x)\ge \frac{1}{n}$ for some $n=1,2,\ldots$ and if $f(x)\ge \frac{1}{n}$ for some $n=1,2,\ldots$ then $x\in E$. Thus $E=\bigcup_{n=1}^\infty E_n$, where
+  $$E_n=f^{-1}([\frac{1}{n},\infty))=\{x:~f(x)\ge\frac{1}{n}\}.$$
+
+For every fixed $n\ge 1$, the function
+  $$\varphi_n(x)=\left\{\begin{array}{ll} \frac{1}{n}, & \mbox{ if } x\in E_n, \\ 0 & \mbox{ otherwise} \end{array}\right. =\frac{1}{n} \II_{E_n}(x)$$
+is simple and $\varphi_n\le f$. So
+  $$\int_\RR\varphi_n~dm=\frac{1}{n} m(E_n)\le \int_\RR f~dm=0\Longrightarrow m(E_n)=0.$$
+Therefore,
+  $$m(E)\le \sum_{n=1}^\infty m(E_n)=0.$$
+\blacksquare \vspace{3mm}
+
+Now we can extend the basic property (i): \\
+If $A\in{\cal M}$ and $f\le g$ almost everywhere, then $\int_A f~dm\le \int_A g~dm$.
+
+More generally, if a statement about integrals holds for functions $f,g,\ldots$ then it holds for functions $f_1,g_1,\ldots$, where $f=f_1$, $g=g_1, \ldots$ almost everywhere.\vspace{3mm}
+
+{\bf Fatou's lemma.}
+If $\{f_n\}$ is a sequence of non-negative measurable functions on $E\in{\cal M}$ then
+  $$\liminf_{n\to\infty} \int_E f_n~dm\ge \int_E\left(\liminf_{n\to\infty} f_n\right)~ dm.$$
+\vspace{3mm}
+
+\underline{Remark.} If $\{z_n\}$ is a sequence of real numbers then $\lim \inf_{n\to\infty} z_n$ (finite or infinite) always exists. Let $Z_N=\inf_{n\ge N} z_n$. The sequence $Z_N$ is non-decreasing:
+  $$Z_{N+1}=\inf_{n\ge N+1} z_n\ge \inf_{n\ge N} z_n=Z_N$$
+and hence has a limit. \vspace{3cm}
+
+\underline{Proof of the Fatou Lemma (sketch).} Notations:
+\begin{eqnarray*}
+g_n(x) &=& \inf_{k\ge n} f_k(x); \\
+f(x) & = & \lim_{n\to\infty} g_n(x)=\lim \inf_{n\to\infty} f_n(x).
+\end{eqnarray*}
+Let $\varphi$ be a simple function, $\varphi\le f$, and prove that
+  $$\int_E \varphi~dm\le\lim \inf_{n\to\infty} \int_E f_n~dm.$$
+Without loss of generality, we assume that $f>0$ on $E$ and put
+  $$\bar\varphi(x)=\left\{\begin{array}{rl} \varphi(x)-\varepsilon>0, & \mbox{ if } \varphi(x)>0, \\ 0, & \mbox{ if } \varphi(x)=0 \mbox{ or } x\notin E, \end{array}\right. $$
+where $\varepsilon>0$ is so small that $\bar\varphi\ge 0$.
+
+Now $\bar\varphi<f$, $g_n(x)$ increases to $f(x)$, so that $\forall x\in E$ sooner or later $g_n(x)\ge\bar\varphi(x)$. Assume for simplicity that
+  $$\exists N: \forall n\ge N~\forall x\in E~ g_n(x)\ge\bar\varphi(x).$$
+[For the general case, see books.] Clearly, one can take also any bigger value of $N$.
+Now
+  $$\int_E g_n~dm\ge\int_E\bar\varphi~dm\Longrightarrow \int_E\bar\varphi~dm\le \int_E \inf_{k\ge n} f_k(x)~dm(x)$$
+  $$\le \int_E f_k(x) ~dm(x)$$
+for all $k\ge n\ge N$, so that
+  $$\int_E\bar\varphi~dm\le\inf_{k\ge N} \int_E f_k~dm.$$
+Since one can take any bigger value of $N$, we  can pass to the limit:
+  $$\int_E\bar\varphi~dm\le\lim_{N\to\infty} \inf_{k\ge N} \int_E f_k~dm.$$
+Below, we replace $N$ with $n$.
+
+On the left, we have expression depending on $\varepsilon$. If $m(\{x:~\varphi(x)>0\})<\infty$ then $\int_E\bar\varphi~dm\to \int_E\varphi~dm$ when $\varepsilon\to 0$.
+[For other cases, see books.] Therefore,
+  $$\int_E\varphi~dm\le \lim \inf_{n\to\infty} \int_E f_n~dm.$$
+Finally,
+  $$\int_E f~dm=\sup_\varphi \left[\int_E \varphi~dm\right]\le \lim \inf_{n\to\infty}\int_E f_n~dm.$$
+\blacksquare \vspace{3mm}
+
+\underline{Example.} The inequality in Fatou's Lemma can be strict!
+
+Let $E=[0,1]$, $f_n(x)=n\II_{(0,\frac{1}{n}]}(x)$.\\
+(a) $\displaystyle\int_E f_n~dm=1\Longrightarrow \lim \inf_{n\to\infty} \int_E f_n~dm=1$.\\
+(b) $\displaystyle \forall x\in E~~\lim_{n\to\infty} f_n(x)=\lim \inf_{n\to\infty} f_n(x)=0$,\\ so that $\displaystyle \int_E\left(\lim \inf_{n\to\infty} f_n\right) ~dm=0<1$.
+\vspace{3mm}
+
+{\bf Monotone Convergence Theorem.}\vspace{3mm}
+
+If $\{f_n\}$ is a sequence of non-negative measurable functions increasing monotonically to $f$ on $E\in{\cal M}$, i.e. $\forall x\in E$ $\lim_{n\to\infty} f_n(x)=f(x)$, then
+  $$\lim_{n\to\infty} \int_E f_n~ dm=\int_E f~dm.$$
+\vspace{3mm}
+
+\underline{Proof.} Since $f_n\le f$, for any $n$ $\int_E f_n~dm\le \int_E f~dm$: hence, if $N$ is fixed, then $\sup_{n\ge N} \int_E f_n~dm\le \int_E f~dm$ and $\lim_{N\to\infty} \sup_{n\ge N} \int_E f_n~dm \le \int_E f~dm$ meaning that
+  $$\lim \sup_{n\to\infty} \int_E f_n~dm \le \int_E f~dm.$$
+
+According to Fatou's Lemma, $\int_E f~dm\le\lim \inf_{n\to\infty}\int_E f_n~dm$. Clearly, $\lim \inf_{n\to\infty} \int_E f_n~dm\le \lim \sup_{n\to\infty} \int_E f_n~dm$, so that
+  $$\int_E f~dm\le \lim \inf_{n\to\infty} \int_E f_n~dm\le \lim \sup_{n\to\infty} \int_E f_n~dm\le \int_E f~dm$$
+  $$\Longrightarrow \lim \inf_{n\to\infty}\int_E f_n~dm=\lim \sup_{n\to\infty} \int_E f_n~dm=\lim_{n\to\infty} \int_E f_n~dm=\int_E f~dm.$$
+\blacksquare \vspace{3mm}
+
+{\bf Corollary.} For a sequence of non-negative measurable functions $f_n$ we have (for any $E\in{\cal M}$)
+  $$\int_E\left(\sum_{n=1}^\infty f_n\right)~dm =\sum_{n=1}^\infty \int_E f_n~dm.$$
+\vspace{3mm}
+
+{\bf Corollary.} Suppose $\{f_n\}$ and $f$ are non-negative and measurable functions on $E\in{\cal M}$. If $f_n$ increases to $f$ almost everywhere, then we still have
+  $$\lim_{n\to\infty} \int_E f_n~ dm=\int_E f~dm.$$
+\vspace{3mm}
+
+{\bf Theorem.} For any non-negative measurable function $f$ on $E\in{\cal M}$, there is a sequence $\varphi_n$ of non-negative simple functions such that $\varphi_n\uparrow f$.\vspace{3mm}
+
+\underline{Proof.} Take
+  $$\varphi_n(x)=\sum_{k=0}^{2^{2n}} \frac{k}{2^n} \II_{f^{-1}([\frac{k}{2^n},\frac{k+1}{2^n}))}(x)$$
+  for $x\in E$. \vspace{2cm}
+
+(i) Any function $\varphi_n$ is a simple function because $f^{-1}\left(\left[\frac{k}{2^n},\frac{k+1}{2^n}\right)\right)\in{\cal M}$ for any $n,k\in\NN$.
+
+Let $x\in E$ be fixed.
+
+(ii) Prove that the sequence $\varphi_n(x)$ is increasing and $f(x)\ge\varphi_n(x)$ for all $n\in\NN$. For a fixed $n\in\NN$ either $f(x)\ge \frac{2^{2n}+1}{2^n}$ and $\varphi_n(x)=0<f(x)$, or there is $\hat k\in\{0,1,\ldots, 2^{2n}\}$ such that $f(x)\in\left[\frac{\hat k}{2^n},\frac{\hat k+1}{2^n}\right)$ in which case $\varphi_n(x)=\frac{\hat k}{2^n}\le f(x)$. For $n+1$, again, either $f(x)\ge \frac{2^{2(n+1)}+1}{2^{(n+1)}}$ and $\varphi_{n+1}(x)=0$ (we necessarily have $\varphi_n(x)=0$ because $\frac{2^{2(n+1)}+1}{2^{(n+1)}}>\frac{2^{2n}+1}{2^n}$), or
+  $$f(x)\in\left[\frac{2\hat k}{2^{n+1}},\frac{2\hat k+1}{2^{n+1}}\right)~~~~~\mbox{ or }~~~~~
+f(x)\in\left[\frac{2\hat k+1}{2^{n+1}},\frac{\hat k+1}{2^n}\right).$$
+In any case, $f(x)\ge\varphi_{n+1}(x)\ge \varphi_n(x)$.
+
+(iii) Prove that $\lim_{n\to\infty}\varphi_n(x)=f(x)$ ($x\in E$ is fixed). Since $f(x)<\infty$, starting from some $N\in\NN$ the case $f(x)\ge\frac{2^{2n}}{2^n}$ is excluded. For an arbitrary $\varepsilon>0$, take any $n$ bigger than $N$ and bigger than $\frac{\ln \frac{1}{\varepsilon}}{\ln 2}$. Now $f(x)\in\left[\frac{\hat k}{2^n},\frac{\hat k+1}{2^n}\right)$ for some $\hat k$ (depending on $n$) and $\varphi_n(x)=\frac{\hat k}{2^n}$. Thus
+  $$f(x)-\varphi_n(x)<\frac{1}{2^n}<\frac{1}{2^{[\ln\frac{1}{\varepsilon}/\ln 2]}}
+  =\frac{1}{\left(2^{1/\ln 2}\right)^{\ln\frac{1}{\varepsilon}}}=\varepsilon.$$
+\blacksquare
+
+\begin{center}\bf\underline{Integrable functions} \end{center}\vspace{5mm}
+
+{\bf Definition.} If $E\in{\cal M}$ and the measurable function $f$ has both $\int_E f^+~dm$ and $\int_E f^-~dm$ finite, then we say that $f$ is \underline{integrable}, and define
+  $$\int_E f~dm=\int_E f^+~dm-\int_E f^-~dm.$$
+Here and below,
+  $$f^+(x)\defi \max \{f(x),0\},~~~~~f^-(x)\defi \max \{-f(x),0\}.$$
+
+The set of all functions that are integrable over $E$ is denoted ${\cal L}^1(E)$.
+\vspace{10mm}
+
+{\bf Basic properties of integrals.}\\
+1. If $E\in{\cal M}$ and $f\le g$ on $E$ are two integrable functions, then $\displaystyle \int_E f~dm\le \int_E g~dm$.\\
+2. For any integrable over $E\in{\cal M}$ functions $f$ and $g$, their sum $f+g$ is also integrable and
+  $$\int_E(f+g)~dm=\int_E f~dm+\int_E g~dm.$$
+3. If $f$ is integrable over $E\in{\cal M}$ and $c\in\RR$, then $\displaystyle\int_E(cf)~dm=c\int_E f~dm$.
+
+\underline{Remark.} Properties 2 and 3 mean that ${\cal L}^1(E)$ is a \underline{vector space}.\\
+4. If $\displaystyle\int_A f~dm\le \int_A g~dm$ for all $A\in{\cal M}$, then $f\le g$ almost everywhere. In particular, if $\displaystyle\int_A f~dm=\int_A g~dm$ for all $A\in{\cal M}$, then $f=g$ almost everywhere.\\
+5. An integrable function is almost everywhere finite.\\
+6. For an integrable function $f$ and $A\in{\cal M}$,
+  $$m(A)\inf_{x\in A} f(x)\le\int_A f~dm\le m(A)\sup_{x\in A} f(x).$$
+7. $\displaystyle\left|\int_E f~dm\right|\le \int_E |f|~dm$.\\
+8. If $f\ge 0$ and $\displaystyle\int_E f~dm=0$, then $f=0$ almost everywhere on $E$.\\
+9. If $f=g$ almost everywhere and $f$ is integrable then so is $g$ and the integrals are the same. \\
+10. If $A\cap B=\emptyset$ are two disjoint sets from $\cal M$ and $f$ is integrable on $A$ and on $B$, then $f$ is integrable on $A\cup B$ and $$\int_{A\cup B} f~dm=\int_A f~dm+\int_B f~dm.$$
+\vspace{5mm}
+
+{\bf Theorem.} Let $f\ge 0$. Then $A\to\displaystyle\int_A f~dm$ (the map from $\cal M$ to $\RR$) is a measure.
+\vspace{3mm}
+
+\underline{Proof.} Denote $\mu(A)=\int_A f~dm\ge 0$ and let $E_i$ be a sequence of pairwise disjoint measurable sets. Clearly, the sequence of functions
+  $$g_n(x)=f(x)\II_{\bigcup_{i=1}^n E_i}(x)$$
+increases and converges to
+  $$g(x)=f(x)\II_{\bigcup_{i=1}^\infty E_i}(x).$$
+Now
+  $$\mu\left(\bigcup_{i=1}^\infty E_i\right)=\int_{\bigcup_{i=1}^\infty E_i} f~dm=\int_\RR g~dm$$
+and, according to the monotone convergence theorem,
+  $$\lim_{n\to\infty} \int_\RR g_n(x) dm(x)=\int_\RR g~dm.$$
+Finally,
+  $$\int_\RR g_n(x)~dm(x)=\int_{\bigcup_{i=1}^n E_i} f(x)~ dm(x)=\sum_{i=1}^n \int_{E_i} f(x)~ dm(x)=\sum_{i=1}^n \mu(E_i)$$
+and
+  $$\lim_{n\to\infty} \sum_{i=1}^n \mu(E_i)=\int_\RR g~dm=\mu\left(\bigcup_{i=1}^\infty E_i\right).$$
+\blacksquare
+
+Note that $\mu(E_i)$ can equal infinity.\vspace{3mm}
+
+\underline{Examples.} 1. Let
+  $$f(x)=\II_{[0,2]}(x)=\left\{\begin{array}{ll} 1, & \mbox{ if } x\in[0,2]; \\ 0 & \mbox{ otherwise}. \end{array}\right.$$
+Then $\mu(A)=\int_A f~dm$ is the following measure:\\
+(i) If $A\subset [0,2]$ then $\mu(A)=m(A)$;\\
+(ii) If $A\subset (-\infty,0)\cup(2,\infty)$ then $\mu(A)=0$;\\
+(iii) For an arbitrary $A\in{\cal M}$,
+  $$\mu(A)=m(A\cap [0,2]).$$
+
+2. Let $f\ge 0$ be such that $\int_{-\infty}^\infty f(x) dx =1$, e.g. $f(x)=\frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$. Then $A\to\int_A f~dm$ is a probability measure on $(\RR,{\cal M})$, e.g. corresponding to the normal distribution: $\int_A f~dm$ equals the probability of the event $Z\in A$, where $Z$ is standard normal.\vspace{3mm}
+
+{\bf Dominated Convergence Theorem.}\vspace{3mm}
+
+Suppose $E\in{\cal M}$. Let $\{f_n\}$ be a sequence of measurable functions such that $|f_n|\le g$ almost everywhere on $E$ for all $n\ge 1$, where $g$ is integrable over $E$ (that is, $\int_E g~dm<\infty$). If $f=\lim_{n\to\infty} f_n$ almost everywhere then $f$ is integrable over $E$ and
+  $$\lim_{n\to\infty} \int_E f_n~dm=\int_E f~dm=\int_E\left(\lim_{n\to\infty} f_n\right)~ dm.$$
+\vspace{3mm}
+
+\underline{Proof.} First, consider the case $f_n\ge 0$. Fatou's Lemma gives $\int_E f~dm\le\lim \inf_{n\to\infty} \int_E f_n~dm$, and it remains to show that $\lim \sup_{n\to\infty} \int_E f_n~dm\le \int_E f~dm$.
+
+Fatou's Lemma applied to $[g-f_n]$ gives
+  $$\int_E\lim_{n\to\infty} (g-f_n)~dm\le \lim \inf_{n\to\infty} \int_E (g-f_n)~dm=\lim \inf_{n\to\infty} \left[\int_E g~dm-\int_E f_n~dm\right]$$
+  $$=\int_E g~dm-\lim \sup_{n\to\infty} \int_E f_n~dm$$
+(because, for any sequence $\{a_n\}$, $\lim \inf_{n\to\infty} (-a_n)=-\lim \sup_{n\to\infty} a_n$).\\
+Therefore,
+  $$\int_E g~dm-\int_E f~dm\le \int_E g~dm-\lim \sup_{n\to\infty} \int_E f_n~dm,$$
+i.e. $\lim \sup_{n\to\infty} \int_E f_n~dm\le \int_E f~dm$.
+
+For the general case, we have
+  $$-g(x)\le f_n(x)\le g(x) \Longleftrightarrow 0\le f_n(x)+g(x)\le 2g(x),$$
+so that
+  $$\lim_{n\to\infty} \int_E[f_n+g]~dm=\int_E[f+g]~dm\Longleftrightarrow$$
+   $$(\mbox{subtract } \int_E g~dm)~ \lim_{n\to\infty} \int_E f_n~dm=\int_E f~dm.$$
+\blacksquare \vspace{3mm}
+
+\underline{Examples.} 1. Let $E=[1,\infty)$, $f_n(x)=\frac{\sqrt{x}}{1+nx^3}$. Clearly, $\forall n=1,2,\ldots$ $f_n(x)\le \frac{\sqrt{x}}{x^3}=g(x)$, and $g(x)$ is integrable over $E$. Thus
+  $$\lim_{n\to\infty} \int_E f_n~dm=\int_E \left(\lim_{n\to\infty} f_n\right)~dm=0.$$
+2. Let $E=[0,\infty)$, $f_n=\II_{[n,n+1]}$. Then
+  $$\lim_{n\to\infty} \int_E f_n~dm=1\ne 0=\int_E \left(\lim_{n\to\infty} f_n\right)~dm.$$
+Here, there is no such an integrable function  $g$ that $|f_n|\le g$.
+\vspace{3mm}
+
+{\bf Beppo-Levi Theorem.}\vspace{3mm}
+
+Suppose that $\displaystyle\sum_{k=1}^\infty \int |f_k|~dm$ is finite. Then the series $\displaystyle\sum_{k=1}^\infty f_k(x)$ converges for almost all $x$, its sum is integrable, and
+  $$\int\sum_{k=1}^\infty f_k~dm=\sum_{k=1}^\infty \int f_k~dm.$$
+(Here and very often below, $\int g~dm$ is the Lebesgue integral over an arbitrarily fixed $E\in{\cal M}$.)\vspace{3mm}
+
+\underline{Proof.} Let $\varphi(x)=\sum_{k=1}^\infty |f_k(x)|$; then $\int \varphi~dm=\sum_{k=1}^\infty \int |f_k|~dm$. (All functions here are non-negative.)
+
+Since $\sum_{k=1}^\infty \int |f_k|~dm<\infty$, function $\varphi$ is integrable and finite almost everywhere. Hence the series $\sum_{k=1}^\infty |f_k(x)|$ and the series $\sum_{k=1}^\infty f_k(x)$ converge for almost all $x$. Let $f(x)=\sum_{k=1}^\infty f_k(x)$. (We put $f(x)=0$ for all $x$ for which the series diverges.) For all partial sums we have
+  $$\left|\sum_{k=1}^n f_k(x)\right|\le \sum_{k=1}^\infty |f_k(x)|\le\varphi(x),$$
+and we can apply the Dominated Convergence Theorem:
+  $$\int f~dm=\int\left[\lim_{n\to\infty} \sum_{k=1}^n f_k(x)\right] ~dm(x)=\lim_{n\to\infty} \int \sum_{k=1}^n f_k~dm$$
+  $$=\lim_{n\to\infty} \sum_{k=1}^n \int f_k~dm=\sum_{k=1}^\infty \int f_k~dm.$$
+\blacksquare \vspace{3mm}
+
+{\Large\bf All the theory remains unchanged if we replace the Lebesgue measure $m$ with any another measure $\mu$ on $(\RR,{\cal B})$, or on any abstract space $\Omega$ with a fixed $\sigma$-field $\cal F$. The integrals are denoted as $\displaystyle \int_E f(x) d\mu(x)$ or simply $\int_E f~d\mu$. We use notation $\int_a^b f(x)dx$ to denote the Riemann integral and $\int_{[a,b]} f~dm$ to denote the Lebesgue integral (with respect to the Lebesgue measure). If a (finite) measure on the measurable space $(\Omega,{\cal F})$ has the form $\mu=\mu_1+\mu_2$, then $\int_\Omega f~d\mu=\int_\Omega f~d\mu_1+\int_\Omega f~d\mu_2$.}
+\vspace{3mm}
+
+\underline{Example.} Calculate $\int_0^\infty\frac{x}{e^x-1}dx$.\\
+(i)
+  $$\frac{x}{e^x-1}=x\frac{e^{-x}}{1-e^{-x}}=\sum_{n=1}^\infty x e^{-nx},$$
+and the last series converges for all $x\ge 0$.\\
+(ii)
+  $$\int_0^\infty x e^{-nx}dx=(\mbox{ by parts })=\left.x(-\frac{1}{n}) e^{-nx}\right|_{x=0}^\infty - (-\frac{1}{n})\int_0^\infty e^{-nx}dx$$
+  $$=\left.\frac{1}{n}(-\frac{1}{n}) e^{-nx}\right|_0^\infty=\frac{1}{n^2}.$$
+(iii) According to the Beppo-Levi Theorem,
+  $$\int_0^\infty \frac{x}{e^x-1} dx=\sum_{n=1}^\infty \frac{1}{n^2}=\frac{\pi^2}{6}.$$
+(The last equality follows from the so called Basel problem;\\ see Wikipedia.) \vspace{1mm}
+
+\begin{center}\bf\underline{Integration with respect to arbitrary measures} \end{center}\vspace{1mm}
+
+\underline{Example.} Consider the interval $\Omega=[0,\pi]\subset \RR$ equipped with the Borel $\sigma$-field ${\cal B}_{[0,\pi]}$ the restriction of $\cal B$ to $[0,\pi]$: ${\cal B}_{[0,\pi]}=\{B\cap[0,\pi]:~B\in{\cal B}\}$. Let the measure $\mu$ be defined by its values on the (open, closed, etc) intervals $(a,b),[a,b],[a,b),(a,b]\subset [0,\pi]$ by the following common expressions:
+$$\mu((a,b))=\mu((a,b)\cap [0,\frac{\pi}{2}))+\mu((a,b)\cap[\frac{\pi}{2},\pi]):$$
+$$\mbox{ for } (c,d)\subset [0,\frac{\pi}{2}), \mbox{ we put } \mu((c,d))=\sin(d)-\sin(c)$$
+$$\mbox{ and for } (c,d)\subset [\frac{\pi}{2},\pi], \mbox{ we put } \mu((c,d))=\sin(c)-\sin(d).$$
+(The extension of $\mu$ to ${\cal B}_{[0,\pi]}$ and also to ${\cal M}_{[0,\pi]}$ can be done using the same constructions as for the Lebesgue measure: null sets, outer measure etc.)
+
+Calculate $\int_{[0,\pi]}x~d\mu(x)$.
+
+\underline{Solution.} Firstly, note that the measure $\mu$ is non-atomic, i.e., for any point $x\in\Omega$ $\mu(\{x\})=0$ and
+$$\mu((a,b))=\mu([a,b))=\mu((a,b])=\mu([a,b])$$
+for every interval $(a,b)\subset\Omega$.
+
+(a) Calculate $\int_{[0,\frac{\pi}{2})} x~\mu(dx)$. First, we divide the interval $[0,\frac{\pi}{2})$ in $n$ equal subintervals and approximate from below the function $f(x)=x$ by $f_n(x)=\sum_{i=0}^{n-1} \frac{\pi i}{2n}\II_{[\frac{\pi i}{2n},\frac{\pi(i+1)}{2n})}(x)$.\vspace{2cm}
+
+Then, by the basic properties of integrals,
+$$\int_{[0,\frac{\pi}{2})} f_n(x)~d\mu(x)$$
+$$=\sum_{i=0}^{n-1} \mu([\frac{\pi i}{2n},\frac{\pi(i+1)}{2n}))\cdot\frac{\pi i}{2n}=\sum_{i=0}^{n-1}\frac{\pi i}{2n}\left[\sin(\frac{\pi(i+1)}{2n})-\sin(\frac{\pi i}{2n})\right]$$
+$$=\sum_{i=0}^{n-1}\frac{\pi i}{2n}\int_{\frac{\pi i}{2n}}^{\frac{\pi(i+1)}{2n}} \cos(x)~dx~\mbox{
+(Fundamental Theorem of Calculus) }$$
+$$=\int_{[0,\frac{\pi}{2})} f_n(x)\cos(x)~dm(x).$$
+The sequence $f_n\ge 0$ converges to $f(x)=x\ge 0$. Hence, by the Dominated Convergence Theorem,
+$$\int_{[0,\frac{\pi}{2})} x~d\mu(x)=\int_{[0,\frac{\pi}{2})} f(x)~d\mu(x)=\lim_{n\to\infty} \int_{[0,\frac{\pi}{2})} f_n(x)~d\mu(x)$$
+$$=\lim_{n\to\infty} \int_{[0,\frac{\pi}{2})} f_n(x)\cos(x)~dm(x)=\int_{[0,\frac{\pi}{2})} x\cos(x)~dm(x).$$
+The function $x~\cos(x)$ is Riemann-integrable, so that
+$$\int_{[0,\frac{\pi}{2})} f(x)~d\mu(x)=\int_0^{\frac{\pi}{2}} x~\cos(s)~dx \mbox{ (standard Riemann integral) }=\frac{\pi}{2}-1.$$
+
+(b) Arguing similarly, one can obtain
+$$\int_{[\frac{\pi}{2},\pi]} x~d\mu(x)=-\int_{\frac{\pi}{2}}^{\pi} x~\cos(s)~dx=1+\frac{\pi}{2}.$$
+Answer: $\int_{[0,\pi]} x~d\mu(x)=\pi$.
+
+More about this example in the section on Radon-Nikodym Theorem.
+\vspace{3mm}
+
+\underline{Example.}
+Let $(\RR,{\cal B},\mu)$ be the measure space with $\mu(dx)=\delta_b(dx)$, the Dirac measure concentrated at point $b\in\RR$. Then  every function $f:~\RR\to\RR$ is integrable and $\int_{\RR} f~d\mu=f(b)$.
+
+\underline{Proof.} It is sufficient to consider a positive function $f$. Suppose the function $0\le\varphi\le f$ is simple. Then
+$$\int_{\RR}\varphi~d\mu=\sum_{i=1}^n a_i~\mu(A_i)=0+0+\ldots +\varphi(b)\cdot 1+0+\ldots +0\le f(b).$$\vspace{3cm}
+
+The maximal possible value of $\int_{\RR}\varphi~d\mu$ is $f(b)$, e.g., if the simple function $\varphi$ is as  follows:
+$$\varphi(x)=\left\{\begin{array}{ll} f(b), & \mbox{ if } x=b;\\ 0 & \mbox{ otherwise}.\end{array}\right.$$
+Thus
+$$\int_{\RR}f~d\mu=\sup\{\int_{\RR}\varphi~d\mu:~0\le\varphi\le f \mbox{ and } \varphi \mbox{ is simple}\}$$
+$$=\max\{\int_{\RR}\varphi~d\mu:~0\le\varphi\le f \mbox{ and } \varphi \mbox{ is simple}\}=f(b).$$
+\blacksquare \vspace{3mm}
+
+\underline{Example.} Lebesgue function (cf Cantor set)\\
+(i) $F(y)=0$ for $y\le 0$, $F(y)=1$ for $y\ge 1$;\\
+(ii) $F(y)=\frac{1}{2}$ for $y\in[\frac{1}{3},\frac{2}{3}]$;\\
+(iii) $F(y)=\frac{1}{4}$ for $y\in[\frac{1}{9},\frac{2}{9}]$; $F(y)=\frac{3}{4}$ for $y\in[\frac{7}{9},\frac{8}{9}]$;\\
+and so on.
+
+This function is obviously increasing, and one can introduce the measure on the intervals by
+$$\mu((a,b))=F(b)-F(a),$$
+define the null sets, outer measure etc. Eventually, we obtain a measure $\mu$ on ${\cal B}_{[0,1]}$. Let us compute $\int_{[0,1]} x d\mu(x)$.
+
+Every one interval of the growth of the function $F$ has the form $[\frac{i}{3^n}, \frac{i+1}{3^n})$, $n=0,1,2,\ldots$, where
+\begin{eqnarray*}
+i=0, && \mbox{ if } n=0,\\
+i=0,2 && \mbox{ if } n=1,\\
+i=0,2,6,8, && \mbox{ if } n=2,\\
+i=0,2,6,8,18,20,24,26, && \mbox{ if } n=3, \mbox{ and so on.}\\
+\end{eqnarray*}
+We approximate the function $f(x)=x$ from below by constant values on those intervals (and in the similar way on the other intervals of the length $\frac{1}{3^n}$).\vspace{10cm}
+
+For a fixed $n=0,1,2,\ldots$, the integral over the corresponding interval is $\frac{i}{3^n}\cdot \frac{1}{2^n}$, the value of the simple function $\varphi_n$ times the measure of that interval. When $n$ increases to $n+1$, every interval is split into 3 subintervals, but the middle one has measure zero. The remainder two subintervals result in $\frac{i}{3^n}\cdot\frac{1}{2^{n+1}}$ and $\frac{3i+2}{3^{n+1}}\cdot\frac{1}{2^{n+1}}$ making the same $\frac{i}{3^n}\cdot \frac{1}{2^n}$ plus $\frac{2}{6^{n+1}}$. The increment $\frac{2}{6^{n+1}}$ appears as many times as there were intervals of the growth of the function $F$, i.e., $2^n$ times. Thus, the total integral of the simple approximating function $\varphi_n$, denoted as $x_n=\int_{[0,1]} \varphi_n(x)~d\mu(x)$, satisfies relations
+$$x_0=0;~~~~~x_{n+1}=x_n+\frac{2}{6^{n+1}} \cdot 2^n=x_n+(\frac{1}{3})^{n+1},$$
+and
+$$\lim_{n\to\infty}x_n =\frac{1}{3}\sum_{i=0}^\infty (\frac{1}{3})^i=\frac{1}{2}.$$
+Like previously, using the Monotone Convergence Theorem, we obtain
+$$\int_{[0,1]} x~d\mu(x)=\int_{[0,1]} f(x)~d\mu(x)=\lim_{n\to\infty} \int_{[0,1]} \varphi_n(x)~d\mu(x)=\lim_{n\to\infty} x_n=\frac{1}{2}.$$
+\blacksquare \vspace{3mm}
+
+\begin{center}\bf\underline{Relation to the Riemann integral} \end{center}\vspace{3mm}
+
+{\bf Theorem.} Let $f:~[a,b]\to\RR$ be bounded, that is $|f(x)|\le K<\infty$ for all $x\in[a,b]$.\\
+(i) $f$ is Riemann-integrable if and only if $f$ is almost everywhere continuous with respect to Lebesgue measure on $[a,b]$.\\
+(ii) If $f$ is Riemann-integrable on $[a,b]$ then it is Lebesgue integrable and the integrals are the same.
+\vspace{3mm}
+
+\underline{Remark.} Remember, any bounded measurable function on $[a,b]$ is Lebesgue-integrable.\vspace{3mm}
+
+\begin{center}\bf\underline{ Geometric Interpretation} \end{center} \vspace{3mm}
+
+(a) (Lower) Riemann integral: we divide the interval $[a,b]$ into small intervals
+  $$\left[a,a+\frac{b-a}{n}\right],\left(a+\frac{b-a}{n},a+\frac{2(b-a)}{n}\right],\ldots,$$
+  $$\left(a+\frac{(n-1)(b-a)}{n},a+\frac{n(b-a)}{n}=b\right]$$
+and approximate the area under the function $f$ by rectangles: \vspace{5cm}
+
+(b) Lebesgue integral: we divide the range of function $f$ into small intervals and approximate the area under the funtion $f$ by rectangles with appropriate width:
+\vspace{5cm}
+
+In the both cases, in the limit we obtain the area under the curve, so that in the most cases Riemann and Lebesgue integrals coincide.\vspace{3mm}
+
+{\bf Improper Riemann integrals.}\vspace{3mm}
+
+If the interval $[a,\infty)$ is not finite, the Riemann integral is defined as $\displaystyle\lim_{b\to\infty} \int_a^b f(x)~dx$. If $f\ge 0$ and the improper Riemann integral exists, then the Lebesgue integral $\displaystyle\int_{[a,\infty)} f~dm$ exists and equals the improper Riemann integral.
+
+The same concerns unbounded functions (e.g. if $\lim_{x\to a+} f(x)=\infty$) and improper Riemann integrals $\displaystyle \lim_{\varepsilon\to 0+} \int_{a+\varepsilon}^b f(x)~dx$.\vspace{3mm}
+
+\underline{Example.} The condition $f\ge 0$ is important. Consider interval $[0,\infty)$ and function
+  $$f(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n+1}\II_{[n,n+1)}(x).$$
+
+The improper Riemann integral exists:
+  $$\int_0^\infty f(x)~dx=\lim_{n\to\infty}\int_0^n f(x)~dx=1-\frac{1}{2}+\frac{1}{3}-\ldots +\frac{(-1)^{n-1}}{n}+\ldots=\sum_{n=0}^\infty \frac{(-1)^n}{n+1},$$
+and this series converges. However, both integrals $\int_{[0,\infty)} f^+~dm=\int_{[0,\infty)} f^-~dm=+\infty$ and  the Lebesgue integral $\int_{[0,\infty)} f~dm$ is undefined. In this case, the Riemann integral is more general than the Lebesgue integral.\vspace{5mm}
+
+\begin{tabular}{|l|}
+\hline {\LARGE\bf 5. Probability}\\
+\hline\end{tabular}
+\vspace{5mm}
+
+\begin{center}\bf\underline{Integration with respect to probability distributions} \end{center}\vspace{3mm}
+
+{\bf Theorem.} Given a RV $X$ on a probability space $(\Omega,{\cal F},P)$ and a Borel function $g:~\RR\to\RR$,
+  $$\int_\Omega g(X(\omega))dP(\omega)=\int_\RR g(x) dP_X(x).$$
+(Change of variable.) The both integrals are well defined (or not) simultaneously. \vspace{3mm}
+
+\underline{Remark.} Suppose $\Omega=[0,1]$, ${\cal F}={\cal B}_{[0,1]}$, $P=m$, $X(\omega)$ has the inverse increasing function $\omega(x)$ which is differentiable. Then
+  $$\int_0^1 g(X(\omega))~d\omega=\int_{X(0)}^{X(1)} g(x) \left(\frac{d\omega(x)}{dx}\right) dx.$$
+Now, $\left(\frac{d\omega(x)}{dx}\right) dx$ equals $dP_X(x)$ in the following sense:
+  $$P_X(A)=\int_A \left(\frac{d\omega(x)}{dx}\right)\II_{[X(0),X(1)]}(x) dx.$$\vspace{3mm}
+
+\underline{Examples.} 1. Suppose $X(\omega)\equiv a$ (a constant); then $P_X=\delta_a$ (Dirac measure) and
+  $$\int_\Omega g(X(\omega)) dP(\omega)=g(a)=\int_\RR g(x)~d\delta_a(x):$$
+integration with respect to $\delta_a$ results in the value of a function at $x=a$.
+
+In the case of a discrete RV taking values  $a_i$ with probabilities $p_i$, we have $P_X=\sum_i p_i\delta_{a_i}$; hence
+  $$\int_\Omega g(X(\omega)) dP(\omega)=\int_\RR g(x) dP_X(x)=\sum_i p_i g(a_i).$$
+
+2. Let $\Omega=[0,1]$, ${\cal F}={\cal B}_{[0,1]}$, $P=m$ and
+  $$X(\omega)=\left\{\begin{array}{rl}
+5\omega, & \mbox{ if } \omega\in[0,\frac{1}{3}]; \\ 4, & \mbox{ if } \omega\in(\frac{1}{3},\frac{2}{3}); \\ 5(1-\omega), & \mbox{ if } \omega\in [\frac{2}{3},1]. \end{array} \right. $$ \vspace{4cm}
+
+Then
+  $$P_X(B)=\left\{\begin{array}{ll}
+2\cdot\frac{1}{5} m(B\cap[0,\frac{5}{3}]), & \mbox{ if } 4\notin B; \\
+\frac{1}{3}+\frac{2}{5} m(B\cap[0,\frac{5}{3}]), & \mbox{ if } 4\in B \end{array}\right. =\frac{1}{3}\delta_4(B)+\frac{2}{5}\int_B\II_{[0,\frac{5}{3}]}(x) dm(x),$$
+and, for a Riemann-integrable function $g:\RR\to\RR$,
+  $$\int_\Omega g(X(\omega)) dP(\omega)=\int_\RR g(x) dP_X(x)=\frac{1}{3} g(4)+\int_0^{\frac{5}{3}} g(x)\cdot \frac{2}{5} dx.$$
+
+3. Let $\Omega=[0,1)$, ${\cal F}={\cal B}_{[0,1)}$, $P=m$ and $X(\omega)=-\ln(1-\omega)$. Then (the inverse function) $\omega(x)=1-e^{-x}$ (if $x\ge 0$) and
+  $$P_X(A)=\int_A e^{-x}\II_{[0,\infty)}(x)\cdot dx.$$
+In particular, for $t\in\RR$,
+$$F_X(t)=P(\{\omega:~X(\omega)\le t\})=P_X((-\infty, t]) =\left\{\begin{array}{ll} 0, & \mbox{ if } t<0; \\ 1-e^{-t},& \mbox{ if } t\ge 0.\end{array}\right. $$
+This is the exponential RV.\vspace{3mm}
+
+{\bf Definition.} The measures on $(\RR,{\cal B})$ of the form
+  $$A\to P(A)=\int_A f~dm$$
+with non-negative integrable $f$ will be called \underline{absolutely continuous}, and the function $f$ will be called a \underline{density} of $P$ with respect to the Lebesgue measure.
+
+Exponential distribution is absolutely continuous with density $e^{-x}\cdot\II_{[0,\infty)}(x)$.
+
+The CDF corresponding to a density $f$ is given by
+  $$F(y)=\int_{-\infty}^y f(x)dx=\int_{(\infty,y]} f~dm;$$
+we say that $F$ is \underline{absolutely continuous}, with density $f$.
+\vspace{3mm}
+
+\underline{Example.} Lebesgue function (cf Cantor set)\\
+(i) $F(y)=0$ for $y\le 0$, $F(y)=1$ for $y\ge 1$;\\
+(ii) $F(y)=\frac{1}{2}$ for $y\in[\frac{1}{3},\frac{2}{3}]$;\\
+(iii) $F(y)=\frac{1}{4}$ for $y\in[\frac{1}{9},\frac{2}{9}]$; $F(y)=\frac{3}{4}$ for $y\in[\frac{7}{9},\frac{8}{9}]$;\\
+and so on. \vspace{5cm}
+
+The function $F$ is constant on the intervals removed in the process of constructing the Cantor set. It is differentiable almost everywhere and the derivative is zero.
+
+Suppose $F(y)=\int_{[0,y]} f~dm$. Then $f(x)=0$ on all intervals $[\frac{1}{3},\frac{2}{3}]$, $[\frac{1}{9},\frac{2}{9}]$, $[\frac{7}{9},\frac{8}{9}],\ldots$, i.e. $f=0$ almost everywhere and $\forall y$ $\int_{[0,y]}f~ dm =0$, but $F(\frac{1}{3})=\frac{1}{2}$, $F(1)=1$. Nevertheless, $F$ is CDF (see the definition below). It is continuous, but not absolutely continuous.\vspace{3mm}
+
+\underline{Example.}
+Let $\Omega=[0,1]$, ${\cal F}={\cal B}_{[0,1]}$, $P=m$ and
+  $$X(\omega)=\left\{\begin{array}{ll} 0, & \mbox{ if } \omega\in[0,\frac{1}{2}); \\ 1, & \mbox{ if } \omega\in[\frac{1}{2},1).
+\end{array}\right. $$
+Then $X$ is a Bernoulli RV, CDF
+  $$F_X(x)=\left\{\begin{array}{ll} 0, & \mbox{ if } x<0;\\ \frac{1}{2}, & \mbox{ if } 0\le x<1; \\ 1, & \mbox{ if } x\ge 1.\end{array}\right. $$\vspace{5cm}
+
+Of course, this RV can be built using another sample space. For example, $\Omega=\{0,1\}$, ${\cal F}=\{\emptyset, \{0\}, \{1\}, \Omega=\{0,1\} \}$, $P(\{0\})=P(\{1\})=\frac{1}{2}$, $X(\omega)=\omega$. \vspace{3mm}
+
+Recall that
+  $$F_X(y)=P(\{\omega:~X(\omega)\le y\})=P_X((-\infty,y]).$$ \vspace{3mm}
+
+\underline{Proposition.} The CDF $F_X$ of a RV defined on a given probability space satisfies the following properties:\\
+(i) $F_X$ is non-negative, non-decreasing;\\
+(ii) $$\lim_{y\to -\infty} F_X(y)=0,~~~~~\lim_{y\to \infty} F_X(y)=1;$$
+(iii) $F_X$ is right-continuous:
+  $$\mbox{ if } y\to y_0,~~y\ge y_0,~~\mbox{ then } F_X(y)\to F_X(y_0).$$\vspace{3mm}
+
+{\bf Theorem.} If a function $F:\RR\to [0,1]$ satisfies conditions (i)--(iii) above, then there is a RV defined on the probability space $([0,1],{\cal B}_{[0,1]},m)$, $X:~[0,1]\to\RR$, such that $F=F_X$. \vspace{5cm}
+
+For example, let $F$ be continuous, strictly increasing on $[a,b]$ and $F(a)=0$, $F(b)=1$. Then there exists the inverse function $X(\omega)$ defined on $[0,1]$ with range $[a,b]$: \vspace{5cm}
+
+This RV $X$ is the desired one: $F_X=F$ because
+  $$F_X(x)=P(\{\omega:~X\le x\})=P(\{\omega:~ F^{-1}(\omega)\le x\})$$
+  $$=P(\{\omega:~0\le \omega\le F(x)\})=m([0,F(x)])=F(x).$$
+\vspace{3mm}
+
+If the probability distribution $P_X$ is absolutely continuous with density $f_X$ and function $g:~\RR\to \RR$ is integrable wrt $P_X$, then
+  $$\int_\Omega g(X(\omega))~dP(\omega)=\int_\RR g(x)~dP_X(x)=\int_\RR g(x) f_X(x) dm(x).$$\vspace{3mm}
+
+\underline{Example.} Let $(\Omega,{\cal F},P)=([0,1],{\cal M}_{[0,1]},m)$ and consider RV
+  $$X(\omega)=\left\{\begin{array}{ll} 1, & \mbox{ if } \omega\in[0,p); \\ 0, & \mbox{ if } \omega\in[p,1],
+\end{array}\right. $$
+where $p\in(0,1)$ is a given number. Then
+  $$P_X(B)=p\delta_1(B)+(1-p)\delta_0(B)~~~\mbox{ and }~~~F_X(y)=\left\{\begin{array}{ll} 0, & \mbox{ if } y<0;\\ 1-p, & \mbox{ if } 0\le y<1; \\ 1, & \mbox{ if } y\ge 1.\end{array}\right. $$
+\vspace{5cm}
+
+The RV $X$ is called Bernoulli; for any (measurable) function $g:\RR\to\RR$ we have
+  $$\int_\Omega g(X(\omega))dP(\omega)=\int_\RR g(x) dP_X(x)=pg(1)+(1-p)g(0).$$
+\vspace{3mm}
+
+If the probability distribution $P_X$ is a combination of Dirac measures
+  $$P_X(B)=\sum_{i=1}^\infty p_i\delta_{x_i}(B)~~~(\mbox{for any } B\in{\cal B})~~~\mbox{ with } \sum_{i=1}^\infty p_i=1$$
+and function $g:~\RR\to \RR$ is integrable wrt $P_X$, then
+  $$\int_\Omega g(X(\omega))~dP(\omega)=\int_\RR g(x)~dP_X(x)=\sum_{i=1}^\infty p_i g(x_i).$$
+(In the previous example, we have $p_1=p$, $p_2=1-p$, $x_1=1$, $x_2=0$.)
+ \vspace{3mm}
+
+\begin{center}\bf\underline{Mathematical expectation} \end{center}\vspace{5mm}
+
+If $X$ is a RV defined on a probability space $(\Omega,{\cal F},P)$ then, by definition, the \underline{mathematical expectation} is given by
+  $$\EE(X)=\int_\Omega X~dP=\int_\RR x~dP_X(x).$$
+(All the integrals are assumed to be well defined.)\vspace{3mm}
+
+\underline{Example.}
+Let $\Omega=[0,1]$, ${\cal F}={\cal M}_{[0,1]}$, $P=m$ and
+  $$X(\omega)=\min\{\omega,1-\omega\}=\left\{\begin{array}{rl}
+\omega, & \mbox{ if } \omega\in[0,\frac{1}{2}]; \\  1-\omega, & \mbox{ if } \omega\in(\frac{1}{2},1]. \end{array}\right.$$
+Then
+  $$\EE(X)=\int_{[0,\frac{1}{2}]} \omega~dm(\omega)+\int_{(\frac{1}{2},1]} (1-\omega) ~dm(\omega)$$
+  $$=\int_0^{\frac{1}{2}} y~dy+\int_{\frac{1}{2}}^1(1-y)~dy=\frac{1}{8}+\left[\frac{1}{2}-\left(\frac{1}{2}-\frac{1}{8}\right)\right]=\frac{1}{4}.$$
+\vspace{3mm}
+
+If RVs $X$ and $Y$ are independent then $\EE(XY)=\EE(X)\EE(Y)$, provided all these expectations are well defined.
+ \vspace{3mm}
+
+\begin{center}\bf\underline{Call-Put parity} \end{center}\vspace{3mm}
+
+Suppose $S(T)$ is the price of a particular stock $T$ days ahead. ($T$ is the so called expiry/strike date.) The European call (put) option is the derivative security which makes it possible for the holder to buy (sell) the stock for the fixed price $K$ (strike price). At the time moment $T$, the call/put option prices are obvious:
+  $$C(T)=(S(T)-K)^+=\left\{\begin{array}{rl}
+S(T)-K, & \mbox{ if } S(T)\ge K; \\ 0 & \mbox{ otherwise}; \end{array}\right. $$
+  $$P(T)=(K-S(T))^+.$$
+At the current moment (today) the prices can be written down like follows
+  $$C=\exp\{-rT\}\EE(S(T)-K)^+;~~~P=\exp\{-rT\}\EE(K-S(T))^+,$$
+where $r$ is the risk-free interest rate; $\EE$ is the mathematical expectation on the probability space $(\Omega,{\cal F},P)$ where the RV $S(T)$ is defiend. Very often the probability space is not known; nevertheless financial specialists are able to compute the so called `fair' options prices.
+
+What is interesting, in any case expression $S(0)=C-P+K\exp\{-rT\}$ does not depend on $K$:
+  $$S(0)=\exp\{-rT\} \left(\int_\Omega (S(T)-K)^+ dP-\int_\Omega (K-S(T))^+ dP+K\right)$$
+  $$=\exp\{-rT\}\left(\int_\Omega \left\{\II_{\{\omega:~S(T)\ge K\}}\cdot(S(T)-K)\right.\right.$$
+  $$\left.\vphantom{\int_\Omega}\left.-\II_{\{\omega:~S(T)<K\}}\cdot(K-S(T))\right\} dP+K\right)$$
+  $$=\exp\{-rT\} \left(\int_\Omega S(T)~dP-\int_\Omega K~dP+K\right)=\exp\{-rT\} \int_\Omega S(T)~dP.$$
+
+\end{document} 
